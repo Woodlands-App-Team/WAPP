@@ -17,7 +17,9 @@ class HomePage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData) {
             final user = FirebaseAuth.instance.currentUser!;
-            if (user.email!.endsWith("@pdsb.net")) {
+            if ((user.email!.endsWith("@pdsb.net") &&
+                    user.displayName!.endsWith("The Woodlands SS")) ||
+                user.email!.endsWith("@peelsb.com")) {
               return LoggedIn();
             } else {
               final provider =
