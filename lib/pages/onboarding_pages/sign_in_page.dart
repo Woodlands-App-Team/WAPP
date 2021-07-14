@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:wapp/constants.dart';
 import 'package:wapp/models/provider.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,16 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+
+        // To make Status bar icons color white in Android devices.
+        statusBarIconBrightness: Brightness.light,
+
+        // statusBarBrightness is used to set Status bar icon color in iOS.
+        statusBarBrightness: Brightness.light
+        // Here light means dark color Status bar icons.
+
+        ));
     return Scaffold(
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
