@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,13 @@ class SplashState extends State<Splash> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool seenPrivacyPolicy = (prefs.getBool('seen privacy policy') ?? false);
+    bool isFirstAppStartUp = (prefs.getBool('first time') ?? true);
+
+    if (isFirstAppStartUp) {
+      FirebaseAuth.instance.signOut();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool('first time', false);
+    }
 
     if (seenPrivacyPolicy) {
       Navigator.of(context).pushReplacement(PageRouteBuilder(
