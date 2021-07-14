@@ -5,7 +5,7 @@ import 'package:delayed_widget/delayed_widget.dart';
 import 'package:wapp/pages/onboarding_pages/privacy_policy_page.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({Key key}) : super(key: key);
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
   _LandingPageState createState() => _LandingPageState();
@@ -39,7 +39,7 @@ class _LandingPageState extends State<LandingPage> {
                   animatedTexts: [
                     TypewriterAnimatedText(
                       'Welcome!',
-                      speed: Duration(milliseconds: 250),
+                      speed: Duration(milliseconds: 160),
                       textStyle: TextStyle(
                           fontSize: 60,
                           color: black,
@@ -49,7 +49,7 @@ class _LandingPageState extends State<LandingPage> {
                   ],
                 ),
                 DelayedWidget(
-                  delayDuration: Duration(milliseconds: 1700),
+                  delayDuration: Duration(milliseconds: 1000),
                   child: Text(
                     'to Woodlands',
                     style: TextStyle(
@@ -58,7 +58,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 SizedBox(height: 40),
                 DelayedWidget(
-                  delayDuration: Duration(milliseconds: 2300),
+                  delayDuration: Duration(milliseconds: 1400),
                   animationDuration: Duration(milliseconds: 500),
                   child: TextButton(
                     onPressed: () {

@@ -1,8 +1,9 @@
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:wapp/constants.dart';
-import 'package:wapp/pages/home.dart';
 import 'package:wapp/pages/onboarding_pages/landing_page.dart';
+import 'package:wapp/pages/onboarding_pages/sign_in_page.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -13,18 +14,22 @@ class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1000), () {
+    Future.delayed(Duration(milliseconds: 750), () {
       checkFirstSeen();
     });
   }
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ?? false);
+    bool seenPrivacyPolicy = (prefs.getBool('seen privacy policy') ?? false);
 
-    if (_seen) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => new Home()));
+    if (seenPrivacyPolicy) {
+      Navigator.of(context).pushReplacement(PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1250),
+          pageBuilder: (context, animation, secondaryAnimation) => SignInPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return child;
+          }));
     } else {
       Navigator.of(context).pushReplacement(PageRouteBuilder(
           transitionDuration: Duration(milliseconds: 1250),
@@ -38,6 +43,17 @@ class SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+
+        // To make Status bar icons color white in Android devices.
+        statusBarIconBrightness: Brightness.light,
+
+        // statusBarBrightness is used to set Status bar icon color in iOS.
+        statusBarBrightness: Brightness.light
+        // Here light means dark color Status bar icons.
+
+        ));
+
     return Container(
         color: white,
         child: Center(

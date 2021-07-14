@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:wapp/pages/onboarding_pages/splash_page.dart';
+import 'package:wapp/models/provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  //Do this in main.dart
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      child: MyApp(),
+    ));
+  });
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Splash(),
+    return MaterialApp(
+      home: Splash(),
       debugShowCheckedModeBanner: false,
     );
   }

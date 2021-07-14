@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wapp/constants.dart';
-import 'package:delayed_widget/delayed_widget.dart';
+import 'package:wapp/models/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:wapp/pages/home_page/home.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
+            final user = FirebaseAuth.instance.currentUser!;
+            if ((user.email!.endsWith("@pdsb.net") &&
+                    user.displayName!.endsWith("The Woodlands SS")) ||
+                user.email!.endsWith("@peelsb.com")) {
+              return Home();
+            } else {
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              final snackBar = SnackBar(
+                  content: Text('Please sign in with a PDSB account.'));
+              provider.delete();
+              provider.logout();
+              WidgetsBinding.instance!.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
+              return SignIn();
+            }
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Something went wrong."));
+          } else {
+            return SignIn();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class SignIn extends StatelessWidget {
+  const SignIn({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +85,10 @@ class _SignInPageState extends State<SignInPage> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: TextButton(
                       onPressed: () {
-                        print("I have been pressed");
+                        final provider = Provider.of<GoogleSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.googleLogin();
                       },
                       child: Text(
                         'Sign in with Google',

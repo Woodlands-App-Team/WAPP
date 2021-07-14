@@ -11,7 +11,7 @@ class PrivacyPolicyPage extends StatefulWidget {
 }
 
 class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
-  bool agree;
+  bool agree = false;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
 
   Future changeAgreeState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('seen', false);
+    prefs.setBool('seen privacy policy', true);
   }
 
   @override
@@ -121,7 +121,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                       value: agree,
                       onChanged: (value) {
                         setState(() {
-                          agree = value;
+                          agree = value!;
                         });
                       },
                     ),
