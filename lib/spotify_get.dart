@@ -5,8 +5,8 @@ class SpotifySongApi {
   static const int _numSongsToQuery = 20; // how many songs to request per call
   static Future<List<Track>> getTracks(String query) async {
     List<Track> songs = [];
-    const String clientId = "b6c2ffeefbdf43568a62fea438e07a1c";
-    const String clientSecret = "ec003fe62ee7495d90fcca1553b59361";
+    const String clientId = "d7e415d5343f47f5aa3d5fc03ae3e3d3";
+    const String clientSecret = "e9121896ded14c54b842241db14735a8";
     final credentials = SpotifyApiCredentials(clientId, clientSecret);
     final spotify = SpotifyApi(credentials);
     // request 20, return top 5 titles that don't contain the bad words
