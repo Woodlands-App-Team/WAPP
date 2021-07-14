@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.woodlands.wapp">
+    package="com.example.song_req_test">
    <application
-        android:label="wapp"
+        android:label="song_req_test"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,6 +1,6 @@
 {
-    "name": "wapp",
-    "short_name": "wapp",
+    "name": "song_req_test",
+    "short_name": "song_req_test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

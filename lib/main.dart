@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
-import 'package:wapp/pages/onboarding_pages/splash_page.dart';
-import 'package:wapp/models/provider.dart';
-import 'package:provider/provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  //Do this in main.dart
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-      child: MyApp(),
-    ));
-  });
+import './song_search.dart';
+
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Splash(),
-      debugShowCheckedModeBanner: false,
+      home: SongSearch(),
     );
   }
 }
