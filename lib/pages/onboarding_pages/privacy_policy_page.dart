@@ -20,8 +20,8 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
   }
 
   Future changeAgreeState() async {
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    prefs.setBool('seen privacy policy', true);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('seen privacy policy', true);
   }
 
   @override
