@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:wapp/pages/onboarding_pages/sign_in_page.dart';
+import 'dart:io' show Platform;
 
 class PrivacyPolicyPage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class PrivacyPolicyPage extends StatefulWidget {
 
 class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
   bool agree = false;
-
+  final bool isIOS = Platform.isIOS;
   @override
   void initState() {
     agree = false;
@@ -38,7 +39,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 100,
+                  height: isIOS ? 100 : 20,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width - 250,
@@ -48,7 +49,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: isIOS ? 100 : 20,
                 ),
                 Container(
                     decoration: BoxDecoration(
@@ -57,7 +58,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                       color: Colors.white,
                     ),
                     margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    height: 400,
+                    height: isIOS ? 400 : 300,
                     child: CupertinoScrollbar(
                       child: ListView(
                           physics: BouncingScrollPhysics(),
@@ -111,7 +112,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                           ]),
                     )),
                 SizedBox(
-                  height: 20,
+                  height: isIOS ? 20 : 15,
                 ),
                 Column(children: [
                   Row(
