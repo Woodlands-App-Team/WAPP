@@ -42,7 +42,8 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                   height: isIOS ? 100 : 20,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width - 250,
+                  width:
+                      MediaQuery.of(context).size.width - (isIOS ? 250 : 230),
                   child: Hero(
                     tag: 'logo',
                     child: Image.asset('assets/logo.png'),
