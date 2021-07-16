@@ -1,50 +1,37 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:wapp/common/announcement_card.dart';
+import 'package:wapp/common/event_card.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+String title = "App Team";
+String description =
+    "Most of the development will be done in the summer. Members will need to complete assigned tasks from among us and not be sussy";
+String month = "Apr";
+String date = "20";
+String imageAddress = 'https://avatars.githubusercontent.com/u/86990803?s=200&v=4';
+
+void main() => runApp(MaterialApp(home: HomePageWidget()));
+
+class HomePageWidget extends StatefulWidget {
+  HomePageWidget({Key key}) : super(key: key);
+
+  @override
+  _HomePageWidgetState createState() => _HomePageWidgetState();
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class _HomePageWidgetState extends State<HomePageWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Firebase'),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => FirebaseFirestore.instance
-              .collection('testing')
-              .add({'timestamp': Timestamp.fromDate(DateTime.now())}),
-          child: Icon(Icons.add),
-        ),
-        body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('testing').snapshots(),
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<QuerySnapshot> snapshot,
-          ) {
-            if (!snapshot.hasData) return const SizedBox.shrink();
-            return ListView.builder(
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (BuildContext context, int index) {
-                final docData = snapshot.data.docs[index]['timestamp'];
-                final dateTime = (docData as Timestamp).toDate();
-                return ListTile(
-                  title: Text(dateTime.toString()),
-                );
-              },
-            );
-          },
+    return Scaffold(
+      key: scaffoldKey,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            EventCard(titleText: title, descriptionText: description, imageUrl: imageAddress),
+            AnnouncementCard(titleText: title, descriptionText: description, imageUrl: imageAddress, month: month, date: date)
+          ],
         ),
       ),
     );
