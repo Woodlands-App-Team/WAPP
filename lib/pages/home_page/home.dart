@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wapp/constants.dart';
+import 'package:wapp/custom_icons.dart';
 import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           indicatorColor: black,
           tabs: [
             Tab(
-              icon: Icon(Icons.home),
+              icon: Icon(CustomIcons.cafe_selected),
             ),
             Tab(
               icon: Image.asset('assets/logo.png'),
