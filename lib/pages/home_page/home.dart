@@ -70,19 +70,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           indicatorColor: black,
           tabs: [
             Tab(
-              icon: Icon(CustomIcons.home_unselected),
+              icon: Icon(CustomIcons.home_selected),
             ),
             Tab(
               icon: Icon(CustomIcons.cafe_unselected),
             ),
             Tab(
-              icon: Icon(CustomIcons.music_note_unselected),
+              icon: Icon(CustomIcons.music_note_selected),
             ),
             Tab(
-              icon: Icon(CustomIcons.club_unselected),
+              icon: Icon(CustomIcons.club_selected),
             ),
             Tab(
-              icon: Icon(CustomIcons.settings_unselected),
+              icon: Icon(CustomIcons.settings_selected),
             ),
           ],
           onTap: onTabTapped,
