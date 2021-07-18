@@ -50,9 +50,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: [
+          AnnouncementsPage(),
           CafMenuPage(),
           SongReqPage(),
-          AnnouncementsPage(),
           ClubPage(),
           GeneralPage(),
         ],
@@ -70,19 +70,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           indicatorColor: black,
           tabs: [
             Tab(
-              icon: Icon(CustomIcons.cafe_selected),
+              icon: Icon(CustomIcons.home_unselected),
             ),
             Tab(
-              icon: Image.asset('assets/logo.png'),
+              icon: Icon(CustomIcons.cafe_unselected),
             ),
             Tab(
-              icon: Icon(Icons.library_music),
+              icon: Icon(CustomIcons.music_note_unselected),
             ),
             Tab(
-              icon: Icon(Icons.group_work),
+              icon: Icon(CustomIcons.club_unselected),
             ),
             Tab(
-              icon: Icon(Icons.settings),
+              icon: Icon(CustomIcons.settings_unselected),
             ),
           ],
           onTap: onTabTapped,
