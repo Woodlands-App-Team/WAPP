@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:spotify/spotify.dart';
 import './spotify_get.dart';
 
 class SongSearch extends StatelessWidget {
@@ -20,12 +19,12 @@ class SongSearch extends StatelessWidget {
               hintText: "Search Song",
             ),
           ),
-          suggestionsCallback: SpotifySongApi.getTracks,
+          suggestionsCallback: searchSongs,
           itemBuilder: (context, Track? songData) {
             final song = songData!;
             return ListTile(
               leading: img.Image.network(
-                song.album.images.last.url,
+                song.imgURL,
                 fit: BoxFit.cover,
               ),
               title: Text(song.name),
@@ -36,7 +35,7 @@ class SongSearch extends StatelessWidget {
             if (selected!.explicit) {
               output = "Explicit songs are not permitted.";
             } else {
-              // Get the ID of the user who requested the song + song URL/name + time 
+              // Get the ID of the user who requested the song + song URL/name + time
               output = "Selected song: ${selected.name}";
             }
             ScaffoldMessenger.of(context)
