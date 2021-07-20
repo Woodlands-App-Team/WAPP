@@ -21,7 +21,7 @@ class Track {
       name: json['name'],
       artist: json['artists'][0][
           'name'], // TODO: if there are multiple artists, this only returns the first one
-      imgURL: json['album']['images'][2]
+      imgURL: json['album']['images'][1]
           ['url'], // index 0 = 640x640, index 1 = 300x300, index 2 = 64x64
       explicit: json['explicit'],
     );
