@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import './spotify_get.dart';
-import './song_request_tile.dart';
+import 'spotify_get.dart';
+import 'song_request_tile.dart';
 
 class SongSearch extends StatelessWidget {
   @override

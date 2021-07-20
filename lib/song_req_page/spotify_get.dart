@@ -41,7 +41,8 @@ Future<List<Track>> searchSongs(String query) async {
   final queryEncoded = Uri.encodeComponent(query);
   final response = await http.get(
     Uri.parse(
-        "https://api.spotify.com/v1/search?q=$queryEncoded&type=track&limit=$_numSongsToQuery"),
+      "https://api.spotify.com/v1/search?q=$queryEncoded&type=track&limit=$_numSongsToQuery",
+    ),
     headers: {
       HttpHeaders.authorizationHeader: 'Bearer ' + authToken,
     },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './song_search.dart';
+import 'song_search.dart';
 
 void main() {
   runApp(MyApp());
