@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'spotify_get.dart';
+import '../../models/spotify_get.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
