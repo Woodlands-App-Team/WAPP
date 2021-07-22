@@ -30,7 +30,6 @@ class _GeneralPageState extends State<GeneralPage> {
 
   @override
   Widget build(BuildContext context) {
-    getMessage();
     return Container(
       padding: EdgeInsets.only(top: 150),
       color: Colors.orange,
