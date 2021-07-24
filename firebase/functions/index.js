@@ -1,14 +1,18 @@
 const functions = require("firebase-functions");
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-// http request 1
-exports.randomNumber = functions.https.onRequest((request, response) => {
+exports.initNewUser = functions.auth.user().onCreate(user => {
+    return admin.firestore().collection('users').doc(user.uid).set({
+        email: user.email,
+        push_notif_announcement: [],
+        push_notif_event: false,
+        last_song_req: null,
+        upvoted_songs: [],
+    })
+});
 
-    const number = Math.round(Math.random() * 100);
-    response.send(number.toString());
-
-})
-
-//http callable function
-exports.sayHello = functions.https.onCall((data, context) => {
-    return 'Hello Woodlands!';
+exports.deleteUser = functions.auth.user().onDelete(user => {
+    const doc = admin.firestore().collection('users').doc(user.uid);
+    return doc.delete();
 });
