@@ -39,18 +39,18 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: isIOS ? 100 : 20,
+                  height: 20,
                 ),
                 Container(
                   width:
-                      MediaQuery.of(context).size.width - (isIOS ? 250 : 230),
+                      MediaQuery.of(context).size.width - (isIOS ? 220 : 230),
                   child: Hero(
                     tag: 'logo',
                     child: Image.asset('assets/logo.png'),
                   ),
                 ),
                 SizedBox(
-                  height: isIOS ? 100 : 20,
+                  height: isIOS ? 40 : 20,
                 ),
                 Container(
                     decoration: BoxDecoration(
