@@ -6,7 +6,7 @@ import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';
 import 'package:wapp/pages/general_page/general_page.dart';
-import 'package:wapp/pages/home_page/home_page_app_bar.dart';
+import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 import 'package:wapp/pages/song_req_page/song_req_page.dart';
 
 class Home extends StatefulWidget {
@@ -46,7 +46,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: homePageAppBar(),
       body: TabBarView(
         controller: _tabController,
         children: [

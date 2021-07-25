@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wapp/constants.dart';
-import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-PreferredSizeWidget homePageAppBar() {
-  final DateTime date = DateTime.now();
-
+PreferredSizeWidget cafMenuPageAppBar() {
   return AppBar(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         bottom: Radius.circular(20),
       ),
     ),
-    toolbarHeight: 75,
+    toolbarHeight: appBarHeight,
     centerTitle: false,
-    title: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          DateFormat('EEEE').format(date) + ",",
-          style: TextStyle(fontWeight: bold, fontSize: 20),
-        ),
-        Text(
-          DateFormat('MMMMd').format(date),
-          style: TextStyle(fontWeight: semibold),
-        ),
-      ],
+    title: Text(
+      "Cafeteria",
+      style: GoogleFonts.poppins(
+        fontSize: 30,
+        fontWeight: FontWeight.w600,
+        color: white,
+      ),
     ),
     brightness: Brightness.dark,
     backgroundColor: black,
