@@ -53,6 +53,8 @@ class Tile extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                             fontSize: 16,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
