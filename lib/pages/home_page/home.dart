@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wapp/constants.dart';
+import 'package:wapp/custom_icons.dart';
 import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';
 import 'package:wapp/pages/general_page/general_page.dart';
-import 'package:wapp/pages/home_page/home_page_app_bar.dart';
+import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 import 'package:wapp/pages/song_req_page/song_req_page.dart';
 
 class Home extends StatefulWidget {
@@ -15,7 +16,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
 
   // ignore: unused_field
@@ -45,13 +46,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: homePageAppBar(),
       body: TabBarView(
         controller: _tabController,
         children: [
+          AnnouncementsPage(),
           CafMenuPage(),
           SongReqPage(),
-          AnnouncementsPage(),
           ClubPage(),
           GeneralPage(),
         ],
@@ -69,19 +69,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           indicatorColor: black,
           tabs: [
             Tab(
-              icon: Icon(Icons.home),
+              icon: Icon(CustomIcons.home_selected),
             ),
             Tab(
-              icon: Image.asset('assets/logo.png'),
+              icon: Icon(CustomIcons.cafe_unselected),
             ),
             Tab(
-              icon: Icon(Icons.library_music),
+              icon: Icon(CustomIcons.music_note_selected),
             ),
             Tab(
-              icon: Icon(Icons.group_work),
+              icon: Icon(CustomIcons.club_selected),
             ),
             Tab(
-              icon: Icon(Icons.settings),
+              icon: Icon(CustomIcons.settings_selected),
             ),
           ],
           onTap: onTabTapped,

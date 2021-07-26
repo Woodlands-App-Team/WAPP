@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wapp/constants.dart';
+import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 
 class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({Key? key}) : super(key: key);
@@ -11,8 +12,9 @@ class AnnouncementsPage extends StatefulWidget {
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: dark_blue,
+    return Scaffold(
+      appBar: announcementPageAppBar(),
+      backgroundColor: dark_blue,
     );
   }
 }

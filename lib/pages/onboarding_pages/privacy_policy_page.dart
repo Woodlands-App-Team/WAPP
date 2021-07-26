@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -39,18 +40,18 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: isIOS ? 100 : 20,
+                  height: 20,
                 ),
                 Container(
                   width:
-                      MediaQuery.of(context).size.width - (isIOS ? 250 : 230),
+                      MediaQuery.of(context).size.width - (isIOS ? 220 : 230),
                   child: Hero(
                     tag: 'logo',
                     child: Image.asset('assets/logo.png'),
                   ),
                 ),
                 SizedBox(
-                  height: isIOS ? 100 : 20,
+                  height: isIOS ? 40 : 20,
                 ),
                 Container(
                     decoration: BoxDecoration(
@@ -69,10 +70,9 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                             RichText(
                               text: TextSpan(
                                 text: '',
-                                style: TextStyle(
+                                style: GoogleFonts.nunitoSans(
                                     color: black,
-                                    fontSize: 14,
-                                    fontFamily: "Nunito Sans",
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w300),
                                 children: const <TextSpan>[
                                   TextSpan(
@@ -113,7 +113,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                           ]),
                     )),
                 SizedBox(
-                  height: isIOS ? 20 : 15,
+                  height: 15,
                 ),
                 Column(children: [
                   Row(
@@ -132,7 +132,7 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                       Text(
                         'I have read and accept the privacy policy',
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: GoogleFonts.nunitoSans(
                             fontSize: 14,
                             color: dark_blue,
                             fontWeight: FontWeight.w500),

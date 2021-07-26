@@ -11,6 +11,7 @@ class _GeneralPageState extends State<GeneralPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 150),
       color: Colors.orange,
     );
   }

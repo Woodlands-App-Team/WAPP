@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:delayed_widget/delayed_widget.dart';
@@ -73,11 +74,10 @@ class _LandingPageState extends State<LandingPage> {
                           }));
                     },
                     child: Text("click to continue",
-                        style: TextStyle(
+                        style: GoogleFonts.nunitoSans(
                           color: dark_blue,
                           fontSize: 20,
-                          fontFamily: 'Nunito Sans',
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w400,
                         )),
                   ),
                 )

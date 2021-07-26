@@ -7,8 +7,6 @@ const Color white = Color(0XFFFFFFFF);
 const Color grey = Color(0XFF555F65);
 const Color black = Color(0XFF010D15);
 
-// Font Weight
-const FontWeight bold = FontWeight.bold;
-const FontWeight semibold = FontWeight.w300;
+//Size
 
-// TODO: Add TextStyle
+const double appBarHeight = 80;
