@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:wapp/pages/song_req_page/song_req_page_app_bar.dart';
 
 import '../../models/spotify_get.dart';
 import './song_req_tile.dart';
@@ -16,6 +17,7 @@ class _SongReqPageState extends State<SongReqPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: songReqPageAppBar(),
       body: Container(
         margin: EdgeInsets.only(top: 100),
         padding: EdgeInsets.all(16),
