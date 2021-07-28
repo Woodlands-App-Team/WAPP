@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  expansion_card:
+    dependency: "direct dev"
+    description:
+      name: expansion_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -198,6 +205,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  lorem_ipsum:
+    dependency: "direct main"
+    description:
+      name: lorem_ipsum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   matcher:
     dependency: transitive
     description:

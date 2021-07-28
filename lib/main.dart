@@ -2,10 +2,11 @@ import 'package:wapp/common/announcement_card.dart';
 import 'package:wapp/common/app_icons.dart';
 import 'package:wapp/common/event_card.dart';
 import 'package:flutter/material.dart';
+import 'package:wapp/common/constants.dart';
 
 String title = "App Team";
 String description =
-    "Most of the development will be done in the summer. Members will need to complete assigned tasks from among us and not be sussy";
+    "Most of the development will be done in the summer. Members will need to complete assigned tasks within established timelines so that the app can be deployed by the end of summer at the earliest";
 String month = "Apr";
 String date = "20";
 String imageAddress =
@@ -137,37 +138,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     children: [
-                      // Things to be shown in the listview
-                      EventCard(
-                          titleText: title,
-                          descriptionText: description,
-                          imageUrl: imageAddress,
-                          month: month,
-                          date: date),
-                      AnnouncementCard(
-                          titleText: title_1,
-                          descriptionText: description_1,
-                          imageUrl: imageAddress),
-                      EventCard(
-                          titleText: title_1,
-                          descriptionText: description_1,
-                          imageUrl: imageAddress,
-                          month: month,
-                          date: date),
                       AnnouncementCard(
                           titleText: title,
                           descriptionText: description,
-                          imageUrl: imageAddress),
-                      EventCard(
-                          titleText: title,
-                          descriptionText: description,
                           imageUrl: imageAddress,
-                          month: month,
-                          date: date),
-                      AnnouncementCard(
-                          titleText: title,
-                          descriptionText: description,
-                          imageUrl: imageAddress)
+                          expandedImageUrl:
+                              "https://cdn.vox-cdn.com/thumbor/IQab79SuQ1PnrneGti_uy_pxTKo=/148x0:1768x1080/1280x854/cdn.vox-cdn.com/uploads/chorus_image/image/47413330/the-simpsons-tv-series-cast-wallpaper-109911.0.0.jpeg"),
                     ],
                   ),
                 ),
