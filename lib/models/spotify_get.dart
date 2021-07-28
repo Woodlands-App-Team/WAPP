@@ -115,7 +115,7 @@ Future<List<Track>> topTracks() async {
     final response2 = await searchPlaylist(authToken2);
     if (response2.statusCode == 200) {
       prefs.setString('token', authToken2);
-      final List<Track> songs = await parseJsonPlaylist(response);
+      final List<Track> songs = await parseJsonPlaylist(response2);
       return songs.sublist(0, 20);
     } else {
       print(response2.statusCode);
