@@ -6,7 +6,6 @@ import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';
 import 'package:wapp/pages/general_page/general_page.dart';
-import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 import 'package:wapp/pages/song_req_page/song_req_page.dart';
 
 class Home extends StatefulWidget {
@@ -20,34 +19,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
 
   // ignore: unused_field
-  int _currentIndex = 3;
+  int _currentIndex = 1;
 
-  late TabController _tabController;
+  late PageController _pageController = PageController(initialPage: 1);
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 5);
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _pageController.dispose();
     super.dispose();
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = _tabController.index;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: black,
       extendBodyBehindAppBar: true,
-      body: TabBarView(
-        controller: _tabController,
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _pageController,
         children: [
           AnnouncementsPage(),
           CafMenuPage(),
@@ -56,36 +50,43 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           GeneralPage(),
         ],
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-        alignment: Alignment.topCenter,
-        color: black,
-        height: 80,
-        child: TabBar(
-          physics: BouncingScrollPhysics(),
-          controller: _tabController,
-          unselectedLabelColor: grey,
-          labelColor: white,
-          indicatorColor: black,
-          tabs: [
-            Tab(
-              icon: Icon(CustomIcons.home_selected),
-            ),
-            Tab(
-              icon: Icon(CustomIcons.cafe_unselected),
-            ),
-            Tab(
-              icon: Icon(CustomIcons.music_note_selected),
-            ),
-            Tab(
-              icon: Icon(CustomIcons.club_selected),
-            ),
-            Tab(
-              icon: Icon(CustomIcons.settings_selected),
-            ),
-          ],
-          onTap: onTabTapped,
+      bottomNavigationBar: Theme(
+        data: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
         ),
+        child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            selectedItemColor: white,
+            unselectedItemColor: grey,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: black,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(CustomIcons.home_selected),
+                title: SizedBox.shrink(),
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(CustomIcons.cafe_selected),
+                  title: SizedBox.shrink()),
+              BottomNavigationBarItem(
+                  icon: Icon(CustomIcons.music_note_selected),
+                  title: SizedBox.shrink()),
+              BottomNavigationBarItem(
+                  icon: Icon(CustomIcons.club_unselected),
+                  title: SizedBox.shrink()),
+              BottomNavigationBarItem(
+                  icon: Icon(CustomIcons.settings_selected),
+                  title: SizedBox.shrink()),
+            ],
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+              _pageController.jumpToPage(
+                index,
+              );
+            }),
       ),
     );
   }
