@@ -13,7 +13,7 @@ PreferredSizeWidget songReqPageAppBar() {
     toolbarHeight: appBarHeight,
     centerTitle: false,
     title: Text(
-      "Song Request",
+      "Song Requests",
       style: GoogleFonts.poppins(
         fontSize: 30,
         fontWeight: FontWeight.w600,
