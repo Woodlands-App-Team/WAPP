@@ -38,6 +38,7 @@ android {
         applicationId "com.woodlands.wapp"
         minSdkVersion 21
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -51,10 +52,18 @@ android {
     }
 }
 
+buildscript {
+    dependencies {
+        // ... other dependencies
+        classpath 'com.google.gms:google-services:4.3.8'
+    }
+}
+
 flutter {
     source '../..'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
 }
