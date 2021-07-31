@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:wapp/constants.dart';
+import '../../constants.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page_app_bar.dart';
 
 class CafMenuPage extends StatefulWidget {
