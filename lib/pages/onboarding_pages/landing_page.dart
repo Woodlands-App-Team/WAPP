@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wapp/constants.dart';
+import '../../constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:wapp/pages/onboarding_pages/privacy_policy_page.dart';
