@@ -16,3 +16,18 @@ exports.deleteUser = functions.auth.user().onDelete(user => {
     const doc = admin.firestore().collection('users').doc(user.uid);
     return doc.delete();
 });
+
+exports.requestSong = functions.https.onCall((data, context) => {
+    if(!context.auth){
+        throw new functions.https.HttpsError('unauthenticated', 'only authenticated users can add requests')
+    }
+    admin.firestore().collection('song-requests').add({
+        songURL: data.songURL,
+        upvotes: 0,
+        approved: false,
+
+    })
+    admin.firestore().collection('users').doc(data.uid).set({
+        last_song_req: data.date,
+    })
+})
