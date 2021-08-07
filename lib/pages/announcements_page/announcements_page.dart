@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:wapp/pages/announcements_page/event_card.dart';
 import '../../constants.dart';
 import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 import 'announcement_card.dart';
@@ -130,19 +131,40 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           return ListView.builder(
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: (context, index) {
-                              return AnnouncementCard(
-                                titleText: snapshot.data!.docs[index]['title'],
-                                previewDescriptionText: snapshot
-                                    .data!.docs[index]['preview_text']
-                                    .replaceAll('"', ''),
-                                expandedDescriptionText: snapshot
-                                    .data!.docs[index]['description']
-                                    .replaceAll('"', ''),
-                                imageUrl: snapshot.data!.docs[index]
-                                    ['logo_url'],
-                                expandedImageUrl: snapshot.data!.docs[index]
-                                    ['expanded_image_url'],
-                              );
+                              if (snapshot.data!.docs[index]['type'] ==
+                                  'announcement') {
+                                return AnnouncementCard(
+                                  titleText: snapshot.data!.docs[index]
+                                      ['title'],
+                                  previewDescriptionText: snapshot
+                                      .data!.docs[index]['preview_text']
+                                      .replaceAll('"', ''),
+                                  expandedDescriptionText: snapshot
+                                      .data!.docs[index]['description']
+                                      .replaceAll('"', ''),
+                                  imageUrl: snapshot.data!.docs[index]
+                                      ['logo_url'],
+                                  expandedImageUrl: snapshot.data!.docs[index]
+                                      ['expanded_image_url'],
+                                );
+                              } else {
+                                return EventCard(
+                                  titleText: snapshot.data!.docs[index]
+                                      ['title'],
+                                  previewDescriptionText: snapshot
+                                      .data!.docs[index]['preview_text']
+                                      .replaceAll('"', ''),
+                                  expandedDescriptionText: snapshot
+                                      .data!.docs[index]['description']
+                                      .replaceAll('"', ''),
+                                  imageUrl: snapshot.data!.docs[index]
+                                      ['logo_url'],
+                                  expandedImageUrl: snapshot.data!.docs[index]
+                                      ['expanded_image_url'],
+                                  date: snapshot.data!.docs[index]['date'],
+                                  month: snapshot.data!.docs[index]['month'],
+                                );
+                              }
                             },
                           );
                         }
