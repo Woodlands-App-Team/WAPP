@@ -19,9 +19,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
 
   // ignore: unused_field
-  int _currentIndex = 1;
+  int _currentIndex = 4;
 
-  late PageController _pageController = PageController(initialPage: 1);
+  late PageController _pageController = PageController(initialPage: 4);
 
   @override
   void initState() {
