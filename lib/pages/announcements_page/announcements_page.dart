@@ -1,17 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
 import 'announcement_card.dart';
-
-String title = "App Team";
-String description =
-    "Most of the development will be done in the summer. Members will need to complete assigned tasks within established timelines so that the app can be deployed by the end of summer at the earliest";
-String month = "Apr";
-String date = "20";
-String imageAddress =
-    'https://avatars.githubusercontent.com/u/86990803?s=200&v=4';
-String expandedImageAddress =
-    "https://cdn.vox-cdn.com/thumbor/IQab79SuQ1PnrneGti_uy_pxTKo=/148x0:1768x1080/1280x854/cdn.vox-cdn.com/uploads/chorus_image/image/47413330/the-simpsons-tv-series-cast-wallpaper-109911.0.0.jpeg";
 
 class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({Key? key}) : super(key: key);
@@ -20,8 +11,11 @@ class AnnouncementsPage extends StatefulWidget {
   _AnnouncementsPageState createState() => _AnnouncementsPageState();
 }
 
+final db = FirebaseFirestore.instance.collection("announcements");
+
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   late TextEditingController textController;
+
   @override
   Widget build(BuildContext context) {
     textController = TextEditingController();
@@ -45,37 +39,39 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(10, 13, 0, 0),
-                    child: TextFormField(
-                      controller: textController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        hintText: ' Search posts...',
-                        hintStyle: TextStyle(fontFamily: 'Poppins'),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                    child: Center(
+                      child: TextFormField(
+                        controller: textController,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          hintText: ' Search posts...',
+                          hintStyle: TextStyle(fontFamily: 'Poppins'),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
                           ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
                         ),
+                        textAlign: TextAlign.start,
                       ),
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                      textAlign: TextAlign.start,
                     ),
                   ),
                 ),
@@ -122,19 +118,36 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      AnnouncementCard(
-                          titleText: title,
-                          descriptionText: description,
-                          imageUrl: imageAddress,
-                          expandedImageUrl: expandedImageAddress)
-                    ],
-                  ),
-                ),
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: db.snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              return AnnouncementCard(
+                                titleText: snapshot.data!.docs[index]['title'],
+                                previewDescriptionText: snapshot
+                                    .data!.docs[index]['preview_text']
+                                    .replaceAll('"', ''),
+                                expandedDescriptionText: snapshot
+                                    .data!.docs[index]['description']
+                                    .replaceAll('"', ''),
+                                imageUrl: snapshot.data!.docs[index]
+                                    ['logo_url'],
+                                expandedImageUrl: snapshot.data!.docs[index]
+                                    ['expanded_image_url'],
+                              );
+                            },
+                          );
+                        }
+                      },
+                    )),
               )
             ],
           ),

@@ -10,14 +10,16 @@ class AnnouncementCard extends StatefulWidget {
   const AnnouncementCard({
     Key? key,
     required this.titleText,
-    required this.descriptionText,
+    required this.previewDescriptionText,
+    required this.expandedDescriptionText,
     required this.imageUrl,
     this.expandedImageUrl,
     this.onExpansionChanged,
   }) : super(key: key);
 
   final String titleText;
-  final String descriptionText;
+  final String previewDescriptionText;
+  final String expandedDescriptionText;
   final String imageUrl;
   final String? expandedImageUrl;
 
@@ -30,7 +32,7 @@ class AnnouncementCard extends StatefulWidget {
 class _AnnouncementCardState extends State<AnnouncementCard>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween =
-  CurveTween(curve: Curves.easeIn);
+      CurveTween(curve: Curves.easeIn);
 
   late AnimationController _controller;
   late Animation<double> _heightFactor;
@@ -101,7 +103,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 height:
-                                MediaQuery.of(context).size.width * 0.15,
+                                    MediaQuery.of(context).size.width * 0.15,
                                 clipBehavior: Clip.antiAlias,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
@@ -142,12 +144,12 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                 color: grey,
                               ),
                               child: Text(
-                                widget.descriptionText,
+                                widget.previewDescriptionText,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 4,
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  color: grey,
+                                  color: white,
                                   fontSize: 16.5,
                                 ),
                               ),
@@ -202,7 +204,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                     ),
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Text(widget.descriptionText,
+                        child: Text(widget.expandedDescriptionText,
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 color: white,
