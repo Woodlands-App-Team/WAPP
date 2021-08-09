@@ -50,18 +50,20 @@ class _CafMenuPageState extends State<CafMenuPage>
     return Scaffold(
       appBar: cafMenuPageAppBar(),
       body: Container(
-        padding: EdgeInsets.fromLTRB(12, 15, 12, 10),
+        padding: EdgeInsets.fromLTRB(2, 15, 2, 10),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  dayText(dayOfWeek[_selectedIndex]),
                   Align(
-                    alignment: Alignment.centerRight,
+                      alignment: Alignment.centerLeft,
+                      child: dayText(dayOfWeek[_selectedIndex])),
+                  Align(
+                    alignment: Alignment.bottomCenter,
                     child: TabBar(
                         isScrollable: true,
                         enableFeedback: false,
@@ -69,7 +71,7 @@ class _CafMenuPageState extends State<CafMenuPage>
                         controller: _tabController,
                         unselectedLabelColor: grey,
                         labelColor: light_blue,
-                        indicatorColor: white,
+                        indicatorColor: Colors.transparent,
                         indicatorSize: TabBarIndicatorSize.tab,
                         tabs: [
                           dayButton('M'),
