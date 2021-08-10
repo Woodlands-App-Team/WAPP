@@ -9,7 +9,8 @@ class EventCard extends StatefulWidget {
   const EventCard({
     Key? key,
     required this.titleText,
-    required this.descriptionText,
+    required this.previewDescriptionText,
+    required this.expandedDescriptionText,
     required this.imageUrl,
     required this.month,
     required this.date,
@@ -18,7 +19,8 @@ class EventCard extends StatefulWidget {
   }) : super(key: key);
 
   final String titleText;
-  final String descriptionText;
+  final String previewDescriptionText;
+  final String expandedDescriptionText;
   final String imageUrl;
   final String month;
   final String date;
@@ -149,7 +151,7 @@ class _EventCardState extends State<EventCard>
                                   color: dark_blue,
                                 ),
                                 child: Text(
-                                  widget.descriptionText,
+                                  widget.previewDescriptionText,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
                                   style: TextStyle(
@@ -252,7 +254,7 @@ class _EventCardState extends State<EventCard>
                     ),
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Text(widget.descriptionText,
+                        child: Text(widget.expandedDescriptionText,
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 color: white,
