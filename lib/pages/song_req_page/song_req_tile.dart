@@ -52,6 +52,7 @@ class Tile extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w700,
                             fontSize: 16,
+                            height: 1.25,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
