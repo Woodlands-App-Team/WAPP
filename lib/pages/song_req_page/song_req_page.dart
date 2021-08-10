@@ -97,7 +97,7 @@ class SongReqScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
-                children: [...topSongs],
+                children: [...topSongs], // TODO: make these clickable
               ),
             )
         ],
