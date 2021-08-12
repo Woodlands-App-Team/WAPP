@@ -99,7 +99,7 @@ class SongReqScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
-                children: [...topSongs], // TODO: make these clickable
+                children: [...topSongs],
               ),
             )
         ],
@@ -116,7 +116,28 @@ class _SongReqPageState extends State<SongReqPage> {
           if (snapshot.hasData) {
             List<Widget> topTrackData = [
               ...(snapshot.data as List<Track>).map((song) {
-                return Tile(song);
+                return InkWell(
+                  child: Tile(song),
+                  onTap: () {
+                    final String output;
+                    if (song.explicit) {
+                      output = "Explicit songs are not permitted.";
+                    } else {
+                      // Get the ID of the user who requested the song + song URL/name + time
+                      output = "Selected song: ${song.name}";
+                    }
+                    ScaffoldMessenger.of(context)
+                      ..removeCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            output,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                  },
+                );
               }).toList()
             ];
             return SongReqScreen(topTrackData);
