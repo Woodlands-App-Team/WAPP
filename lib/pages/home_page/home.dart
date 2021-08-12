@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
-import '../../custom_icons.dart';
+import '../../custom_icons_icons.dart';
 import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';
@@ -63,20 +63,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             backgroundColor: black,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(CustomIcons.home_selected),
+                icon: Icon(CustomIcons.announcements),
                 title: SizedBox.shrink(),
               ),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.cafe_selected),
+                  icon: Icon(CustomIcons.cafe),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.music_note_selected),
+                  icon: Icon(CustomIcons.music_note),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.club_unselected),
+                  icon: Icon(CustomIcons.club),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.settings_selected),
+                  icon: Icon(CustomIcons.miscellaneous),
                   title: SizedBox.shrink()),
             ],
             onTap: (index) {
