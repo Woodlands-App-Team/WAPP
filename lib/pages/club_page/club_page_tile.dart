@@ -4,7 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 import './club_page_tile_clicked.dart';
 
-class ClubPageTile extends StatelessWidget {
+class ClubPageTile extends StatefulWidget {
+  const ClubPageTile({Key? key}) : super(key: key);
+
+  @override
+  _ClubPageTileState createState() => _ClubPageTileState();
+}
+
+class _ClubPageTileState extends State<ClubPageTile> {
+  var _notification = false; // load this in from firebase later
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -47,10 +55,19 @@ class ClubPageTile extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                    child: Icon(
-                      CupertinoIcons.bell,
-                      size: 30,
-                      color: Colors.white,
+                    child: IconButton(
+                      icon: Icon(
+                        _notification
+                            ? CupertinoIcons.bell_fill
+                            : CupertinoIcons.bell,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _notification = !_notification;
+                        });
+                      },
                     ),
                   ),
                 ),
