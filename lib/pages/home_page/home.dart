@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../constants.dart';
-import '../../custom_icons_icons.dart';
+import 'package:wapp/constants.dart';
+import 'package:wapp/custom_icons_icons.dart';
 import 'package:wapp/pages/announcements_page/announcements_page.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page.dart';
 import 'package:wapp/pages/club_page/club_page.dart';

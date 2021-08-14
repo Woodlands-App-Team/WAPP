@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:wapp/custom_icons_icons.dart';
 import './club_page_tile_clicked.dart';
 
 class ClubPageTile extends StatefulWidget {
@@ -58,8 +59,8 @@ class _ClubPageTileState extends State<ClubPageTile> {
                     child: IconButton(
                       icon: Icon(
                         _notification
-                            ? CupertinoIcons.bell_fill
-                            : CupertinoIcons.bell,
+                            ? CustomIcons.notification_filled_ringing
+                            : CustomIcons.notification_unselected,
                         size: 30,
                         color: Colors.white,
                       ),
