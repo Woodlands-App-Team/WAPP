@@ -63,20 +63,35 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             backgroundColor: black,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(CustomIcons.announcements),
+                icon: Icon(
+                  CustomIcons.announcements,
+                  size: 35,
+                ),
                 title: SizedBox.shrink(),
               ),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.cafe),
+                  icon: Icon(
+                    CustomIcons.cafe,
+                    size: 35,
+                  ),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.music_note),
+                  icon: Icon(
+                    CustomIcons.music_note,
+                    size: 35,
+                  ),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.club),
+                  icon: Icon(
+                    CustomIcons.club,
+                    size: 35,
+                  ),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.miscellaneous),
+                  icon: Icon(
+                    CustomIcons.miscellaneous,
+                    size: 35,
+                  ),
                   title: SizedBox.shrink()),
             ],
             onTap: (index) {
