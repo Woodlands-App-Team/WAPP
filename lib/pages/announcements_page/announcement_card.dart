@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
@@ -119,10 +120,9 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                   child: AutoSizeText(
                                     widget.titleText,
                                     maxLines: 1,
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
+                                    style: GoogleFonts.poppins(
                                       color: white,
-                                      fontSize: 45,
+                                      fontSize: 35,  //45
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -147,10 +147,9 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                 widget.previewDescriptionText,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 4,
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
+                                style: GoogleFonts.poppins(
                                   color: white,
-                                  fontSize: 16.5,
+                                  fontSize: 16, //16.5
                                 ),
                               ),
                             ),
@@ -205,10 +204,9 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         child: Text(widget.expandedDescriptionText,
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
+                            style: GoogleFonts.poppins(
                                 color: white,
-                                fontSize: 16.5))),
+                                fontSize: 16))), //16.5
                   ],
                 )
               ],
