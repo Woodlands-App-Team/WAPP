@@ -118,14 +118,13 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         child: Text(
                           'All',
                           style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 20,
-                            color: allButtonTextColor
-                          ),
+                              fontFamily: 'Poppins',
+                              fontSize: 20,
+                              color: allButtonTextColor),
                         ),
                         style: ButtonStyle(
-                            backgroundColor: allButtonColor,
-                            ),
+                          backgroundColor: allButtonColor,
+                        ),
                       ),
                       Spacer(),
                       ElevatedButton(
@@ -145,15 +144,14 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         child: Text(
                           'Announcements',
                           style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 20,
-                            color: announcementsButtonTextColor
-                          ),
+                              fontFamily: 'Poppins',
+                              fontSize: 20,
+                              color: announcementsButtonTextColor),
                         ),
                         style: ButtonStyle(
                             backgroundColor: announcementsButtonColor,
-                            textStyle: MaterialStateProperty.all(
-                                TextStyle(color: announcementsButtonTextColor))),
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                                color: announcementsButtonTextColor))),
                       ),
                       Spacer(),
                       ElevatedButton(
@@ -174,10 +172,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         child: Text(
                           'Events',
                           style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 20,
-                            color: eventsButtonTextColor
-                          ),
+                              fontFamily: 'Poppins',
+                              fontSize: 20,
+                              color: eventsButtonTextColor),
                         ),
                         style: ButtonStyle(
                             backgroundColor: eventsButtonColor,
@@ -206,7 +203,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 if (cardFilter == "all") {
                                   // If filter is for all data
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'announcement') {
+                                      'Announcement') {
                                     return AnnouncementCard(
                                       titleText: snapshot.data!.docs[index]
                                           ['title'],
@@ -243,7 +240,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 } else if (cardFilter == "announcements") {
                                   // If filter is for announcements
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'announcement') {
+                                      'Announcement') {
                                     return AnnouncementCard(
                                       titleText: snapshot.data!.docs[index]
                                           ['title'],
@@ -262,7 +259,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 } else {
                                   // If filter is for events
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'event') {
+                                      'Event') {
                                     return EventCard(
                                       titleText: snapshot.data!.docs[index]
                                           ['title'],
