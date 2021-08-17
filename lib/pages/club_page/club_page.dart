@@ -16,7 +16,6 @@ class _ClubPageState extends State<ClubPage> {
     return Scaffold(
       appBar: clubPageAppBar(),
       body: ListView(
-        //padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         physics: ScrollPhysics(),
@@ -25,6 +24,7 @@ class _ClubPageState extends State<ClubPage> {
           ClubPageTile(),
           ClubPageTile(),
           ClubPageTile(),
+          SizedBox(height: 20),
         ],
       ),
     );

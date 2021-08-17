@@ -9,12 +9,14 @@ class Track {
   final String artist;
   final String imgURL;
   final bool explicit;
+  final String songURL;
 
   Track({
     required this.name,
     required this.artist,
     required this.imgURL,
     required this.explicit,
+    required this.songURL,
   });
 
   factory Track.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class Track {
       imgURL: json['album']['images'][1]
           ['url'], // index 0 = 640x640, index 1 = 300x300, index 2 = 64x64
       explicit: json['explicit'],
+      songURL: json['external_urls']['spotify'],
     );
   }
 }
