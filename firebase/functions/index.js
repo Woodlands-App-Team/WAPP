@@ -25,9 +25,11 @@ exports.requestSong = functions.https.onCall((data, context) => {
         songURL: data.songURL,
         upvotes: 0,
         approved: false,
+        date: data.date,
 
     })
-    admin.firestore().collection('users').doc(data.uid).set({
+    admin.firestore().collection('users').doc(data.uid).update({
         last_song_req: data.date,
     })
+    return data.songName;
 })

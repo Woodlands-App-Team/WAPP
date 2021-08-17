@@ -223,7 +223,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - cloud_firestore (2.3.0):
+  - cloud_firestore (1.0.0):
     - Firebase/Firestore (= 8.3.0)
     - firebase_core
     - Flutter
@@ -247,11 +247,11 @@ PODS:
   - Firebase/Functions (8.3.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 8.3.0)
-  - firebase_analytics (8.1.2):
+  - firebase_analytics (8.2.0):
     - Firebase/Analytics (= 8.3.0)
     - firebase_core
     - Flutter
-  - firebase_auth (2.0.0):
+  - firebase_auth (3.0.1):
     - Firebase/Auth (= 8.3.0)
     - firebase_core
     - Flutter
@@ -459,11 +459,11 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  cloud_firestore: 77d17e643cc27cc678d4cd5164317f211d8df7bc
+  cloud_firestore: b48ce51dbf8dce31499f6483e5db3d0978a7789b
   cloud_functions: 3c28b449603cc0be688d37a15f9feee5880fca8b
   Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
-  firebase_analytics: 796e1691b8f54a327995241f1e390fc8385bd62e
-  firebase_auth: 521f09fcffdba3a1eaa3976f52771d0a99f93239
+  firebase_analytics: 25a03006c041a3be10bbd8e7313f87f59b9857bf
+  firebase_auth: 3b08d67bda60758347d15584fd0a7a4cf5f6496f
   firebase_core: 72374607c8c6f5a0adc0559e5c5bf57deda975e3
   FirebaseAnalytics: 456f2c51599870a15ded4548d1f1f7b2cabf65a7
   FirebaseAuth: fd12c82de44e7ad3b821610c387b8251f03aa0f9
@@ -474,7 +474,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 1585729afc787877763208c2088ed84221161f77
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
+  google_sign_in: de494e5e993986afae63e22a32441e30c35c9823
   GoogleAppMeasurement: de70802583dedceb0bca18172b345307e8f410b8
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213

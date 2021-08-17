@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -17,8 +18,23 @@ class SongReqPage extends StatefulWidget {
 
 class SongReqScreen extends StatelessWidget {
   FirebaseFunctions functions = FirebaseFunctions.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   final List<Widget> topSongs;
   SongReqScreen(this.topSongs);
+
+  Future<String> requestSong(Track song) async {
+    String date = DateTime.now().toString();
+
+    HttpsCallable requestSong = functions.httpsCallable('requestSong');
+    dynamic songName = await requestSong.call(<String, dynamic>{
+      "songURL": song.name,
+      "date": date,
+      "uid": auth.currentUser!.uid,
+      "songName": song.songURL,
+    });
+    print(song.songURL);
+    return songName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +87,8 @@ class SongReqScreen extends StatelessWidget {
                 if (selected!.explicit) {
                   output = "Explicit songs are not permitted.";
                 } else {
-                  // Get the ID of the user who requested the song + song URL/name + time
-                  output = "Selected song: ${selected.name}";
+                  requestSong(selected);
+                  output = "Song Requested";
                 }
                 ScaffoldMessenger.of(context)
                   ..removeCurrentSnackBar()
@@ -109,6 +125,22 @@ class SongReqScreen extends StatelessWidget {
 }
 
 class _SongReqPageState extends State<SongReqPage> {
+  FirebaseFunctions functions = FirebaseFunctions.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  Future<String> requestSong(Track song) async {
+    String date = DateTime.now().toString();
+
+    HttpsCallable requestSong = functions.httpsCallable('requestSong');
+    dynamic songName = await requestSong.call(<String, dynamic>{
+      "songURL": song.name,
+      "date": date,
+      "uid": auth.currentUser!.uid,
+      "songName": song.songURL,
+    });
+    print(song.songURL);
+    return songName;
+  }
+
   @override
   Widget build(BuildContext context) => FutureBuilder(
         future: topTracks(),
@@ -123,7 +155,7 @@ class _SongReqPageState extends State<SongReqPage> {
                     if (song.explicit) {
                       output = "Explicit songs are not permitted.";
                     } else {
-                      // Get the ID of the user who requested the song + song URL/name + time
+                      requestSong(song);
                       output = "Selected song: ${song.name}";
                     }
                     ScaffoldMessenger.of(context)
