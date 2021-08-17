@@ -120,8 +120,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 20,
-                              color: allButtonTextColor
-                          ),
+                              color: allButtonTextColor),
                         ),
                         style: ButtonStyle(
                           backgroundColor: allButtonColor,
@@ -147,13 +146,12 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 20,
-                              color: announcementsButtonTextColor
-                          ),
+                              color: announcementsButtonTextColor),
                         ),
                         style: ButtonStyle(
                             backgroundColor: announcementsButtonColor,
-                            textStyle: MaterialStateProperty.all(
-                                TextStyle(color: announcementsButtonTextColor))),
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                                color: announcementsButtonTextColor))),
                       ),
                       Spacer(),
                       ElevatedButton(
@@ -176,8 +174,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 20,
-                              color: eventsButtonTextColor
-                          ),
+                              color: eventsButtonTextColor),
                         ),
                         style: ButtonStyle(
                             backgroundColor: eventsButtonColor,
@@ -206,7 +203,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 if (cardFilter == "all") {
                                   // If filter is for all data
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'announcement') {
+                                      'Announcement') {
                                     return AnnouncementCard(
                                       titleText: snapshot.data!.docs[index]
                                       ['title'],
@@ -243,7 +240,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 } else if (cardFilter == "announcements") {
                                   // If filter is for announcements
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'announcement') {
+                                      'Announcement') {
                                     return AnnouncementCard(
                                       titleText: snapshot.data!.docs[index]
                                       ['title'],
@@ -262,7 +259,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 } else {
                                   // If filter is for events
                                   if (snapshot.data!.docs[index]['type'] ==
-                                      'event') {
+                                      'Event') {
                                     return EventCard(
                                       titleText: snapshot.data!.docs[index]
                                       ['title'],

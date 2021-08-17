@@ -247,7 +247,7 @@ class _EventCardState extends State<EventCard>
                             endIndent: 20)),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
-                      child: Image.network(widget.expandedImageUrl!),
+                      child: widget.expandedImageUrl!.length == 0 || widget.expandedImageUrl == null ? Container() : Image.network(widget.expandedImageUrl!),
                     ),
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
