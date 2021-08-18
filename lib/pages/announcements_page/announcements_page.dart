@@ -29,6 +29,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   Color announcementsButtonTextColor = black;
   Color eventsButtonTextColor = black;
 
+  String searchString = "";
+
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _loadingAnnouncements = true;
   List<DocumentSnapshot> _announcements = [];
@@ -37,6 +39,46 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   ScrollController _scrollController = ScrollController();
   bool _gettingMoreAnnouncements = false;
   bool _moreAnnouncementsAvailable = true;
+
+  int filterNMode = 0;
+
+  changeFilter() {
+    switch (filterNMode) {
+      case 0:
+        cardFilter = "all";
+        allButtonColor = MaterialStateProperty.all(dark_blue);
+        announcementsButtonColor = MaterialStateProperty.all(white);
+        eventsButtonColor = MaterialStateProperty.all(white);
+
+        allButtonTextColor = white;
+        announcementsButtonTextColor = black;
+        eventsButtonTextColor = black;
+        setState(() {});
+        break;
+      case 1:
+        cardFilter = "announcements";
+        allButtonColor = MaterialStateProperty.all(white);
+        announcementsButtonColor = MaterialStateProperty.all(dark_blue);
+        eventsButtonColor = MaterialStateProperty.all(white);
+
+        allButtonTextColor = black;
+        announcementsButtonTextColor = white;
+        eventsButtonTextColor = black;
+        setState(() {});
+        break;
+      case 2:
+        cardFilter = "events";
+        allButtonColor = MaterialStateProperty.all(white);
+        announcementsButtonColor = MaterialStateProperty.all(white);
+        eventsButtonColor = MaterialStateProperty.all(dark_blue);
+
+        allButtonTextColor = black;
+        announcementsButtonTextColor = black;
+        eventsButtonTextColor = white;
+        setState(() {});
+        break;
+    }
+  }
 
   _getMoreAnnouncements() async {
     print("Getting more announcements");
@@ -62,7 +104,6 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
     setState(() {
       _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
       _announcements.addAll(querySnapshot.docs);
-
 
       if (querySnapshot.docs.length < _perPage) {
         _moreAnnouncementsAvailable = false;
@@ -92,7 +133,6 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getAnnouncements();
 
@@ -110,6 +150,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
     textController = TextEditingController();
+    textController.text = searchString;
+
     return Scaffold(
       appBar: announcementPageAppBar(),
       backgroundColor: white,
@@ -131,7 +173,11 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(10, 13, 0, 0),
                     child: Center(
-                      child: TextFormField(
+                      child: TextField(
+                        onSubmitted: (text) {
+                          searchString = text;
+                          setState(() {});
+                        },
                         controller: textController,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -182,16 +228,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                       Spacer(),
                       ElevatedButton(
                         onPressed: () {
-                          cardFilter = "all";
-                          allButtonColor = MaterialStateProperty.all(dark_blue);
-                          announcementsButtonColor =
-                              MaterialStateProperty.all(white);
-                          eventsButtonColor = MaterialStateProperty.all(white);
-
-                          allButtonTextColor = white;
-                          announcementsButtonTextColor = black;
-                          eventsButtonTextColor = black;
-                          setState(() {});
+                          filterNMode = 0;
+                          changeFilter();
                         },
                         child: Text(
                           'All',
@@ -207,17 +245,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                       Spacer(),
                       ElevatedButton(
                         onPressed: () {
-                          cardFilter = "announcements";
-                          allButtonColor = MaterialStateProperty.all(white);
-                          announcementsButtonColor =
-                              MaterialStateProperty.all(dark_blue);
-                          eventsButtonColor = MaterialStateProperty.all(white);
-
-                          allButtonTextColor = black;
-                          announcementsButtonTextColor = white;
-                          eventsButtonTextColor = black;
-
-                          setState(() {});
+                          filterNMode = 1;
+                          changeFilter();
                         },
                         child: Text(
                           'Announcements',
@@ -234,18 +263,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                       Spacer(),
                       ElevatedButton(
                         onPressed: () {
-                          cardFilter = "events";
-                          allButtonColor = MaterialStateProperty.all(white);
-                          announcementsButtonColor =
-                              MaterialStateProperty.all(white);
-                          eventsButtonColor =
-                              MaterialStateProperty.all(dark_blue);
-
-                          allButtonTextColor = black;
-                          announcementsButtonTextColor = black;
-                          eventsButtonTextColor = white;
-
-                          setState(() {});
+                          filterNMode = 2;
+                          changeFilter();
                         },
                         child: Text(
                           'Events',
@@ -265,118 +284,146 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                 ),
               ),
               Expanded(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                      child: _loadingAnnouncements == true
-                          ? Container(
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          : _announcements.length == 0
-                              ? Center(
-                                  child: Text(
-                                    "No announcements found",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 20, color: Colors.black),
-                                  ),
-                                )
-                              : ListView.builder(
-                                  controller: _scrollController,
-                                  itemCount: _announcements.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    if (cardFilter == "all") {
-                                      // If filter is for all data
-                                      if (_announcements[index]['type'] ==
-                                          'Announcement') {
-                                        return AnnouncementCard(
-                                          titleText: _announcements[index]
-                                              ['title'],
-                                          previewDescriptionText:
-                                              _announcements[index]
-                                                      ['preview_text']
-                                                  .replaceAll('"', ''),
-                                          expandedDescriptionText:
-                                              _announcements[index]
-                                                      ['description']
-                                                  .replaceAll('"', ''),
-                                          imageUrl: _announcements[index]
-                                              ['logo_url'],
-                                          expandedImageUrl:
-                                              _announcements[index]
-                                                  ['expanded_image_url'],
-                                        );
-                                      } else {
-                                        return EventCard(
-                                          titleText: _announcements[index]
-                                              ['title'],
-                                          previewDescriptionText:
-                                              _announcements[index]
-                                                      ['preview_text']
-                                                  .replaceAll('"', ''),
-                                          expandedDescriptionText:
-                                              _announcements[index]
-                                                      ['description']
-                                                  .replaceAll('"', ''),
-                                          imageUrl: _announcements[index]
-                                              ['logo_url'],
-                                          expandedImageUrl:
-                                              _announcements[index]
-                                                  ['expanded_image_url'],
-                                          date: _announcements[index]['date'],
-                                          month: _announcements[index]['month'],
-                                        );
+                child: GestureDetector(
+                    onPanUpdate: (details) {
+                      // Swiping in right direction.
+                      if (details.delta.dx > 25) {
+                        if (filterNMode < 2) {
+                          filterNMode += 1;
+                          changeFilter();
+                        }
+                      }
+
+                      // Swiping in left direction.
+                      if (details.delta.dx < -25) {
+                        if (filterNMode > 0) {
+                          filterNMode -= 1;
+                          changeFilter();
+                        }
+                      }
+                    },
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                        child: _loadingAnnouncements == true
+                            ? Container(
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : _announcements.length == 0
+                                ? Center(
+                                    child: Text(
+                                      "No announcements found",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    controller: _scrollController,
+                                    itemCount: _announcements.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      if (_announcements[index]['title'].contains(searchString) ||
+                                          _announcements[index]['preview_text'].replaceAll('"', '').contains(searchString) ||
+                                          _announcements[index]['description'].replaceAll('"', '').contains(searchString)) {
+                                        if (cardFilter == "all") {
+                                          // If filter is for all data
+                                          if (_announcements[index]['type'] ==
+                                              'Announcement') {
+                                            return AnnouncementCard(
+                                              titleText: _announcements[index]
+                                                  ['title'],
+                                              previewDescriptionText:
+                                                  _announcements[index]
+                                                          ['preview_text']
+                                                      .replaceAll('"', ''),
+                                              expandedDescriptionText:
+                                                  _announcements[index]
+                                                          ['description']
+                                                      .replaceAll('"', ''),
+                                              imageUrl: _announcements[index]
+                                                  ['logo_url'],
+                                              expandedImageUrl:
+                                                  _announcements[index]
+                                                      ['expanded_image_url'],
+                                            );
+                                          } else {
+                                            return EventCard(
+                                              titleText: _announcements[index]
+                                                  ['title'],
+                                              previewDescriptionText:
+                                                  _announcements[index]
+                                                          ['preview_text']
+                                                      .replaceAll('"', ''),
+                                              expandedDescriptionText:
+                                                  _announcements[index]
+                                                          ['description']
+                                                      .replaceAll('"', ''),
+                                              imageUrl: _announcements[index]
+                                                  ['logo_url'],
+                                              expandedImageUrl:
+                                                  _announcements[index]
+                                                      ['expanded_image_url'],
+                                              date: _announcements[index]
+                                                  ['date'],
+                                              month: _announcements[index]
+                                                  ['month'],
+                                            );
+                                          }
+                                        } else if (cardFilter ==
+                                            "announcements") {
+                                          // If filter is for announcements
+                                          if (_announcements[index]['type'] ==
+                                              'Announcement') {
+                                            return AnnouncementCard(
+                                              titleText: _announcements[index]
+                                                  ['title'],
+                                              previewDescriptionText:
+                                                  _announcements[index]
+                                                          ['preview_text']
+                                                      .replaceAll('"', ''),
+                                              expandedDescriptionText:
+                                                  _announcements[index]
+                                                          ['description']
+                                                      .replaceAll('"', ''),
+                                              imageUrl: _announcements[index]
+                                                  ['logo_url'],
+                                              expandedImageUrl:
+                                                  _announcements[index]
+                                                      ['expanded_image_url'],
+                                            );
+                                          }
+                                        } else {
+                                          // If filter is for events
+                                          if (_announcements[index]['type'] ==
+                                              'Event') {
+                                            return EventCard(
+                                              titleText: _announcements[index]
+                                                  ['title'],
+                                              previewDescriptionText:
+                                                  _announcements[index]
+                                                          ['preview_text']
+                                                      .replaceAll('"', ''),
+                                              expandedDescriptionText:
+                                                  _announcements[index]
+                                                          ['description']
+                                                      .replaceAll('"', ''),
+                                              imageUrl: _announcements[index]
+                                                  ['logo_url'],
+                                              expandedImageUrl:
+                                                  _announcements[index]
+                                                      ['expanded_image_url'],
+                                              date: _announcements[index]
+                                                  ['date'],
+                                              month: _announcements[index]
+                                                  ['month'],
+                                            );
+                                          }
+                                        }
                                       }
-                                    } else if (cardFilter == "announcements") {
-                                      // If filter is for announcements
-                                      if (_announcements[index]['type'] ==
-                                          'Announcement') {
-                                        return AnnouncementCard(
-                                          titleText: _announcements[index]
-                                              ['title'],
-                                          previewDescriptionText:
-                                              _announcements[index]
-                                                      ['preview_text']
-                                                  .replaceAll('"', ''),
-                                          expandedDescriptionText:
-                                              _announcements[index]
-                                                      ['description']
-                                                  .replaceAll('"', ''),
-                                          imageUrl: _announcements[index]
-                                              ['logo_url'],
-                                          expandedImageUrl:
-                                              _announcements[index]
-                                                  ['expanded_image_url'],
-                                        );
-                                      }
-                                    } else {
-                                      // If filter is for events
-                                      if (_announcements[index]['type'] ==
-                                          'Event') {
-                                        return EventCard(
-                                          titleText: _announcements[index]
-                                              ['title'],
-                                          previewDescriptionText:
-                                              _announcements[index]
-                                                      ['preview_text']
-                                                  .replaceAll('"', ''),
-                                          expandedDescriptionText:
-                                              _announcements[index]
-                                                      ['description']
-                                                  .replaceAll('"', ''),
-                                          imageUrl: _announcements[index]
-                                              ['logo_url'],
-                                          expandedImageUrl:
-                                              _announcements[index]
-                                                  ['expanded_image_url'],
-                                          date: _announcements[index]['date'],
-                                          month: _announcements[index]['month'],
-                                        );
-                                      }
-                                    }
-                                    return Container(); // Return blank widget when data does not match filter.
-                                  })))
+                                      return Container(); // Return blank widget when data does not match filter.
+                                    }))),
+              )
             ],
           ),
         ),
