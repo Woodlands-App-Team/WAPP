@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 PreferredSizeWidget announcementPageAppBar() {
   final DateTime date = DateTime.now();
@@ -34,7 +35,11 @@ PreferredSizeWidget announcementPageAppBar() {
     actions: [
       Container(
         padding: EdgeInsets.fromLTRB(5, 10, 17, 20),
-        child: Image.asset('assets/logo.png'),
+        child: GestureDetector(
+            child: Image.asset('assets/logo.png'),
+            onTap: () async {
+              await launch("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+            },),
       ),
     ],
   );
