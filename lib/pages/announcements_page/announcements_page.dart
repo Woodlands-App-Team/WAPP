@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:wapp/pages/announcements_page/event_card.dart';
 import '../../constants.dart';
 import 'package:wapp/pages/announcements_page/announcement_page_app_bar.dart';
@@ -323,9 +322,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                     itemCount: _announcements.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      if (_announcements[index]['title'].contains(searchString) ||
-                                          _announcements[index]['preview_text'].replaceAll('"', '').contains(searchString) ||
-                                          _announcements[index]['description'].replaceAll('"', '').contains(searchString)) {
+                                      if (_announcements[index]['title'].toUpperCase().contains(searchString.toUpperCase()) ||
+                                          _announcements[index]['preview_text'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
+                                          _announcements[index]['description'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
+                                          _announcements[index]['tags'].toUpperCase().contains(searchString.toUpperCase())) {
                                         if (cardFilter == "all") {
                                           // If filter is for all data
                                           if (_announcements[index]['type'] ==
