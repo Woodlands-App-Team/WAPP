@@ -74,13 +74,13 @@ class _AnnouncementCardState extends State<AnnouncementCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 2),   // TODO Card padding
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 5),   // TODO Card padding
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: grey,
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
             mainAxisSize: MainAxisSize.min,

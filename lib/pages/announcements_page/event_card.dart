@@ -77,13 +77,13 @@ class _EventCardState extends State<EventCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 2),   //TODO Card padding here
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 5),   //TODO Card padding here
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: dark_blue,
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -168,13 +168,13 @@ class _EventCardState extends State<EventCard>
                                   decoration: BoxDecoration(
                                     color: Color(0x00FF0000),
                                   ),
-                                  child: Align(
-                                    alignment: Alignment(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 30, 10),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Align(
-                                          alignment: Alignment(0, -2),
+                                          alignment: Alignment(0, 0),
                                           child: AutoSizeText(
                                             widget.month,
                                             maxLines: 1,
