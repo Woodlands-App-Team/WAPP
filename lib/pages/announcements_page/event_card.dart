@@ -77,7 +77,7 @@ class _EventCardState extends State<EventCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 2),   //TODO Anyone who doesn't like padding can change it here!!
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 2),   //TODO Card padding here
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: dark_blue,

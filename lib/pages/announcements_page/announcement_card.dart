@@ -74,7 +74,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 2),   // TODO Card padding
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: grey,
