@@ -146,19 +146,20 @@ class _EventCardState extends State<EventCard>
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width * 0.65,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: dark_blue,
-                                  ),
-                                  child: Text(
-                                    widget.previewDescriptionText,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 4,
-                                    style: GoogleFonts.poppins(
-                                      color: white,
-                                      fontSize: 16, //16.5
+                                Expanded(
+                                  child: Container(
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: dark_blue,
+                                    ),
+                                    child: Text(
+                                      widget.previewDescriptionText,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 4,
+                                      style: GoogleFonts.poppins(
+                                        color: white,
+                                        fontSize: 16, //16.5
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -169,7 +170,7 @@ class _EventCardState extends State<EventCard>
                                     color: Color(0x00FF0000),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 30, 10),
+                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [

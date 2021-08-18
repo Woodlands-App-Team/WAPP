@@ -139,19 +139,20 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: grey,
-                                ),
-                                child: Text(
-                                  widget.previewDescriptionText,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  style: GoogleFonts.poppins(
-                                    color: white,
-                                    fontSize: 16, //16.5
+                              Expanded(
+                                child: Container(
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    color: grey,
+                                  ),
+                                  child: Text(
+                                    widget.previewDescriptionText,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: GoogleFonts.poppins(
+                                      color: white,
+                                      fontSize: 16, //16.5
+                                    ),
                                   ),
                                 ),
                               ),
