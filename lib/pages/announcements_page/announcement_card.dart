@@ -14,7 +14,7 @@ class AnnouncementCard extends StatefulWidget {
     required this.previewDescriptionText,
     required this.expandedDescriptionText,
     required this.imageUrl,
-    this.expandedImageUrl,
+    required this.expandedImageUrl,
     this.onExpansionChanged,
   }) : super(key: key);
 
@@ -57,19 +57,21 @@ class _AnnouncementCardState extends State<AnnouncementCard>
   }
 
   void _handleTap() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-      if (_isExpanded) {
-        _controller.forward();
-      } else {
-        _controller.reverse().then<void>((void value) {
-          if (!mounted) return;
-          setState(() {});
-        });
-      }
-      PageStorage.of(context)?.writeState(context, _isExpanded);
-    });
-    widget.onExpansionChanged?.call(_isExpanded);
+    if(widget.expandedImageUrl != '' && widget.expandedDescriptionText != '') {
+      setState(() {
+        _isExpanded = !_isExpanded;
+        if (_isExpanded) {
+          _controller.forward();
+        } else {
+          _controller.reverse().then<void>((void value) {
+            if (!mounted) return;
+            setState(() {});
+          });
+        }
+        PageStorage.of(context)?.writeState(context, _isExpanded);
+      });
+      widget.onExpansionChanged?.call(_isExpanded);
+    }
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {

@@ -41,6 +41,15 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
   int filterNMode = 0;
 
+  List<String> getDateAndMonth(String dateString) {
+    List<String> output = [];
+    List<String> months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+    output.add(dateString.split('/')[1]);
+    output.add(months[int.parse(dateString.split('/')[0]) - 1]);
+
+    return output;
+  }
+
   changeFilter() {
     switch (filterNMode) {
       case 0:
@@ -346,10 +355,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                           expandedImageUrl:
                                               _announcements[index]
                                                   ['expanded_image_url'],
-                                          date: _announcements[index]
-                                              ['date'],
-                                          month: _announcements[index]
-                                              ['month'],
+                                          date: getDateAndMonth(_announcements[index]
+                                          ['date'])[0],
+                                          month: getDateAndMonth(_announcements[index]
+                                          ['date'])[1],
                                         );
                                       }
                                     } else if (cardFilter ==
@@ -395,10 +404,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                           expandedImageUrl:
                                               _announcements[index]
                                                   ['expanded_image_url'],
-                                          date: _announcements[index]
-                                              ['date'],
-                                          month: _announcements[index]
-                                              ['month'],
+                                          date: getDateAndMonth(_announcements[index]
+                                          ['date'])[0],
+                                          month: getDateAndMonth(_announcements[index]
+                                          ['date'])[1],
                                         );
                                       }
                                     }
