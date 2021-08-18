@@ -283,146 +283,128 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                 ),
               ),
               Expanded(
-                child: GestureDetector(
-                    onPanUpdate: (details) {
-                      // Swiping in right direction.
-                      if (details.delta.dx > 25) {
-                        if (filterNMode < 2) {
-                          filterNMode += 1;
-                          changeFilter();
-                        }
-                      }
-
-                      // Swiping in left direction.
-                      if (details.delta.dx < -25) {
-                        if (filterNMode > 0) {
-                          filterNMode -= 1;
-                          changeFilter();
-                        }
-                      }
-                    },
-                    child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                        child: _loadingAnnouncements == true
-                            ? Container(
-                                child: Center(
-                                  child: CircularProgressIndicator(),
+                child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    child: _loadingAnnouncements == true
+                        ? Container(
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : _announcements.length == 0
+                            ? Center(
+                                child: Text(
+                                  "No announcements found",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20, color: Colors.black),
                                 ),
                               )
-                            : _announcements.length == 0
-                                ? Center(
-                                    child: Text(
-                                      "No announcements found",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 20, color: Colors.black),
-                                    ),
-                                  )
-                                : ListView.builder(
-                                    controller: _scrollController,
-                                    itemCount: _announcements.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      if (_announcements[index]['title'].toUpperCase().contains(searchString.toUpperCase()) ||
-                                          _announcements[index]['preview_text'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
-                                          _announcements[index]['description'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
-                                          _announcements[index]['tags'].toUpperCase().contains(searchString.toUpperCase())) {
-                                        if (cardFilter == "all") {
-                                          // If filter is for all data
-                                          if (_announcements[index]['type'] ==
-                                              'Announcement') {
-                                            return AnnouncementCard(
-                                              titleText: _announcements[index]
-                                                  ['title'],
-                                              previewDescriptionText:
-                                                  _announcements[index]
-                                                          ['preview_text']
-                                                      .replaceAll('"', ''),
-                                              expandedDescriptionText:
-                                                  _announcements[index]
-                                                          ['description']
-                                                      .replaceAll('"', ''),
-                                              imageUrl: _announcements[index]
-                                                  ['logo_url'],
-                                              expandedImageUrl:
-                                                  _announcements[index]
-                                                      ['expanded_image_url'],
-                                            );
-                                          } else {
-                                            return EventCard(
-                                              titleText: _announcements[index]
-                                                  ['title'],
-                                              previewDescriptionText:
-                                                  _announcements[index]
-                                                          ['preview_text']
-                                                      .replaceAll('"', ''),
-                                              expandedDescriptionText:
-                                                  _announcements[index]
-                                                          ['description']
-                                                      .replaceAll('"', ''),
-                                              imageUrl: _announcements[index]
-                                                  ['logo_url'],
-                                              expandedImageUrl:
-                                                  _announcements[index]
-                                                      ['expanded_image_url'],
-                                              date: _announcements[index]
-                                                  ['date'],
-                                              month: _announcements[index]
-                                                  ['month'],
-                                            );
-                                          }
-                                        } else if (cardFilter ==
-                                            "announcements") {
-                                          // If filter is for announcements
-                                          if (_announcements[index]['type'] ==
-                                              'Announcement') {
-                                            return AnnouncementCard(
-                                              titleText: _announcements[index]
-                                                  ['title'],
-                                              previewDescriptionText:
-                                                  _announcements[index]
-                                                          ['preview_text']
-                                                      .replaceAll('"', ''),
-                                              expandedDescriptionText:
-                                                  _announcements[index]
-                                                          ['description']
-                                                      .replaceAll('"', ''),
-                                              imageUrl: _announcements[index]
-                                                  ['logo_url'],
-                                              expandedImageUrl:
-                                                  _announcements[index]
-                                                      ['expanded_image_url'],
-                                            );
-                                          }
-                                        } else {
-                                          // If filter is for events
-                                          if (_announcements[index]['type'] ==
-                                              'Event') {
-                                            return EventCard(
-                                              titleText: _announcements[index]
-                                                  ['title'],
-                                              previewDescriptionText:
-                                                  _announcements[index]
-                                                          ['preview_text']
-                                                      .replaceAll('"', ''),
-                                              expandedDescriptionText:
-                                                  _announcements[index]
-                                                          ['description']
-                                                      .replaceAll('"', ''),
-                                              imageUrl: _announcements[index]
-                                                  ['logo_url'],
-                                              expandedImageUrl:
-                                                  _announcements[index]
-                                                      ['expanded_image_url'],
-                                              date: _announcements[index]
-                                                  ['date'],
-                                              month: _announcements[index]
-                                                  ['month'],
-                                            );
-                                          }
-                                        }
+                            : ListView.builder(
+                                controller: _scrollController,
+                                itemCount: _announcements.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  if (_announcements[index]['title'].toUpperCase().contains(searchString.toUpperCase()) ||
+                                      _announcements[index]['preview_text'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
+                                      _announcements[index]['description'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
+                                      _announcements[index]['tags'].toUpperCase().contains(searchString.toUpperCase())) {
+                                    if (cardFilter == "all") {
+                                      // If filter is for all data
+                                      if (_announcements[index]['type'] ==
+                                          'Announcement') {
+                                        return AnnouncementCard(
+                                          titleText: _announcements[index]
+                                              ['title'],
+                                          previewDescriptionText:
+                                              _announcements[index]
+                                                      ['preview_text']
+                                                  .replaceAll('"', ''),
+                                          expandedDescriptionText:
+                                              _announcements[index]
+                                                      ['description']
+                                                  .replaceAll('"', ''),
+                                          imageUrl: _announcements[index]
+                                              ['logo_url'],
+                                          expandedImageUrl:
+                                              _announcements[index]
+                                                  ['expanded_image_url'],
+                                        );
+                                      } else {
+                                        return EventCard(
+                                          titleText: _announcements[index]
+                                              ['title'],
+                                          previewDescriptionText:
+                                              _announcements[index]
+                                                      ['preview_text']
+                                                  .replaceAll('"', ''),
+                                          expandedDescriptionText:
+                                              _announcements[index]
+                                                      ['description']
+                                                  .replaceAll('"', ''),
+                                          imageUrl: _announcements[index]
+                                              ['logo_url'],
+                                          expandedImageUrl:
+                                              _announcements[index]
+                                                  ['expanded_image_url'],
+                                          date: _announcements[index]
+                                              ['date'],
+                                          month: _announcements[index]
+                                              ['month'],
+                                        );
                                       }
-                                      return Container(); // Return blank widget when data does not match filter.
-                                    }))),
+                                    } else if (cardFilter ==
+                                        "announcements") {
+                                      // If filter is for announcements
+                                      if (_announcements[index]['type'] ==
+                                          'Announcement') {
+                                        return AnnouncementCard(
+                                          titleText: _announcements[index]
+                                              ['title'],
+                                          previewDescriptionText:
+                                              _announcements[index]
+                                                      ['preview_text']
+                                                  .replaceAll('"', ''),
+                                          expandedDescriptionText:
+                                              _announcements[index]
+                                                      ['description']
+                                                  .replaceAll('"', ''),
+                                          imageUrl: _announcements[index]
+                                              ['logo_url'],
+                                          expandedImageUrl:
+                                              _announcements[index]
+                                                  ['expanded_image_url'],
+                                        );
+                                      }
+                                    } else {
+                                      // If filter is for events
+                                      if (_announcements[index]['type'] ==
+                                          'Event') {
+                                        return EventCard(
+                                          titleText: _announcements[index]
+                                              ['title'],
+                                          previewDescriptionText:
+                                              _announcements[index]
+                                                      ['preview_text']
+                                                  .replaceAll('"', ''),
+                                          expandedDescriptionText:
+                                              _announcements[index]
+                                                      ['description']
+                                                  .replaceAll('"', ''),
+                                          imageUrl: _announcements[index]
+                                              ['logo_url'],
+                                          expandedImageUrl:
+                                              _announcements[index]
+                                                  ['expanded_image_url'],
+                                          date: _announcements[index]
+                                              ['date'],
+                                          month: _announcements[index]
+                                              ['month'],
+                                        );
+                                      }
+                                    }
+                                  }
+                                  return Container(); // Return blank widget when data does not match filter.
+                                })),
               )
             ],
           ),
