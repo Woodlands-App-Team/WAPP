@@ -350,7 +350,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                               )
                             : ListView.builder(
                                 controller: _scrollController,
-                                itemCount: _announcements.length,
+                                itemCount: _announcements.length - 1,
                                 itemBuilder: (BuildContext context, int index) {
                                   if (_announcements[index]['title']
                                           .toUpperCase()
