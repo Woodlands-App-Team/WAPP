@@ -9,6 +9,8 @@ import 'package:wapp/pages/general_page/general_page.dart';
 import 'package:wapp/pages/song_req_page/song_req_page.dart';
 import 'dart:math';
 
+import 'package:wapp/pages/song_upvote_page/song_upvote_page.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -69,9 +71,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   // ignore: unused_field
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
-  late PageController _pageController = PageController(initialPage: 0);
+  late PageController _pageController = PageController(initialPage: 2);
 
   @override
   void initState() {
@@ -95,7 +97,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         children: [
           AnnouncementsPage(),
           CafMenuPage(),
-          SongReqPage(),
+          SongUpvotePage(),
           ClubPage(),
           GeneralPage(),
         ],

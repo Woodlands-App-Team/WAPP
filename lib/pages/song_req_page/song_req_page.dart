@@ -27,7 +27,9 @@ class SongReqScreen extends StatelessWidget {
 
     HttpsCallable requestSong = functions.httpsCallable('requestSong');
     dynamic songName = await requestSong.call(<String, dynamic>{
-      "songURL": song.name,
+      "name": song.name,
+      "artist": song.artist,
+      "imgURL": song.imgURL,
       "date": date,
       "uid": auth.currentUser!.uid,
       "songName": song.songURL,
@@ -132,7 +134,9 @@ class _SongReqPageState extends State<SongReqPage> {
 
     HttpsCallable requestSong = functions.httpsCallable('requestSong');
     dynamic songName = await requestSong.call(<String, dynamic>{
-      "songURL": song.name,
+      "name": song.name,
+      "artist": song.artist,
+      "imgURL": song.imgURL,
       "date": date,
       "uid": auth.currentUser!.uid,
       "songName": song.songURL,

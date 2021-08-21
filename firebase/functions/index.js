@@ -8,7 +8,6 @@ exports.initNewUser = functions.auth.user().onCreate(user => {
         push_notif_announcement: [],
         push_notif_event: false,
         last_song_req: null,
-        upvoted_songs: [],
     })
 });
 
@@ -22,14 +21,28 @@ exports.requestSong = functions.https.onCall((data, context) => {
         throw new functions.https.HttpsError('unauthenticated', 'only authenticated users can add requests')
     }
     admin.firestore().collection('song-requests').add({
-        songURL: data.songURL,
+        name: data.name,
+        artist: data.artist,
+        imgURL: data.imgURL,
         upvotes: 0,
         approved: false,
         date: data.date,
+        upvotedUsers: [],
 
     })
     admin.firestore().collection('users').doc(data.uid).update({
         last_song_req: data.date,
     })
-    return data.songName;
-})
+    return data.name;
+});
+
+exports.upvoteSong = functions.https.onCall((data, context) => {
+    if(!context.auth){
+        throw new functions.https.HttpsError('unauthenticated', 'only authenticated users can add requests')
+    }
+
+    return admin.firestore().collection('song-requests').doc(data.song).update({
+        upvotedUsers: admin.firestore.FieldValue.arrayUnion(data.uid),
+        upvotes: admin.firestore.FieldValue.increment(1),
+    })
+});
