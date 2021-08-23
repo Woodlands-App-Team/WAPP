@@ -2,18 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:wapp/custom_icons_icons.dart';
 import './club_page_tile_clicked.dart';
 
 class ClubPageTile extends StatefulWidget {
-  const ClubPageTile({Key? key}) : super(key: key);
+  final String title;
+  final String meetingTime;
+  final String logo;
+  final String topic;
 
+  ClubPageTile({
+    required this.title,
+    required this.meetingTime,
+    required this.logo,
+    required this.topic,
+  });
   @override
-  _ClubPageTileState createState() => _ClubPageTileState();
+  _ClubPageTileState createState() => _ClubPageTileState(
+        title: this.title,
+        logo: this.logo,
+        meetingTime: this.meetingTime,
+        topic: this.topic,
+      );
 }
 
 class _ClubPageTileState extends State<ClubPageTile> {
+  final String title;
+  final String meetingTime;
+  final String logo;
+  final String topic;
+
+  _ClubPageTileState({
+    required this.title,
+    required this.meetingTime,
+    required this.logo,
+    required this.topic,
+  });
+
   var _notification = false; // load this in from firebase later
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -65,6 +97,11 @@ class _ClubPageTileState extends State<ClubPageTile> {
                         color: Colors.white,
                       ),
                       onPressed: () {
+                        if (_notification) {
+                          _fcm.unsubscribeFromTopic(this.topic);
+                        } else {
+                          _fcm.subscribeToTopic(this.topic);
+                        }
                         setState(() {
                           _notification = !_notification;
                         });
@@ -101,8 +138,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50.0),
                               child: FittedBox(
-                                child: Image.network(
-                                    'https://i.kym-cdn.com/entries/icons/facebook/000/012/589/patrickstar.jpg'),
+                                child: Image.network(this.logo),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -115,7 +151,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 padding: const EdgeInsets.only(left: 10),
                                 width: MediaQuery.of(context).size.width * 0.65,
                                 child: Text(
-                                  "Woodlands Athletic Association",
+                                  this.title,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 20,
@@ -128,7 +164,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 padding: const EdgeInsets.only(left: 10),
                                 width: MediaQuery.of(context).size.width * 0.65,
                                 child: Text(
-                                  "Monday 12:00",
+                                  this.meetingTime,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,

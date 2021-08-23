@@ -20,10 +20,34 @@ class _ClubPageState extends State<ClubPage> {
         shrinkWrap: true,
         physics: ScrollPhysics(),
         children: [
-          ClubPageTile(),
-          ClubPageTile(),
-          ClubPageTile(),
-          ClubPageTile(),
+          ClubPageTile(
+            title: "WAA",
+            logo:
+                "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
+            meetingTime: "Monday 12:00",
+            topic: "WAA",
+          ),
+          ClubPageTile(
+            title: "WAA",
+            logo:
+                "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
+            meetingTime: "Monday 12:00",
+            topic: "WAA",
+          ),
+          ClubPageTile(
+            title: "WAA",
+            logo:
+                "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
+            meetingTime: "Monday 12:00",
+            topic: "WAA",
+          ),
+          ClubPageTile(
+            title: "WAA",
+            logo:
+                "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
+            meetingTime: "Monday 12:00",
+            topic: "WAA",
+          ),
           SizedBox(height: 20),
         ],
       ),
