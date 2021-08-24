@@ -137,7 +137,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                          padding: EdgeInsets.fromLTRB(19, 10, 17, 0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -191,7 +191,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
         child: TickerMode(
           enabled: !closed,
           child: Padding(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

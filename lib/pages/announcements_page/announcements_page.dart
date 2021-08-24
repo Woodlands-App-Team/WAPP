@@ -20,9 +20,16 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   MaterialStateProperty<Color> allButtonColor =
       MaterialStateProperty.all(dark_blue);
   MaterialStateProperty<Color> announcementsButtonColor =
-      MaterialStateProperty.all(white);
+      MaterialStateProperty.all(clear);
   MaterialStateProperty<Color> eventsButtonColor =
-      MaterialStateProperty.all(white);
+      MaterialStateProperty.all(clear);
+
+  MaterialStateProperty<Color> allButtonShadowColor =
+      MaterialStateProperty.all(defaultShadowColor);
+  MaterialStateProperty<Color> announcementsButtonShadowColor =
+      MaterialStateProperty.all(clear);
+  MaterialStateProperty<Color> eventsButtonShadowColor =
+      MaterialStateProperty.all(clear);
 
   Color allButtonTextColor = white;
   Color announcementsButtonTextColor = black;
@@ -43,7 +50,8 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
   List<String> getDateAndMonth(String dateString) {
     List<String> output = [];
-    List<String> months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+    List<String> months =
+        'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
     output.add(dateString.split('/')[1]);
     output.add(months[int.parse(dateString.split('/')[0]) - 1]);
 
@@ -55,8 +63,15 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
       case 0:
         cardFilter = "all";
         allButtonColor = MaterialStateProperty.all(dark_blue);
-        announcementsButtonColor = MaterialStateProperty.all(white);
-        eventsButtonColor = MaterialStateProperty.all(white);
+        announcementsButtonColor = MaterialStateProperty.all(clear);
+        eventsButtonColor = MaterialStateProperty.all(clear);
+
+        allButtonShadowColor =
+            MaterialStateProperty.all(defaultShadowColor);
+        announcementsButtonShadowColor =
+            MaterialStateProperty.all(clear);
+        eventsButtonShadowColor =
+            MaterialStateProperty.all(clear);
 
         allButtonTextColor = white;
         announcementsButtonTextColor = black;
@@ -65,9 +80,16 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         break;
       case 1:
         cardFilter = "announcements";
-        allButtonColor = MaterialStateProperty.all(white);
+        allButtonColor = MaterialStateProperty.all(clear);
         announcementsButtonColor = MaterialStateProperty.all(dark_blue);
-        eventsButtonColor = MaterialStateProperty.all(white);
+        eventsButtonColor = MaterialStateProperty.all(clear);
+
+        allButtonShadowColor =
+            MaterialStateProperty.all(clear);
+        announcementsButtonShadowColor =
+            MaterialStateProperty.all(defaultShadowColor);
+        eventsButtonShadowColor =
+            MaterialStateProperty.all(clear);
 
         allButtonTextColor = black;
         announcementsButtonTextColor = white;
@@ -76,9 +98,16 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         break;
       case 2:
         cardFilter = "events";
-        allButtonColor = MaterialStateProperty.all(white);
-        announcementsButtonColor = MaterialStateProperty.all(white);
+        allButtonColor = MaterialStateProperty.all(clear);
+        announcementsButtonColor = MaterialStateProperty.all(clear);
         eventsButtonColor = MaterialStateProperty.all(dark_blue);
+
+        allButtonShadowColor =
+            MaterialStateProperty.all(clear);
+        announcementsButtonShadowColor =
+            MaterialStateProperty.all(clear);
+        eventsButtonShadowColor =
+            MaterialStateProperty.all(defaultShadowColor);
 
         allButtonTextColor = black;
         announcementsButtonTextColor = black;
@@ -241,12 +270,16 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         },
                         child: Text(
                           'All',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 20,
-                              color: allButtonTextColor),
+                          style: GoogleFonts.poppins(
+                              fontSize: 20, color: allButtonTextColor),
                         ),
                         style: ButtonStyle(
+                          shadowColor: allButtonShadowColor,
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(18.0))),
                           backgroundColor: allButtonColor,
                         ),
                       ),
@@ -258,12 +291,16 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         },
                         child: Text(
                           'Announcements',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
+                          style: GoogleFonts.poppins(
                               fontSize: 20,
                               color: announcementsButtonTextColor),
                         ),
                         style: ButtonStyle(
+                            shadowColor: announcementsButtonShadowColor,
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0))),
                             backgroundColor: announcementsButtonColor,
                             textStyle: MaterialStateProperty.all(TextStyle(
                                 color: announcementsButtonTextColor))),
@@ -276,12 +313,15 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                         },
                         child: Text(
                           'Events',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 20,
-                              color: eventsButtonTextColor),
+                          style: GoogleFonts.poppins(
+                              fontSize: 20, color: eventsButtonTextColor),
                         ),
                         style: ButtonStyle(
+                            shadowColor: eventsButtonShadowColor,
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0))),
                             backgroundColor: eventsButtonColor,
                             textStyle: MaterialStateProperty.all(
                                 TextStyle(color: eventsButtonTextColor))),
@@ -310,13 +350,26 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                               )
                             : ListView.builder(
                                 controller: _scrollController,
-                                itemCount: _announcements.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  if (_announcements[index]['title'].toUpperCase().contains(searchString.toUpperCase()) ||
-                                      _announcements[index]['preview_text'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
-                                      _announcements[index]['description'].toUpperCase().replaceAll('"', '').contains(searchString.toUpperCase()) ||
-                                      _announcements[index]['tags'].toUpperCase().contains(searchString.toUpperCase())) {
+                                itemCount: _announcements.length - 1,
+                                itemBuilder: (BuildContext context, int index) {
+                                  if (_announcements[index]['title']
+                                          .toUpperCase()
+                                          .contains(
+                                              searchString.toUpperCase()) ||
+                                      _announcements[index]['preview_text']
+                                          .toUpperCase()
+                                          .replaceAll('"', '')
+                                          .contains(
+                                              searchString.toUpperCase()) ||
+                                      _announcements[index]['description']
+                                          .toUpperCase()
+                                          .replaceAll('"', '')
+                                          .contains(
+                                              searchString.toUpperCase()) ||
+                                      _announcements[index]['tags']
+                                          .toUpperCase()
+                                          .contains(
+                                              searchString.toUpperCase())) {
                                     if (cardFilter == "all") {
                                       // If filter is for all data
                                       if (_announcements[index]['type'] ==
@@ -355,14 +408,13 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                           expandedImageUrl:
                                               _announcements[index]
                                                   ['expanded_image_url'],
-                                          date: getDateAndMonth(_announcements[index]
-                                          ['date'])[0],
-                                          month: getDateAndMonth(_announcements[index]
-                                          ['date'])[1],
+                                          date: getDateAndMonth(
+                                              _announcements[index]['date'])[0],
+                                          month: getDateAndMonth(
+                                              _announcements[index]['date'])[1],
                                         );
                                       }
-                                    } else if (cardFilter ==
-                                        "announcements") {
+                                    } else if (cardFilter == "announcements") {
                                       // If filter is for announcements
                                       if (_announcements[index]['type'] ==
                                           'Announcement') {
@@ -404,10 +456,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                           expandedImageUrl:
                                               _announcements[index]
                                                   ['expanded_image_url'],
-                                          date: getDateAndMonth(_announcements[index]
-                                          ['date'])[0],
-                                          month: getDateAndMonth(_announcements[index]
-                                          ['date'])[1],
+                                          date: getDateAndMonth(
+                                              _announcements[index]['date'])[0],
+                                          month: getDateAndMonth(
+                                              _announcements[index]['date'])[1],
                                         );
                                       }
                                     }

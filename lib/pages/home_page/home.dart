@@ -9,6 +9,8 @@ import 'package:wapp/pages/club_page/club_page.dart';
 import 'package:wapp/pages/general_page/general_page.dart';
 import 'package:wapp/pages/song_req_page/song_req_page.dart';
 import 'package:wapp/services/local_notification_service.dart';
+import 'dart:math';
+import 'package:wapp/pages/song_upvote_page/song_upvote_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,10 +22,59 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
 
-  // ignore: unused_field
-  int _currentIndex = 0;
+  Color bottomNavBarColor = black;
+  int lastTap = DateTime.now().millisecondsSinceEpoch;
+  int consecutiveTaps = 0;
+  bool changedColour = false;
 
-  late PageController _pageController = PageController(initialPage: 0);
+  List<String> colours = [
+    "#00ffff",
+    "#f0ffff",
+    "#f5f5dc",
+    "#000000",
+    "#0000ff",
+    "#a52a2a",
+    "#00ffff",
+    "#ff00ff",
+    "#ffd700",
+    "#008000",
+    "#4b0082",
+    "#f0e68c",
+    "#add8e6",
+    "#e0ffff",
+    "#90ee90",
+    "#d3d3d3",
+    "#ffb6c1",
+    "#ffffe0",
+    "#00ff00",
+    "#ff00ff",
+    "#800000",
+    "#000080",
+    "#808000",
+    "#ffa500",
+    "#ffc0cb",
+    "#800080",
+    "#800080",
+    "#ff0000",
+    "#c0c0c0",
+    "#ffffff",
+    "#ffff00"
+  ];
+
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+
+    return int.parse(hexColor, radix: 16);
+  }
+
+  // ignore: unused_field
+  int _currentIndex = 2;
+
+  late PageController _pageController = PageController(initialPage: 2);
 
   @override
   void initState() {
@@ -69,7 +120,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         children: [
           AnnouncementsPage(),
           CafMenuPage(),
-          SongReqPage(),
+          SongUpvotePage(),
           ClubPage(),
           GeneralPage(),
         ],
@@ -84,7 +135,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             selectedItemColor: white,
             unselectedItemColor: grey,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: black,
+            backgroundColor: bottomNavBarColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
@@ -125,6 +176,28 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               _pageController.jumpToPage(
                 index,
               );
+
+              int now = DateTime.now().millisecondsSinceEpoch;
+              if (now - lastTap < 1000) {
+                consecutiveTaps++;
+                if (consecutiveTaps >= 7) {
+                  if (changedColour == false) {
+                    setState(() {
+                      bottomNavBarColor = Color(
+                          _getColorFromHex(colours[Random().nextInt(30)]));
+                    });
+                    consecutiveTaps = 0;
+                    changedColour = true;
+                  } else {
+                    bottomNavBarColor = black;
+                    changedColour = false;
+                    consecutiveTaps = 0;
+                  }
+                }
+              } else {
+                consecutiveTaps = 0;
+              }
+              lastTap = now;
             }),
       ),
     );
