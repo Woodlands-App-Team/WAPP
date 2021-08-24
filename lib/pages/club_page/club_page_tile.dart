@@ -48,10 +48,6 @@ class _ClubPageTileState extends State<ClubPageTile> {
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
   Future<void> changeNotification() async {
-    print("HERE " + _notification.toString());
-    print(FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid));
     return FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)

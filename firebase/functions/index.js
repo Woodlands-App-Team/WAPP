@@ -47,7 +47,7 @@ exports.sendToTopic = functions.firestore.document('announcements/{announcementI
     const annoucementInfo = snapshot.data(); 
     const payload = {
         notification: {
-            title: "New Annoucement",
+            title: annoucementInfo.title,
             body: annoucementInfo.description, 
             sound: 'default', 
             clickAction: 'FLUTTER_NOTIFICATION_CLICK',  
