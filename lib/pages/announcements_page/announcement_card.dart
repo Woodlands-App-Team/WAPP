@@ -93,7 +93,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                   onTap: _handleTap,
                   behavior: HitTestBehavior.opaque,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
