@@ -259,75 +259,76 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                   decoration: BoxDecoration(
                     color: Color(0x00EEEEEE),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          filterNMode = 0;
-                          changeFilter();
-                        },
-                        child: Text(
-                          'All',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20, color: allButtonTextColor),
+                  child: Expanded(
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            filterNMode = 0;
+                            changeFilter();
+                          },
+                          child: Text(
+                            'All',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20, color: allButtonTextColor),
+                          ),
+                          style: ButtonStyle(
+                            shadowColor: allButtonShadowColor,
+                            shape:
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0))),
+                            backgroundColor: allButtonColor,
+                          ),
                         ),
-                        style: ButtonStyle(
-                          shadowColor: allButtonShadowColor,
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            filterNMode = 1;
+                            changeFilter();
+                          },
+                          child: Text(
+                            'Announcements',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                color: announcementsButtonTextColor),
+                          ),
+                          style: ButtonStyle(
+                              shadowColor: announcementsButtonShadowColor,
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(18.0))),
-                          backgroundColor: allButtonColor,
+                                      borderRadius: BorderRadius.circular(18.0))),
+                              backgroundColor: announcementsButtonColor,
+                              textStyle: MaterialStateProperty.all(TextStyle(
+                                  color: announcementsButtonTextColor))),
                         ),
-                      ),
-                      Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          filterNMode = 1;
-                          changeFilter();
-                        },
-                        child: Text(
-                          'Announcements',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20,
-                              color: announcementsButtonTextColor),
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            filterNMode = 2;
+                            changeFilter();
+                          },
+                          child: Text(
+                            'Events',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20, color: eventsButtonTextColor),
+                          ),
+                          style: ButtonStyle(
+                              shadowColor: eventsButtonShadowColor,
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0))),
+                              backgroundColor: eventsButtonColor,
+                              textStyle: MaterialStateProperty.all(
+                                  TextStyle(color: eventsButtonTextColor))),
                         ),
-                        style: ButtonStyle(
-                            shadowColor: announcementsButtonShadowColor,
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0))),
-                            backgroundColor: announcementsButtonColor,
-                            textStyle: MaterialStateProperty.all(TextStyle(
-                                color: announcementsButtonTextColor))),
-                      ),
-                      Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          filterNMode = 2;
-                          changeFilter();
-                        },
-                        child: Text(
-                          'Events',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20, color: eventsButtonTextColor),
-                        ),
-                        style: ButtonStyle(
-                            shadowColor: eventsButtonShadowColor,
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0))),
-                            backgroundColor: eventsButtonColor,
-                            textStyle: MaterialStateProperty.all(
-                                TextStyle(color: eventsButtonTextColor))),
-                      ),
-                      Spacer()
-                    ],
+                        Spacer()
+                      ],
+                    ),
                   ),
                 ),
               ),

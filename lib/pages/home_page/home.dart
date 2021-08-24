@@ -155,9 +155,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               );
 
               int now = DateTime.now().millisecondsSinceEpoch;
-              if (now - lastTap < 1000) {
+              if (now - lastTap < 750) {
                 consecutiveTaps++;
-                if (consecutiveTaps >= 7) {
+                if (consecutiveTaps >= 12) {
                   if (changedColour == false) {
                     setState(() {
                       bottomNavBarColor = Color(
