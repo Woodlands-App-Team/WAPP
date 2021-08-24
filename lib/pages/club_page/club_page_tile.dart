@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:wapp/custom_icons_icons.dart';
 import './club_page_tile_clicked.dart';
@@ -20,6 +21,7 @@ class ClubPageTile extends StatefulWidget {
     required this.logo,
     required this.topic,
   });
+
   @override
   _ClubPageTileState createState() => _ClubPageTileState(
         title: this.title,
@@ -42,12 +44,30 @@ class _ClubPageTileState extends State<ClubPageTile> {
     required this.topic,
   });
 
-  var _notification = false; // load this in from firebase later
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  bool _notification = false;
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
+  Future<void> changeNotification() async {
+    print("HERE " + _notification.toString());
+    print(FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid));
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({"push_notif_announcement." + topic: _notification});
+  }
 
   @override
   Widget build(BuildContext context) {
+    Future<DocumentSnapshot> _getDocument() async {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+      final FirebaseAuth _user = FirebaseAuth.instance;
+      DocumentSnapshot document = await users.doc(_user.currentUser!.uid).get();
+      return document;
+    }
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -88,23 +108,60 @@ class _ClubPageTileState extends State<ClubPageTile> {
                   alignment: Alignment.topRight,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                    child: IconButton(
-                      icon: Icon(
-                        _notification
-                            ? CustomIcons.notification_filled_ringing
-                            : CustomIcons.notification_unselected,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        if (_notification) {
-                          _fcm.unsubscribeFromTopic(this.topic);
+                    child: FutureBuilder<DocumentSnapshot>(
+                      future: _getDocument(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done &&
+                            snapshot.hasData &&
+                            snapshot.data!.exists) {
+                          _notification = snapshot.data!
+                              .data()!["push_notif_announcement"][topic];
+
+                          return IconButton(
+                            icon: Icon(
+                              _notification
+                                  ? CustomIcons.notification_filled_ringing
+                                  : CustomIcons.notification_unselected,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _notification = !_notification;
+                              });
+                              if (_notification) {
+                                _fcm.subscribeToTopic(topic);
+                                changeNotification();
+                              } else {
+                                _fcm.unsubscribeFromTopic(topic);
+                                changeNotification();
+                              }
+                            },
+                          );
                         } else {
-                          _fcm.subscribeToTopic(this.topic);
+                          return IconButton(
+                            icon: Icon(
+                              _notification
+                                  ? CustomIcons.notification_filled_ringing
+                                  : CustomIcons.notification_unselected,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _notification = !_notification;
+                              });
+                              if (_notification) {
+                                _fcm.subscribeToTopic(topic);
+                                changeNotification();
+                              } else {
+                                _fcm.unsubscribeFromTopic(topic);
+                                changeNotification();
+                              }
+                            },
+                          );
                         }
-                        setState(() {
-                          _notification = !_notification;
-                        });
                       },
                     ),
                   ),

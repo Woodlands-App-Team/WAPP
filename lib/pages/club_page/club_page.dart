@@ -21,32 +21,39 @@ class _ClubPageState extends State<ClubPage> {
         physics: ScrollPhysics(),
         children: [
           ClubPageTile(
-            title: "WAA",
+            title: "SAC",
             logo:
                 "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
             meetingTime: "Monday 12:00",
-            topic: "WAA",
+            topic: "SAC",
           ),
           ClubPageTile(
-            title: "WAA",
+            title: "Woodlands Athletic Association",
             logo:
                 "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
             meetingTime: "Monday 12:00",
-            topic: "WAA",
+            topic: "WoodlandsAthleticAssociation",
           ),
           ClubPageTile(
-            title: "WAA",
+            title: "Woodlands Computer Science Club",
             logo:
                 "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
             meetingTime: "Monday 12:00",
-            topic: "WAA",
+            topic: "WoodlandsComputerScienceClub",
           ),
           ClubPageTile(
-            title: "WAA",
+            title: "Eco Club",
             logo:
                 "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
             meetingTime: "Monday 12:00",
-            topic: "WAA",
+            topic: "EcoClub",
+          ),
+          ClubPageTile(
+            title: "The Prefects",
+            logo:
+                "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/220px-Patrick_Star.svg.png",
+            meetingTime: "Monday 12:00",
+            topic: "ThePrefects",
           ),
           SizedBox(height: 20),
         ],
