@@ -24,9 +24,9 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
     return Container(
       height: 120,
       child: Card(
-        elevation: 3,
+        elevation: 4,
         color: dark_blue,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -93,16 +93,20 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     widget.isUpvoted == true
-                        ? SizedBox.shrink()
-                        : Icon(
+                        ? Icon(
                             Icons.keyboard_arrow_up_rounded,
                             size: 30,
                             color: white,
+                          )
+                        : Icon(
+                            Icons.keyboard_arrow_up_rounded,
+                            size: 30,
+                            color: light_blue,
                           ),
                     Text(
                       widget.upvotes.toStringAsFixed(0),
                       style: GoogleFonts.nunitoSans(
-                        color: white,
+                        color: widget.isUpvoted ? white : light_blue,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

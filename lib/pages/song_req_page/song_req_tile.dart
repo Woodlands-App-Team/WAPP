@@ -13,7 +13,7 @@ class Tile extends StatelessWidget {
     return Container(
       height: 92.5,
       child: Card(
-        elevation: 1,
+        elevation: 2,
         color: Colors.white,
         margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
         shape: RoundedRectangleBorder(
