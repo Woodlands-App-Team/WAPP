@@ -99,14 +99,14 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
                             color: white,
                           )
                         : Icon(
-                            Icons.keyboard_arrow_up_rounded,
+                            Icons.arrow_back_ios,
                             size: 30,
-                            color: light_blue,
+                            color: white,
                           ),
                     Text(
                       widget.upvotes.toStringAsFixed(0),
                       style: GoogleFonts.nunitoSans(
-                        color: widget.isUpvoted ? white : light_blue,
+                        color: white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
