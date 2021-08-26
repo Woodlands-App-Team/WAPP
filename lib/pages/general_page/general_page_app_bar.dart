@@ -15,7 +15,7 @@ PreferredSizeWidget generalPageAppBar() {
     title: Text(
       "General Information",
       style: GoogleFonts.poppins(
-        fontSize: 26,
+        fontSize: 24,
         fontWeight: FontWeight.w600,
         color: white,
       ),

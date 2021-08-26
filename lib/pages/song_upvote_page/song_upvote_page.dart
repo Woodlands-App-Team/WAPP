@@ -68,6 +68,9 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                   size: 30,
                   color: dark_blue,
                 ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text("Request Song",
                     style: GoogleFonts.poppins(
                         color: grey,
@@ -81,7 +84,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: songUpvotePageAppBar(),
       body: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('song-requests')

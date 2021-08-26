@@ -15,7 +15,7 @@ PreferredSizeWidget cafMenuPageAppBar() {
     title: Text(
       "Cafeteria",
       style: GoogleFonts.poppins(
-        fontSize: 30,
+        fontSize: 24,
         fontWeight: FontWeight.w600,
         color: white,
       ),

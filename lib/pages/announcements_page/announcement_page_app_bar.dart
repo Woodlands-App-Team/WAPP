@@ -36,10 +36,12 @@ PreferredSizeWidget announcementPageAppBar() {
       Container(
         padding: EdgeInsets.fromLTRB(5, 10, 17, 20),
         child: GestureDetector(
-            child: Image.asset('assets/logo.png'),
-            onTap: () async {
-              await launch("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
-            },),
+          child: Image.asset('assets/logo.png'),
+          onTap: () async {
+            await launch(
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+          },
+        ),
       ),
     ],
   );
