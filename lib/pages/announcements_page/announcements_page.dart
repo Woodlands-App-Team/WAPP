@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/pages/announcements_page/event_card.dart';
@@ -66,12 +67,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         announcementsButtonColor = MaterialStateProperty.all(clear);
         eventsButtonColor = MaterialStateProperty.all(clear);
 
-        allButtonShadowColor =
-            MaterialStateProperty.all(defaultShadowColor);
-        announcementsButtonShadowColor =
-            MaterialStateProperty.all(clear);
-        eventsButtonShadowColor =
-            MaterialStateProperty.all(clear);
+        allButtonShadowColor = MaterialStateProperty.all(defaultShadowColor);
+        announcementsButtonShadowColor = MaterialStateProperty.all(clear);
+        eventsButtonShadowColor = MaterialStateProperty.all(clear);
 
         allButtonTextColor = white;
         announcementsButtonTextColor = black;
@@ -84,12 +82,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         announcementsButtonColor = MaterialStateProperty.all(dark_blue);
         eventsButtonColor = MaterialStateProperty.all(clear);
 
-        allButtonShadowColor =
-            MaterialStateProperty.all(clear);
+        allButtonShadowColor = MaterialStateProperty.all(clear);
         announcementsButtonShadowColor =
             MaterialStateProperty.all(defaultShadowColor);
-        eventsButtonShadowColor =
-            MaterialStateProperty.all(clear);
+        eventsButtonShadowColor = MaterialStateProperty.all(clear);
 
         allButtonTextColor = black;
         announcementsButtonTextColor = white;
@@ -102,12 +98,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         announcementsButtonColor = MaterialStateProperty.all(clear);
         eventsButtonColor = MaterialStateProperty.all(dark_blue);
 
-        allButtonShadowColor =
-            MaterialStateProperty.all(clear);
-        announcementsButtonShadowColor =
-            MaterialStateProperty.all(clear);
-        eventsButtonShadowColor =
-            MaterialStateProperty.all(defaultShadowColor);
+        allButtonShadowColor = MaterialStateProperty.all(clear);
+        announcementsButtonShadowColor = MaterialStateProperty.all(clear);
+        eventsButtonShadowColor = MaterialStateProperty.all(defaultShadowColor);
 
         allButtonTextColor = black;
         announcementsButtonTextColor = black;
@@ -259,76 +252,85 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                   decoration: BoxDecoration(
                     color: Color(0x00EEEEEE),
                   ),
-                  child: Expanded(
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: () {
-                            filterNMode = 0;
-                            changeFilter();
-                          },
-                          child: Text(
-                            'All',
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, color: allButtonTextColor),
-                          ),
-                          style: ButtonStyle(
-                            shadowColor: allButtonShadowColor,
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+                    child: Flex(direction: Axis.horizontal, children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                filterNMode = 0;
+                                changeFilter();
+                              },
+                              child: Text(
+                                'All',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20, color: allButtonTextColor),
+                              ),
+                              style: ButtonStyle(
+                                shadowColor: allButtonShadowColor,
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(18.0))),
-                            backgroundColor: allButtonColor,
-                          ),
+                                backgroundColor: allButtonColor,
+                              ),
+                            ),
+                            Spacer(),
+                            ElevatedButton(
+                              onPressed: () {
+                                filterNMode = 1;
+                                changeFilter();
+                              },
+                              child: Text(
+                                'Announcements',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: announcementsButtonTextColor),
+                              ),
+                              style: ButtonStyle(
+                                  shadowColor: announcementsButtonShadowColor,
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0))),
+                                  backgroundColor: announcementsButtonColor,
+                                  textStyle: MaterialStateProperty.all(
+                                      TextStyle(
+                                          color:
+                                              announcementsButtonTextColor))),
+                            ),
+                            Spacer(),
+                            ElevatedButton(
+                              onPressed: () {
+                                filterNMode = 2;
+                                changeFilter();
+                              },
+                              child: Text(
+                                'Events',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: eventsButtonTextColor),
+                              ),
+                              style: ButtonStyle(
+                                  shadowColor: eventsButtonShadowColor,
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0))),
+                                  backgroundColor: eventsButtonColor,
+                                  textStyle: MaterialStateProperty.all(
+                                      TextStyle(
+                                          color: eventsButtonTextColor))),
+                            ),
+                          ],
                         ),
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: () {
-                            filterNMode = 1;
-                            changeFilter();
-                          },
-                          child: Text(
-                            'Announcements',
-                            style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                color: announcementsButtonTextColor),
-                          ),
-                          style: ButtonStyle(
-                              shadowColor: announcementsButtonShadowColor,
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0))),
-                              backgroundColor: announcementsButtonColor,
-                              textStyle: MaterialStateProperty.all(TextStyle(
-                                  color: announcementsButtonTextColor))),
-                        ),
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: () {
-                            filterNMode = 2;
-                            changeFilter();
-                          },
-                          child: Text(
-                            'Events',
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, color: eventsButtonTextColor),
-                          ),
-                          style: ButtonStyle(
-                              shadowColor: eventsButtonShadowColor,
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0))),
-                              backgroundColor: eventsButtonColor,
-                              textStyle: MaterialStateProperty.all(
-                                  TextStyle(color: eventsButtonTextColor))),
-                        ),
-                        Spacer()
-                      ],
-                    ),
+                      ),
+                    ]),
                   ),
                 ),
               ),
