@@ -57,7 +57,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
   }
 
   void _handleTap() {
-    if(widget.expandedImageUrl != '' && widget.expandedDescriptionText != '') {
+    if (widget.expandedImageUrl != '' && widget.expandedDescriptionText != '') {
       setState(() {
         _isExpanded = !_isExpanded;
         if (_isExpanded) {
@@ -76,7 +76,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 5),   // TODO Card padding
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 5), // TODO Card padding
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: grey,
@@ -106,7 +106,8 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                               Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                 child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.15,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
                                   height:
                                       MediaQuery.of(context).size.width * 0.15,
                                   clipBehavior: Clip.antiAlias,
@@ -126,7 +127,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                       maxLines: 1,
                                       style: GoogleFonts.poppins(
                                         color: white,
-                                        fontSize: 35,  //45
+                                        fontSize: 35, //45
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
@@ -205,15 +206,16 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                             endIndent: 20)),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
-                      child: widget.expandedImageUrl!.length == 0 || widget.expandedImageUrl == null ? Container() : Image.network(widget.expandedImageUrl!),
-
+                      child: widget.expandedImageUrl!.length == 0 ||
+                              widget.expandedImageUrl == null
+                          ? Container()
+                          : Image.network(widget.expandedImageUrl!),
                     ),
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         child: Text(widget.expandedDescriptionText,
                             style: GoogleFonts.poppins(
-                                color: white,
-                                fontSize: 16))), //16.5
+                                color: white, fontSize: 16))), //16.5
                   ],
                 )
               ],

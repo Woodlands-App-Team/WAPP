@@ -3,9 +3,13 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 exports.initNewUser = functions.auth.user().onCreate(user => {
+    const clubs = ["WoodlandsAthleticAssociation", "WoodlandsComputerScienceClub", "EcoClub", "SAC", "ThePrefects"]; 
+    // clubs cannot have spaces 
+    const push_notif_subscribed = {};  
+    clubs.forEach(club_name => { push_notif_subscribed[club_name]=false; });
     return admin.firestore().collection('users').doc(user.uid).set({
         email: user.email,
-        push_notif_announcement: [],
+        push_notif_announcement: push_notif_subscribed,
         push_notif_event: false,
         last_song_req: null,
     })
@@ -34,6 +38,26 @@ exports.requestSong = functions.https.onCall((data, context) => {
         last_song_req: data.date,
     })
     return data.name;
+}); 
+
+const db = admin.firestore(); 
+const fcm = admin.messaging(); 
+
+exports.sendToTopic = functions.firestore.document('announcements/{announcementID}').onCreate(async (snapshot, context) => {
+    const annoucementInfo = snapshot.data(); 
+    const payload = {
+        notification: {
+            title: annoucementInfo.title,
+            body: annoucementInfo.description, 
+            sound: 'default', 
+            clickAction: 'FLUTTER_NOTIFICATION_CLICK',  
+        }, 
+    }; 
+    return admin.messaging().sendToTopic(annoucementInfo.title, payload).then(response => {
+        console.log("Success"); 
+    }).catch(error => {
+        console.log("Failed"); 
+    }); 
 });
 
 exports.upvoteSong = functions.https.onCall((data, context) => {
