@@ -28,6 +28,7 @@ dependencies:
   firebase_analytics: ^8.1.2
   firebase_auth: ^3.0.1
   cloud_firestore: 1.0.0
+  firebase_messaging: ^10.0.5
   shared_preferences: ^2.0.6
   animated_text_kit: ^4.2.1
   delayed_widget: ^1.1.1
@@ -45,6 +46,7 @@ dependencies:
   auto_size_text: 3.0.0-nullsafety.0
   rxdart: ^0.27.1
   url_launcher: ^6.0.9
+  flutter_local_notifications: ^8.1.1+1
 
 dev_dependencies:
   flutter_test:
