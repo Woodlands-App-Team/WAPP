@@ -186,156 +186,177 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
       appBar: announcementPageAppBar(),
       backgroundColor: white,
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: Alignment(0, 0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Color(0xB222221219),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 13, 0, 0),
-                    child: Center(
-                      child: TextField(
-                        onSubmitted: (text) {
-                          searchString = text;
-                          setState(() {});
-                        },
-                        controller: textController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: ' Search posts...',
-                          hintStyle: TextStyle(fontFamily: 'Poppins'),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.white,
+              floating: false,
+              elevation: 0,
+              bottom: PreferredSize(
+                child: Container(),
+                preferredSize: Size(0, 60),
+              ),
+              expandedHeight: 115,
+              flexibleSpace: Container(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment(0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xB222221219),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 13, 0, 0),
+                          child: Center(
+                            child: TextField(
+                              onSubmitted: (text) {
+                                searchString = text;
+                                setState(() {});
+                              },
+                              controller: textController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                hintText: ' Search posts...',
+                                hintStyle: TextStyle(fontFamily: 'Poppins'),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                              ),
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                              ),
+                              textAlign: TextAlign.start,
                             ),
                           ),
                         ),
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                        ),
-                        textAlign: TextAlign.start,
                       ),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: Container(
-                  // Row with filter buttons
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  height: 35,
-                  decoration: BoxDecoration(
-                    color: Color(0x00EEEEEE),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
-                    child: Flex(direction: Axis.horizontal, children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                filterNMode = 0;
-                                changeFilter();
-                              },
-                              child: Text(
-                                'All',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20, color: allButtonTextColor),
-                              ),
-                              style: ButtonStyle(
-                                shadowColor: allButtonShadowColor,
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0))),
-                                backgroundColor: allButtonColor,
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                      child: Container(
+                        // Row with filter buttons
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: Color(0x00EEEEEE),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+                          child: Flex(direction: Axis.horizontal, children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      filterNMode = 0;
+                                      changeFilter();
+                                    },
+                                    child: Text(
+                                      'All',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 17,
+                                          color: allButtonTextColor),
+                                    ),
+                                    style: ButtonStyle(
+                                      shadowColor: allButtonShadowColor,
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0))),
+                                      backgroundColor: allButtonColor,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      filterNMode = 1;
+                                      changeFilter();
+                                    },
+                                    child: Text(
+                                      'Announcements',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 17,
+                                          color: announcementsButtonTextColor),
+                                    ),
+                                    style: ButtonStyle(
+                                        shadowColor:
+                                            announcementsButtonShadowColor,
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        18.0))),
+                                        backgroundColor:
+                                            announcementsButtonColor,
+                                        textStyle: MaterialStateProperty.all(
+                                            TextStyle(
+                                                color:
+                                                    announcementsButtonTextColor))),
+                                  ),
+                                  Spacer(),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      filterNMode = 2;
+                                      changeFilter();
+                                    },
+                                    child: Text(
+                                      'Events',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 17,
+                                          color: eventsButtonTextColor),
+                                    ),
+                                    style: ButtonStyle(
+                                        shadowColor: eventsButtonShadowColor,
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        18.0))),
+                                        backgroundColor: eventsButtonColor,
+                                        textStyle: MaterialStateProperty.all(
+                                            TextStyle(
+                                                color: eventsButtonTextColor))),
+                                  ),
+                                  Spacer(),
+                                ],
                               ),
                             ),
-                            Spacer(),
-                            ElevatedButton(
-                              onPressed: () {
-                                filterNMode = 1;
-                                changeFilter();
-                              },
-                              child: Text(
-                                'Announcements',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: announcementsButtonTextColor),
-                              ),
-                              style: ButtonStyle(
-                                  shadowColor: announcementsButtonShadowColor,
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0))),
-                                  backgroundColor: announcementsButtonColor,
-                                  textStyle: MaterialStateProperty.all(
-                                      TextStyle(
-                                          color:
-                                              announcementsButtonTextColor))),
-                            ),
-                            Spacer(),
-                            ElevatedButton(
-                              onPressed: () {
-                                filterNMode = 2;
-                                changeFilter();
-                              },
-                              child: Text(
-                                'Events',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: eventsButtonTextColor),
-                              ),
-                              style: ButtonStyle(
-                                  shadowColor: eventsButtonShadowColor,
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0))),
-                                  backgroundColor: eventsButtonColor,
-                                  textStyle: MaterialStateProperty.all(
-                                      TextStyle(
-                                          color: eventsButtonTextColor))),
-                            ),
-                          ],
+                          ]),
                         ),
                       ),
-                    ]),
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Expanded(
-                child: Padding(
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Padding(
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                     child: _loadingAnnouncements == true
                         ? Container(
@@ -352,6 +373,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 ),
                               )
                             : ListView.builder(
+                                shrinkWrap: true,
                                 controller: _scrollController,
                                 itemCount: _announcements.length - 1,
                                 itemBuilder: (BuildContext context, int index) {
@@ -469,9 +491,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                   }
                                   return Container(); // Return blank widget when data does not match filter.
                                 })),
-              )
-            ],
-          ),
+              ]),
+            )
+          ],
         ),
       ),
     );

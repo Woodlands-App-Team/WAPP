@@ -108,7 +108,7 @@ class _GeneralPageState extends State<GeneralPage> {
                                 child: Icon(
                                   CustomIcons.logout,
                                   size: 80,
-                                  color: dark_blue,
+                                  color: Color(0XFFd00000),
                                 ),
                               ),
                             ),
