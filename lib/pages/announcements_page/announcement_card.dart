@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -114,7 +115,12 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Image.network(widget.imageUrl),
+                                  child: Image.network(
+                                    widget.imageUrl,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.network('https://upload.wikimedia.org/wikipedia/en/thumb/3/34/The_Woodlands_School_-_Mississauga_logo.png/220px-The_Woodlands_School_-_Mississauga_logo.png');
+                                    },
+                                  ),
                                 ),
                               ),
                               Expanded(

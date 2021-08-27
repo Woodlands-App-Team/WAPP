@@ -120,7 +120,12 @@ class _EventCardState extends State<EventCard>
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.network(widget.imageUrl),
+                                    child: Image.network(
+                                      widget.imageUrl,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Image.network('https://upload.wikimedia.org/wikipedia/en/thumb/3/34/The_Woodlands_School_-_Mississauga_logo.png/220px-The_Woodlands_School_-_Mississauga_logo.png');
+                                      },
+                                    ),
                                   ),
                                 ),
                                 Expanded(
