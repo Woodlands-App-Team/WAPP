@@ -189,8 +189,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              floating: true,
+              snap: true,
               backgroundColor: Colors.white,
-              floating: false,
               elevation: 0,
               bottom: PreferredSize(
                 child: Container(),

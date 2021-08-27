@@ -6,7 +6,9 @@ import 'package:wapp/constants.dart';
 import 'package:wapp/custom_icons_icons.dart';
 import 'package:wapp/models/provider.dart';
 import 'package:wapp/pages/general_page/general_page_app_bar.dart';
+import 'package:wapp/pages/general_page/info_page.dart';
 import 'package:wapp/pages/general_page/map_page.dart';
+import 'package:wapp/pages/general_page/wapp_desc_page.dart';
 
 class GeneralPage extends StatefulWidget {
   const GeneralPage({Key? key}) : super(key: key);
@@ -24,7 +26,8 @@ class _GeneralPageState extends State<GeneralPage> {
       body: Container(
         padding: EdgeInsets.all(15),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Card(
               elevation: 5,
@@ -69,57 +72,62 @@ class _GeneralPageState extends State<GeneralPage> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconCard(CustomIcons.wapp_team, MapPage(), 100,
+                IconCard(CustomIcons.wapp_team, WappDescPage(), 100,
                     "Woodlands\nApp Team"),
                 IconCard(
-                    CustomIcons.description, MapPage(), 100, "School Info"),
+                    CustomIcons.description, InfoPage(), 100, "School Info"),
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconCard(CustomIcons.settings, MapPage(), 100, "Settings"),
-                Container(
-                  width: MediaQuery.of(context).size.width / 2 - 15,
-                  height: MediaQuery.of(context).size.height / 4.5,
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    child: GestureDetector(
-                      onTap: () {
-                        final provider = Provider.of<GoogleSignInProvider>(
-                            context,
-                            listen: false);
-                        provider.logout();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Container(
-                                width: 100,
-                                child: Icon(
-                                  CustomIcons.logout,
-                                  size: 80,
-                                  color: Color(0XFFd00000),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2 - 25,
+                    height: MediaQuery.of(context).size.height / 4.8,
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      child: GestureDetector(
+                        onTap: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.logout();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Container(
+                                  width: 100,
+                                  child: Icon(
+                                    CustomIcons.logout,
+                                    size: 80,
+                                    color: Color(0XFFd00000),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 8),
-                            Text("Logout",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                    color: grey,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600)),
-                          ],
+                              SizedBox(height: 8),
+                              Text("Logout",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      color: Color(0XFFd00000),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -134,46 +142,49 @@ class _GeneralPageState extends State<GeneralPage> {
   }
 
   Widget IconCard(IconData icon, Widget page, double size, String name) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2 - 15,
-      height: MediaQuery.of(context).size.height / 4.5,
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15))),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => page),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: Container(
-                    width: 100,
-                    child: Icon(
-                      icon,
-                      size: 80,
-                      color: dark_blue,
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2 - 25,
+        height: MediaQuery.of(context).size.height / 4.8,
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15))),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 100,
+                      child: Icon(
+                        icon,
+                        size: 80,
+                        color: dark_blue,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(name,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                        color: grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600)),
-              ],
+                  SizedBox(height: 8),
+                  Text(name,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          color: grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600)),
+                ],
+              ),
             ),
           ),
         ),
