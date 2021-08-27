@@ -5,9 +5,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:wapp/pages/caf_menu_page/cafFlipCard.dart';
 import '../../constants.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page_app_bar.dart';
 import 'package:wapp/pages/caf_menu_page/special_card.dart';
+import 'cafFlipCard.dart';
 
 class CafMenuPage extends StatefulWidget {
   const CafMenuPage({Key? key}) : super(key: key);
@@ -107,6 +109,22 @@ class _CafMenuPageState extends State<CafMenuPage>
                     }
                   },
                 )),
+            Container(
+              height: MediaQuery.of(context).size.height - 460,
+              padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
+              child: GridView.count(
+                crossAxisCount: 2,
+                children: [
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$800.8135', flipText: "random text what do you want from me",),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                  cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
+                ],),
+            )
           ],
         ),
       ),

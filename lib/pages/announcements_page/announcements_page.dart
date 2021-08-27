@@ -187,10 +187,12 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
       backgroundColor: white,
       body: SafeArea(
         child: CustomScrollView(
+          controller: _scrollController,
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
-              floating: false,
+              floating: true,
+              snap: true,
               elevation: 0,
               bottom: PreferredSize(
                 child: Container(),
@@ -373,8 +375,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 ),
                               )
                             : ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                controller: _scrollController,
+                                //controller: _scrollController,
                                 itemCount: _announcements.length - 1,
                                 itemBuilder: (BuildContext context, int index) {
                                   if (_announcements[index]['title']
