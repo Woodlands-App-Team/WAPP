@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 PreferredSizeWidget generalPageAppBar() {
   return AppBar(
+    automaticallyImplyLeading: false,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         bottom: Radius.circular(20),

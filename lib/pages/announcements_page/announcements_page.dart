@@ -190,9 +190,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
           controller: _scrollController,
           slivers: [
             SliverAppBar(
-              backgroundColor: Colors.white,
               floating: true,
               snap: true,
+              backgroundColor: Colors.white,
               elevation: 0,
               bottom: PreferredSize(
                 child: Container(),
