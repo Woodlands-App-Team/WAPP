@@ -113,7 +113,6 @@ Future<List<Track>> topTracks() async {
     final List<Track> songs = await parseJsonPlaylist(response);
     return songs.sublist(0, 20);
   } else {
-    print(response.statusCode);
     final authToken2 = await getToken();
     final response2 = await searchPlaylist(authToken2);
     if (response2.statusCode == 200) {
@@ -132,19 +131,16 @@ Future<List<Track>> searchSongs(String query) async {
   final authToken = prefs.getString('token') ?? '';
   final response = await searchSpotify(query, authToken);
   if (response.statusCode == 200) {
-    print("USING TOKEN: " + authToken);
     final List<Track> songs = await parseJson(response);
     return songs;
   } else {
     final authToken2 = await getToken();
     final response2 = await searchSpotify(query, authToken2);
     if (response2.statusCode == 200) {
-      print("USING TOKEN: " + authToken2);
       prefs.setString('token', authToken2);
       final List<Track> songs = await parseJson(response2);
       return songs;
     } else {
-      // return empty list if fails twice
       return [];
     }
   }
