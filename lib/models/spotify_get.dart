@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wapp/models/filter_words.dart';
 
 class Track {
   final String name;
@@ -22,10 +23,10 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) {
     return Track(
       name: json['name'],
-      artist: json['artists'][0][
-          'name'], // TODO: if there are multiple artists, this only returns the first one
-      imgURL: json['album']['images'][1]
-          ['url'], // index 0 = 640x640, index 1 = 300x300, index 2 = 64x64
+      artist: json['artists'][0]['name'],
+      // TODO: if there are multiple artists, this only returns the first one
+      imgURL: json['album']['images'][1]['url'],
+      // index 0 = 640x640, index 1 = 300x300, index 2 = 64x64
       explicit: json['explicit'],
       songURL: json['external_urls']['spotify'],
     );
@@ -72,13 +73,12 @@ Future<http.Response> searchPlaylist(String authToken) async {
 }
 
 Future<List<Track>> parseJson(http.Response response) async {
-  const List<String> _filterWords = ["night"];
   final responseJson = jsonDecode(response.body);
   List<Track> songs = [];
   (responseJson['tracks']['items'] as List<dynamic>).forEach((json) {
     Track song = Track.fromJson(json);
     bool cleanTitle = true;
-    _filterWords.forEach((invalidWord) {
+    filterWords.forEach((invalidWord) {
       if (song.name.toLowerCase().contains(invalidWord)) {
         cleanTitle = false;
       }
