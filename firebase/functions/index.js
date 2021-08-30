@@ -3,14 +3,11 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 exports.initNewUser = functions.auth.user().onCreate(user => {
-    const clubs = ["WoodlandsAthleticAssociation", "WoodlandsComputerScienceClub", "EcoClub", "SAC", "ThePrefects"]; 
-    // clubs cannot have spaces 
-    const push_notif_subscribed = {};  
-    clubs.forEach(club_name => { push_notif_subscribed[club_name]=false; });
     return admin.firestore().collection('users').doc(user.uid).set({
         email: user.email,
-        push_notif_announcement: push_notif_subscribed,
+        push_notif_announcement: [],
         push_notif_event: false,
+        push_notif_all_clubs: false, 
         last_song_req: null,
     })
 });
@@ -53,11 +50,8 @@ exports.sendToTopic = functions.firestore.document('announcements/{announcementI
             clickAction: 'FLUTTER_NOTIFICATION_CLICK',  
         }, 
     }; 
-    return admin.messaging().sendToTopic(annoucementInfo.title, payload).then(response => {
-        console.log("Success"); 
-    }).catch(error => {
-        console.log("Failed"); 
-    }); 
+    // return admin.messaging().sendToTopic(annoucementInfo.title.replace(/ /g, ''), payload); 
+    return admin.messaging().sendToTopic("SAC", payload); 
 });
 
 exports.upvoteSong = functions.https.onCall((data, context) => {

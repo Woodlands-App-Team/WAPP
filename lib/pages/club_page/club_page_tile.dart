@@ -48,22 +48,32 @@ class _ClubPageTileState extends State<ClubPageTile> {
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
   Future<void> changeNotification() async {
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"push_notif_announcement." + topic: _notification});
+    if (_notification) {
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "push_notif_announcement": FieldValue.arrayUnion([topic])
+      });
+    } else {
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "push_notif_announcement": FieldValue.arrayRemove([topic])
+      });
+    }
+  }
+
+  Future<DocumentSnapshot> _getDocument() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final FirebaseAuth _user = FirebaseAuth.instance;
+    DocumentSnapshot document = await users.doc(_user.currentUser!.uid).get();
+    return document;
   }
 
   @override
   Widget build(BuildContext context) {
-    Future<DocumentSnapshot> _getDocument() async {
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('users');
-      final FirebaseAuth _user = FirebaseAuth.instance;
-      DocumentSnapshot document = await users.doc(_user.currentUser!.uid).get();
-      return document;
-    }
-
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -112,7 +122,8 @@ class _ClubPageTileState extends State<ClubPageTile> {
                             snapshot.hasData &&
                             snapshot.data!.exists) {
                           _notification = snapshot.data!
-                              .data()!["push_notif_announcement"][topic];
+                              .data()!["push_notif_announcement"]
+                              .contains(topic);
 
                           return IconButton(
                             icon: Icon(
@@ -127,10 +138,14 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(topic);
+                                _fcm.subscribeToTopic(
+                                  topic.replaceAll(' ', ''),
+                                );
                                 changeNotification();
                               } else {
-                                _fcm.unsubscribeFromTopic(topic);
+                                _fcm.unsubscribeFromTopic(
+                                  topic.replaceAll(' ', ''),
+                                );
                                 changeNotification();
                               }
                             },
@@ -149,10 +164,14 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(topic);
+                                _fcm.subscribeToTopic(
+                                  topic.replaceAll(' ', ''),
+                                );
                                 changeNotification();
                               } else {
-                                _fcm.unsubscribeFromTopic(topic);
+                                _fcm.unsubscribeFromTopic(
+                                  topic.replaceAll(' ', ''),
+                                );
                                 changeNotification();
                               }
                             },

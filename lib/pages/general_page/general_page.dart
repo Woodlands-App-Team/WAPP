@@ -9,6 +9,7 @@ import 'package:wapp/pages/general_page/general_page_app_bar.dart';
 import 'package:wapp/pages/general_page/info_page.dart';
 import 'package:wapp/pages/general_page/map_page.dart';
 import 'package:wapp/pages/general_page/wapp_desc_page.dart';
+import './settings_page.dart';
 
 class GeneralPage extends StatefulWidget {
   const GeneralPage({Key? key}) : super(key: key);
@@ -83,7 +84,7 @@ class _GeneralPageState extends State<GeneralPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconCard(CustomIcons.settings, MapPage(), 100, "Settings"),
+                IconCard(CustomIcons.settings, SettingsPage(), 100, "Settings"),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(

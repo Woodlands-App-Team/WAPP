@@ -53,6 +53,7 @@ dependencies:
   cached_network_image: ^3.1.0
   profanity_filter: ^2.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -12,6 +12,10 @@ class ClubPageInfo extends StatelessWidget {
         ),
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          highlightElevation: 0,
           elevation: 0,
           onPressed: () {
             Navigator.pop(context);
