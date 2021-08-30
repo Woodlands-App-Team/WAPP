@@ -113,18 +113,17 @@ class _CafMenuPageState extends State<CafMenuPage>
             Expanded(
               child: Container(
                 padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  children: [
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$800.8135', flipText: "random text what do you want from me",),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                    cafFlipCard(imageAddress: 'https://assets.change.org/photos/8/jw/ax/QMjwAxeQAfcpoxs-1600x900-noPad.jpg?1597557421', title: "Spam with Foobar", price: '\$69.42', flipText: "random text what do you want from me"),
-                  ],),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: db.snapshots(),
+                  builder: (context, snapshot) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container();
+                      },
+                    );
+                  },
+                ),
               ),
             )
           ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:wapp/pages/song_req_page/song_req_page_app_bar.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 
 import '../../models/spotify_get.dart';
 import './song_req_tile.dart';
@@ -20,6 +21,7 @@ class SongReqScreen extends StatelessWidget {
   FirebaseFunctions functions = FirebaseFunctions.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   final List<Widget> topSongs;
+  final filter = ProfanityFilter();
   SongReqScreen(this.topSongs);
 
   Future<String> requestSong(Track song) async {

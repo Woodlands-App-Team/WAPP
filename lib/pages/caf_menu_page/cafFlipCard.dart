@@ -32,7 +32,7 @@ class cafFlipCardState extends State<cafFlipCard> {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.95 / 2,
             height: MediaQuery.of(context).size.width * 0.9 / 2,
-            padding: EdgeInsets.fromLTRB(5, 10, 0, 5),
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
             child: Card(
               elevation: 4,
               clipBehavior: Clip.antiAliasWithSaveLayer,
