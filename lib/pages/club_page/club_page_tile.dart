@@ -65,16 +65,15 @@ class _ClubPageTileState extends State<ClubPageTile> {
     }
   }
 
+  Future<DocumentSnapshot> _getDocument() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final FirebaseAuth _user = FirebaseAuth.instance;
+    DocumentSnapshot document = await users.doc(_user.currentUser!.uid).get();
+    return document;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future<DocumentSnapshot> _getDocument() async {
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('users');
-      final FirebaseAuth _user = FirebaseAuth.instance;
-      DocumentSnapshot document = await users.doc(_user.currentUser!.uid).get();
-      return document;
-    }
-
     return InkWell(
       onTap: () {
         Navigator.push(

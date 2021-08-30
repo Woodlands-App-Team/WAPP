@@ -23,73 +23,74 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: generalPageAppBar(),
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(
-            top: 60,
+      appBar: generalPageAppBar(),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          top: 60,
+        ),
+        child: FloatingActionButton(
+          highlightElevation: 0,
+          hoverColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          elevation: 0,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            CupertinoIcons.chevron_back,
+            size: 30,
+            color: Colors.black,
           ),
-          child: FloatingActionButton(
-            highlightElevation: 0,
-            hoverColor: Colors.transparent,
-            backgroundColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            elevation: 0,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              CupertinoIcons.chevron_back,
-              size: 30,
-              color: Colors.black,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(16, 50, 16, 26),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Card(
+            elevation: 5,
+            color: white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
+              child: ListView.builder(
+                itemCount: fields.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          fields[index].name,
+                          style: GoogleFonts.poppins(
+                              color: dark_blue,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          fields[index].info,
+                          style: GoogleFonts.nunitoSans(
+                              color: grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(16, 50, 16, 26),
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              elevation: 5,
-              color: white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
-                child: ListView.builder(
-                  itemCount: fields.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            fields[index].name,
-                            style: GoogleFonts.poppins(
-                                color: dark_blue,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            fields[index].info,
-                            style: GoogleFonts.nunitoSans(
-                                color: grey,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }

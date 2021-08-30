@@ -7,6 +7,7 @@ exports.initNewUser = functions.auth.user().onCreate(user => {
         email: user.email,
         push_notif_announcement: [],
         push_notif_event: false,
+        push_notif_all_clubs: false, 
         last_song_req: null,
     })
 });
