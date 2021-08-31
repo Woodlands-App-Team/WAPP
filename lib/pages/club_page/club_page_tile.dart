@@ -138,9 +138,12 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(
-                                  topic.replaceAll(' ', ''),
-                                );
+                                if (snapshot.data!
+                                    .data()!["push_notif_enabled"]) {
+                                  _fcm.subscribeToTopic(
+                                    topic.replaceAll(' ', ''),
+                                  );
+                                }
                                 changeNotification();
                               } else {
                                 _fcm.unsubscribeFromTopic(
@@ -164,9 +167,12 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(
-                                  topic.replaceAll(' ', ''),
-                                );
+                                if (snapshot.data!
+                                    .data()!["push_notif_enabled"]) {
+                                  _fcm.subscribeToTopic(
+                                    topic.replaceAll(' ', ''),
+                                  );
+                                }
                                 changeNotification();
                               } else {
                                 _fcm.unsubscribeFromTopic(
