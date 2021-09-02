@@ -72,9 +72,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   // ignore: unused_field
-  int _currentIndex = 4;
+  int _currentIndex = 0;
 
-  late PageController _pageController = PageController(initialPage: 4);
+  late PageController _pageController = PageController(initialPage: 0);
 
   @override
   void initState() {

@@ -94,12 +94,12 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
                   children: [
                     widget.isUpvoted == true
                         ? Icon(
-                            Icons.keyboard_arrow_up_rounded,
+                            Icons.check_circle_outline_outlined,
                             size: 30,
                             color: white,
                           )
                         : Icon(
-                            Icons.arrow_back_ios,
+                            Icons.circle_outlined,
                             size: 30,
                             color: white,
                           ),

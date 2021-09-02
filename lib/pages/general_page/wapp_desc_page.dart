@@ -74,6 +74,14 @@ class WappDescPage extends StatelessWidget {
         imgURL:
             "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
         desc: '"I am shorter than John"'),
+    Member(
+        name: "Vishnu Satish",
+        role: "Developer",
+        altRole: "Poggers",
+        altColor: Color(0XFFFF8800),
+        imgURL:
+            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
+        desc: '"Sup guys! I am Vishnu."'),
   ];
 
   @override
