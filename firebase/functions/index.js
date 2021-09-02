@@ -51,8 +51,7 @@ exports.sendToTopic = functions.firestore.document('announcements/{announcementI
             clickAction: 'FLUTTER_NOTIFICATION_CLICK',  
         }, 
     }; 
-    // return admin.messaging().sendToTopic(annoucementInfo.title.replace(/ /g, ''), payload); 
-    return admin.messaging().sendToTopic("SAC", payload); 
+    return admin.messaging().sendToTopic(annoucementInfo.title.replace(/ /g, ''), payload); 
 });
 
 exports.upvoteSong = functions.https.onCall((data, context) => {

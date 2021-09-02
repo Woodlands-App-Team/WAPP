@@ -29,21 +29,26 @@ class _SettingsPageState extends State<SettingsPage> {
     return document;
   }
 
-  Future<void> changeAllClubNotifications() async {
-    const clubs = [
-      "SAC",
-      "Woodlands Athletic Association",
-      "Woodlands Computer Science Club",
-      "Eco Club",
-      "The Prefects"
-    ];
+  Future<List<String>> _getClubs() async {
+    DocumentSnapshot clubs = await FirebaseFirestore.instance
+        .collection('club-page')
+        .doc('club-info')
+        .get();
+    return clubs.data()!.keys.toList();
+  }
 
+  Future<void> changeAllClubNotifications() async {
     final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"push_notif_all_clubs": clubNotifications});
+        .update({
+      "push_notif_all_clubs": clubNotifications,
+      "push_notif_enabled": true
+    });
+
+    final clubs = await _getClubs();
 
     if (clubNotifications) {
       clubs.forEach((topic) {
@@ -69,7 +74,10 @@ class _SettingsPageState extends State<SettingsPage> {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"push_notif_event": eventNotifications});
+        .update({
+      "push_notif_event": eventNotifications,
+      "push_notif_enabled": true
+    });
     if (eventNotifications) {
       _fcm.subscribeToTopic("events");
     } else {
@@ -79,10 +87,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> changePushNotifications(clubs) async {
     final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"push_notif_enabled": pushNotifications});
+    if (pushNotifications == false) {
+      if (clubNotifications == false && eventNotifications == false) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .update({"push_notif_enabled": pushNotifications});
+      }
+    } else {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({"push_notif_enabled": pushNotifications});
+    }
+
     if (pushNotifications) {
       clubs.forEach((topic) {
         _fcm.subscribeToTopic(topic.replaceAll(' ', ''));
@@ -147,7 +165,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             snapshot.data!.data()!["push_notif_event"];
                         pushNotifications = (clubNotifications ||
                             eventNotifications ||
-                            pushNotifications);
+                            snapshot.data!.data()!["push_notif_enabled"]);
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

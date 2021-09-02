@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import './club_page_tile.dart';
 import './club_page_app_bar.dart';
@@ -11,47 +12,43 @@ class ClubPage extends StatefulWidget {
 }
 
 class _ClubPageState extends State<ClubPage> {
+  Future<DocumentSnapshot> _getClubs() async {
+    DocumentSnapshot clubs = await FirebaseFirestore.instance
+        .collection('club-page')
+        .doc('club-info')
+        .get();
+    return clubs;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: clubPageAppBar(),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        physics: ScrollPhysics(),
-        children: [
-          ClubPageTile(
-            title: "SAC",
-            logo: "https://avatars1.githubusercontent.com/u/72957331?s=280&v=4",
-            meetingTime: "Monday 12:00",
-            topic: "SAC",
-          ),
-          ClubPageTile(
-            title: "Woodlands Athletic Association",
-            logo: "https://avatars1.githubusercontent.com/u/72957331?s=280&v=4",
-            meetingTime: "Monday 12:00",
-            topic: "Woodlands Athletic Association",
-          ),
-          ClubPageTile(
-            title: "Woodlands Computer Science Club",
-            logo: "https://avatars1.githubusercontent.com/u/72957331?s=280&v=4",
-            meetingTime: "Monday 12:00",
-            topic: "Woodlands Computer Science Club",
-          ),
-          ClubPageTile(
-            title: "Eco Club",
-            logo: "https://avatars1.githubusercontent.com/u/72957331?s=280&v=4",
-            meetingTime: "Monday 12:00",
-            topic: "Eco Club",
-          ),
-          ClubPageTile(
-            title: "The Prefects",
-            logo: "https://avatars1.githubusercontent.com/u/72957331?s=280&v=4",
-            meetingTime: "Monday 12:00",
-            topic: "The Prefects",
-          ),
-          SizedBox(height: 20),
-        ],
+      body: FutureBuilder<DocumentSnapshot>(
+        future: _getClubs(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData &&
+              snapshot.data!.exists) {
+            final mpKeys = snapshot.data!.data()!.keys.toList();
+            final clubData = snapshot.data!.data()!;
+            return ListView.builder(
+              itemCount: mpKeys.length,
+              itemBuilder: (context, index) {
+                return ClubPageTile(
+                  title: mpKeys[index],
+                  logo: clubData[mpKeys[index]]["logo"],
+                  meetingTime: clubData[mpKeys[index]]["meetingTime"],
+                  topic: mpKeys[index],
+                  description:
+                      clubData[mpKeys[index]]["description"].toString(),
+                );
+              },
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
