@@ -116,19 +116,40 @@ class _CafMenuPageState extends State<CafMenuPage>
                 child: StreamBuilder<QuerySnapshot>(
                   stream: db.snapshots(),
                   builder: (context, snapshot) {
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                      itemCount: snapshot.data!.docs[_selectedIndex]['regItems'].length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if(snapshot.hasData) {
-                          for(var i = 0; i < snapshot.data!.docs[_selectedIndex]['regItems'].length; i++){
-                            var cardData = snapshot.data!.docs[_selectedIndex]['regItems'][i];
-                            return cafFlipCard(imageAddress: cardData['imageAddress'], title: cardData['name'], price: cardData['price'], flipText: cardData['location']);
-                          }
-                        } return Container();
-
-                      },
-                    );
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemCount: snapshot
+                              .data!.docs[_selectedIndex]['regItems'].length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (!snapshot.hasData) {
+                              return Container();
+                            } else {
+                              for (var i = 0;
+                                  i <
+                                      snapshot
+                                          .data!
+                                          .docs[_selectedIndex]['regItems']
+                                          .length;
+                                  i++) {
+                                var cardData = snapshot
+                                    .data!.docs[_selectedIndex]['regItems'][i];
+                                return cafFlipCard(
+                                    imageAddress: cardData['imageAddress'],
+                                    title: cardData['name'],
+                                    price: cardData['price'],
+                                    flipText: cardData['location']);
+                              }
+                            }
+                            throw {};
+                          });
+                    }
                   },
                 ),
               ),
