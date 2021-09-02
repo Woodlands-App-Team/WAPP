@@ -6,6 +6,7 @@ exports.initNewUser = functions.auth.user().onCreate(user => {
     return admin.firestore().collection('users').doc(user.uid).set({
         email: user.email,
         push_notif_announcement: [],
+        push_notif_enabled: false, 
         push_notif_event: false,
         push_notif_all_clubs: false, 
         last_song_req: null,
@@ -50,8 +51,7 @@ exports.sendToTopic = functions.firestore.document('announcements/{announcementI
             clickAction: 'FLUTTER_NOTIFICATION_CLICK',  
         }, 
     }; 
-    // return admin.messaging().sendToTopic(annoucementInfo.title.replace(/ /g, ''), payload); 
-    return admin.messaging().sendToTopic("SAC", payload); 
+    return admin.messaging().sendToTopic(annoucementInfo.title.replace(/ /g, ''), payload); 
 });
 
 exports.upvoteSong = functions.https.onCall((data, context) => {

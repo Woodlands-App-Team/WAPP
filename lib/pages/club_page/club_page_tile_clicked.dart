@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ClubPageInfo extends StatelessWidget {
+  final String description;
+  final String title;
+  final String logo;
+  final String meetingTime;
+
+  ClubPageInfo({
+    required this.title,
+    required this.meetingTime,
+    required this.logo,
+    required this.description,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +96,7 @@ class ClubPageInfo extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100.0),
                           child: FittedBox(
                             child: Image.network(
-                              'https://i.kym-cdn.com/entries/icons/facebook/000/012/589/patrickstar.jpg',
+                              logo,
                             ),
                             fit: BoxFit.fill,
                           ),
@@ -104,12 +117,17 @@ class ClubPageInfo extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Text(
-                          "MEDLIFE",
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 40,
-                            color: const Color(0xff1f489c),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.90,
+                          child: AutoSizeText(
+                            title,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 40,
+                              color: const Color(0xff1f489c),
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
                           ),
                         ),
                         RichText(
@@ -121,14 +139,14 @@ class ClubPageInfo extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(text: 'every '),
                               TextSpan(
-                                text: "Monday ",
+                                text: meetingTime.split(" ")[0],
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              TextSpan(text: 'at '),
+                              TextSpan(text: ' at '),
                               TextSpan(
-                                text: "3:00PM",
+                                text: meetingTime.split(" ")[1],
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -140,43 +158,7 @@ class ClubPageInfo extends StatelessWidget {
                           margin: EdgeInsets.only(top: 15),
                           width: MediaQuery.of(context).size.width * 0.86,
                           child: Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width * 0.86,
-                          child: Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width * 0.86,
-                          child: Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width * 0.86,
-                          child: Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+                            description.replaceAll(r'\n', '\n\n'),
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
