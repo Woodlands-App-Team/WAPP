@@ -125,7 +125,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
     Query q = _firestore
         .collection('announcements')
-        .orderBy('timestamp')
+        .orderBy('timestamp', descending: true)
         .startAfter([_lastDocument.data()['timestamp']]).limit(_perPage);
 
     QuerySnapshot querySnapshot = await q.get();
@@ -144,7 +144,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
   _getAnnouncements() async {
     Query q =
-        _firestore.collection('announcements').orderBy('timestamp').limit(5);
+        _firestore.collection('announcements').orderBy('timestamp', descending: true).limit(5);
 
     setState(() {
       _loadingAnnouncements = true;
