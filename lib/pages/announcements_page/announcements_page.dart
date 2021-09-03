@@ -51,10 +51,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
   List<String> getDateAndMonth(String dateString) {
     List<String> output = [];
-    List<String> months =
-        'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
-    output.add(dateString.split('/')[1]);
-    output.add(months[int.parse(dateString.split('/')[0]) - 1]);
+
+    output.add(dateString.split(' ')[2]);
+    output.add(dateString.split(' ')[1]);
 
     return output;
   }
