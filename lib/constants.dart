@@ -10,7 +10,6 @@ const Color black = Color(0XFF010D15);
 const Color clear = Color.fromARGB(0, 0, 0, 0);
 const Color defaultShadowColor = Color(0xFFBABABA);
 
-
 //Size
 
-const double appBarHeight = 80;
+const double appBarHeight = 70;

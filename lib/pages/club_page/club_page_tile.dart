@@ -14,12 +14,14 @@ class ClubPageTile extends StatefulWidget {
   final String meetingTime;
   final String logo;
   final String topic;
+  final String description;
 
   ClubPageTile({
     required this.title,
     required this.meetingTime,
     required this.logo,
     required this.topic,
+    required this.description,
   });
 
   @override
@@ -28,6 +30,7 @@ class ClubPageTile extends StatefulWidget {
         logo: this.logo,
         meetingTime: this.meetingTime,
         topic: this.topic,
+        description: this.description,
       );
 }
 
@@ -36,12 +39,14 @@ class _ClubPageTileState extends State<ClubPageTile> {
   final String meetingTime;
   final String logo;
   final String topic;
+  final String description;
 
   _ClubPageTileState({
     required this.title,
     required this.meetingTime,
     required this.logo,
     required this.topic,
+    required this.description,
   });
 
   bool _notification = false;
@@ -78,7 +83,14 @@ class _ClubPageTileState extends State<ClubPageTile> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ClubPageInfo()),
+          MaterialPageRoute(
+            builder: (context) => ClubPageInfo(
+              description: description,
+              title: title,
+              logo: logo,
+              meetingTime: meetingTime,
+            ),
+          ),
         );
       },
       child: Center(
@@ -138,9 +150,12 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(
-                                  topic.replaceAll(' ', ''),
-                                );
+                                if (snapshot.data!
+                                    .data()!["push_notif_enabled"]) {
+                                  _fcm.subscribeToTopic(
+                                    topic.replaceAll(' ', ''),
+                                  );
+                                }
                                 changeNotification();
                               } else {
                                 _fcm.unsubscribeFromTopic(
@@ -164,9 +179,12 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 _notification = !_notification;
                               });
                               if (_notification) {
-                                _fcm.subscribeToTopic(
-                                  topic.replaceAll(' ', ''),
-                                );
+                                if (snapshot.data!
+                                    .data()!["push_notif_enabled"]) {
+                                  _fcm.subscribeToTopic(
+                                    topic.replaceAll(' ', ''),
+                                  );
+                                }
                                 changeNotification();
                               } else {
                                 _fcm.unsubscribeFromTopic(
