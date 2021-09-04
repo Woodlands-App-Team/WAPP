@@ -47,7 +47,7 @@ class SongReqScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 5),
+            padding: EdgeInsets.fromLTRB(14, 16, 14, 0),
             child: TypeAheadField<Track?>(
               hideSuggestionsOnKeyboardHide: false,
               debounceDuration: Duration(milliseconds: 500),
@@ -79,7 +79,11 @@ class SongReqScreen extends StatelessWidget {
                 ),
               ),
               suggestionsCallback: searchSongs,
+              suggestionsBoxVerticalOffset: 0,
               suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                constraints: new BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
                 elevation: 0.0,
               ),
               itemBuilder: (context, Track? songData) {
