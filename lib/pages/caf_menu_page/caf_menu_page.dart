@@ -21,30 +21,26 @@ class CafMenuPage extends StatefulWidget {
 final db = FirebaseFirestore.instance.collection("caf-menu");
 
 class _CafMenuPageState extends State<CafMenuPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _tabController;
+  late TabController _foodController;
   final DateTime date = DateTime.now();
   int _selectedIndex = 0;
-  List<String> dayOfWeek = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday'
-  ];
+  int _foodSelectedIndex = 0;
 
   @override
   void initState() {
     _tabController = TabController(length: 5, initialIndex: 0, vsync: this);
-    _tabController.addListener(_handleTabChange);
+    _foodController = TabController(length: 4, initialIndex: 0, vsync: this);
     super.initState();
   }
 
-  void _handleTabChange() {
-    setState(() {
-      _selectedIndex = _tabController.index;
-    });
-    print("Selected Index: " + _tabController.index.toString());
+  Future<DocumentSnapshot> getFoodItems() async {
+    DocumentSnapshot foodItems = await FirebaseFirestore.instance
+        .collection('food-items')
+        .doc('S8m4MjTdNwoGNIR7tRjY')
+        .get();
+    return foodItems;
   }
 
   @override
@@ -64,7 +60,7 @@ class _CafMenuPageState extends State<CafMenuPage>
                 children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: dayText(dayOfWeek[_selectedIndex])),
+                      child: dayText('Daily Specials')),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: TabBar(
@@ -88,7 +84,7 @@ class _CafMenuPageState extends State<CafMenuPage>
               ),
             ),
             Container(
-                height: 230,
+                height: 200,
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: db.snapshots(),
@@ -110,50 +106,129 @@ class _CafMenuPageState extends State<CafMenuPage>
                     }
                   },
                 )),
-            Expanded(
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: TabBar(
+                  isScrollable: true,
+                  enableFeedback: false,
+                  labelPadding: EdgeInsets.all(0),
+                  unselectedLabelColor: grey,
+                  labelColor: light_blue,
+                  indicatorColor: Colors.transparent,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  controller: _foodController,
+                  tabs: [
+                    foodButton('All'),
+                    foodButton('Meals'),
+                    foodButton('Drinks'),
+                    foodButton('Snacks'),
+                  ]),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Flexible(
               child: Container(
-                padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: db.snapshots(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      return GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemCount: snapshot
-                              .data!.docs[_selectedIndex]['regItems'].length,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (!snapshot.hasData) {
-                              return Container();
+                  padding: EdgeInsets.fromLTRB(18, 0, 18, 0),
+                  child: FutureBuilder<DocumentSnapshot>(
+                      future: getFoodItems(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done &&
+                            snapshot.hasData &&
+                            snapshot.data!.exists) {
+                          final allFoodItem = snapshot.data!.data();
+                          List mealItem = [];
+                          List drinkItem = [];
+                          List snackItem = [];
+                          for (int i = 0;
+                              i < allFoodItem!['foodItems'].length;
+                              i++) {
+                            if (allFoodItem['foodItems'][i]['type'] == 'Food') {
+                              mealItem.add(allFoodItem['foodItems'][i]);
+                            } else if (allFoodItem['foodItems'][i]['type'] ==
+                                'Drink') {
+                              drinkItem.add(allFoodItem['foodItems'][i]);
                             } else {
-                              for (var i = 0;
-                                  i <
-                                      snapshot
-                                          .data!
-                                          .docs[_selectedIndex]['regItems']
-                                          .length;
-                                  i++) {
-                                var cardData = snapshot
-                                    .data!.docs[_selectedIndex]['regItems'][i];
-                                return cafFlipCard(
-                                    imageAddress: cardData['imageAddress'],
-                                    title: cardData['name'],
-                                    price: cardData['price'],
-                                    flipText: cardData['location']);
-                              }
+                              snackItem.add(allFoodItem['foodItems'][i]);
                             }
-                            throw {};
-                          });
-                    }
-                  },
-                ),
-              ),
-            )
+                          }
+                          return TabBarView(
+                              physics: NeverScrollableScrollPhysics(),
+                              controller: _foodController,
+                              children: [
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    itemCount: allFoodItem['foodItems'].length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return cafFlipCard(
+                                          imageAddress: allFoodItem['foodItems']
+                                              [index]['imgURL'],
+                                          title: allFoodItem['foodItems'][index]
+                                              ['title'],
+                                          price: allFoodItem['foodItems'][index]
+                                              ['price'],
+                                          flipText: allFoodItem['foodItems']
+                                              [index]['flipText']);
+                                    }),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    itemCount: mealItem.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return cafFlipCard(
+                                          imageAddress: mealItem[index]
+                                              ['imgURL'],
+                                          title: mealItem[index]['title'],
+                                          price: mealItem[index]['price'],
+                                          flipText: mealItem[index]
+                                              ['flipText']);
+                                    }),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    itemCount: drinkItem.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return cafFlipCard(
+                                          imageAddress: drinkItem[index]
+                                              ['imgURL'],
+                                          title: drinkItem[index]['title'],
+                                          price: drinkItem[index]['price'],
+                                          flipText: drinkItem[index]
+                                              ['flipText']);
+                                    }),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    itemCount: snackItem.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return cafFlipCard(
+                                          imageAddress: snackItem[index]
+                                              ['imgURL'],
+                                          title: snackItem[index]['title'],
+                                          price: snackItem[index]['price'],
+                                          flipText: snackItem[index]
+                                              ['flipText']);
+                                    }),
+                              ]);
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      })),
+            ),
           ],
         ),
       ),
@@ -171,9 +246,20 @@ class _CafMenuPageState extends State<CafMenuPage>
     );
   }
 
+  Widget foodButton(String name) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: Text(name,
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          )),
+    );
+  }
+
   Widget dayText(String day) {
     return Text(
-      day + "'s Menu",
+      day,
       style: GoogleFonts.poppins(
           color: dark_blue, fontSize: 24, fontWeight: FontWeight.w600),
     );
