@@ -25,7 +25,7 @@ class _GeneralPageState extends State<GeneralPage> {
       appBar: generalPageAppBar(),
       backgroundColor: Color(0XFFF7F5F2),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,7 +56,7 @@ class _GeneralPageState extends State<GeneralPage> {
                           width: 140,
                           child: Icon(
                             CustomIcons.map,
-                            size: 100,
+                            size: 110,
                             color: dark_blue,
                           ),
                         ),
@@ -88,8 +88,8 @@ class _GeneralPageState extends State<GeneralPage> {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 2 - 25,
-                    height: MediaQuery.of(context).size.height / 4.8,
+                    width: MediaQuery.of(context).size.width / 2 - 18,
+                    height: MediaQuery.of(context).size.height / 4.2,
                     child: Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(
@@ -112,10 +112,10 @@ class _GeneralPageState extends State<GeneralPage> {
                             children: [
                               Center(
                                 child: Container(
-                                  width: 100,
+                                  width: 120,
                                   child: Icon(
                                     CustomIcons.logout,
-                                    size: 80,
+                                    size: 110,
                                     color: Color(0XFFd00000),
                                   ),
                                 ),
@@ -146,8 +146,8 @@ class _GeneralPageState extends State<GeneralPage> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
-        width: MediaQuery.of(context).size.width / 2 - 25,
-        height: MediaQuery.of(context).size.height / 4.8,
+        width: MediaQuery.of(context).size.width / 2 - 18,
+        height: MediaQuery.of(context).size.height / 4.2,
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
@@ -169,10 +169,10 @@ class _GeneralPageState extends State<GeneralPage> {
                 children: [
                   Center(
                     child: Container(
-                      width: 100,
+                      width: 120,
                       child: Icon(
                         icon,
-                        size: 80,
+                        size: 110,
                         color: dark_blue,
                       ),
                     ),

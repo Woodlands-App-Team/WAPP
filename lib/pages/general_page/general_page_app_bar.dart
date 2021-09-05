@@ -25,7 +25,7 @@ PreferredSizeWidget generalPageAppBar() {
     backgroundColor: black,
     actions: [
       Container(
-        padding: EdgeInsets.fromLTRB(5, 10, 17, 15),
+        padding: EdgeInsets.fromLTRB(0, 10, 17, 15),
         child: Image.asset('assets/logo.png'),
       ),
     ],

@@ -15,6 +15,7 @@ class ClubPageTile extends StatefulWidget {
   final String logo;
   final String topic;
   final String description;
+  final String backgroundImage;
 
   ClubPageTile({
     required this.title,
@@ -22,6 +23,7 @@ class ClubPageTile extends StatefulWidget {
     required this.logo,
     required this.topic,
     required this.description,
+    required this.backgroundImage,
   });
 
   @override
@@ -31,10 +33,12 @@ class ClubPageTile extends StatefulWidget {
         meetingTime: this.meetingTime,
         topic: this.topic,
         description: this.description,
+        backgroundImage: this.backgroundImage,
       );
 }
 
 class _ClubPageTileState extends State<ClubPageTile> {
+  final String backgroundImage;
   final String title;
   final String meetingTime;
   final String logo;
@@ -42,6 +46,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
   final String description;
 
   _ClubPageTileState({
+    required this.backgroundImage,
     required this.title,
     required this.meetingTime,
     required this.logo,
@@ -85,6 +90,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
           context,
           MaterialPageRoute(
             builder: (context) => ClubPageInfo(
+              backgroundImage: backgroundImage,
               description: description,
               title: title,
               logo: logo,
@@ -114,7 +120,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                     child: FittedBox(
                       child: Opacity(
                         opacity: 0.5,
-                        child: Image.network('https://i.imgur.com/ebJuOXi.jpg'),
+                        child: Image.network(backgroundImage),
                       ),
                       fit: BoxFit.fill,
                     ),

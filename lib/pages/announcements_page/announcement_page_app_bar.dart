@@ -26,7 +26,7 @@ PreferredSizeWidget announcementPageAppBar() {
         ),
         Text(
           DateFormat('MMMMd').format(date),
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: 20),
         ),
       ],
     ),
@@ -34,7 +34,7 @@ PreferredSizeWidget announcementPageAppBar() {
     backgroundColor: black,
     actions: [
       Container(
-        padding: EdgeInsets.fromLTRB(5, 10, 17, 20),
+        padding: EdgeInsets.fromLTRB(5, 10, 17, 15),
         child: GestureDetector(
           child: Image.asset('assets/logo.png'),
           onTap: () async {

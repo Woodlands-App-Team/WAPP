@@ -40,6 +40,7 @@ class _ClubPageState extends State<ClubPage> {
                 itemCount: mpKeys.length,
                 itemBuilder: (context, index) {
                   return ClubPageTile(
+                    backgroundImage: clubData[mpKeys[index]]["backgroundImage"],
                     title: mpKeys[index],
                     logo: clubData[mpKeys[index]]["logo"],
                     meetingTime: clubData[mpKeys[index]]["meetingTime"],

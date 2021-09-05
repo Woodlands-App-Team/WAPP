@@ -61,7 +61,7 @@ class _CafMenuPageState extends State<CafMenuPage>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.topLeft,
                       child: dayText('Daily Specials')),
                   Align(
                     alignment: Alignment.bottomCenter,

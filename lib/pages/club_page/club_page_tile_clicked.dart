@@ -8,12 +8,14 @@ class ClubPageInfo extends StatelessWidget {
   final String title;
   final String logo;
   final String meetingTime;
+  final String backgroundImage;
 
   ClubPageInfo({
     required this.title,
     required this.meetingTime,
     required this.logo,
     required this.description,
+    required this.backgroundImage,
   });
 
   @override
@@ -62,9 +64,7 @@ class ClubPageInfo extends StatelessWidget {
                       opacity: 1,
                       child: Image(
                         fit: BoxFit.cover,
-                        image: NetworkImage(
-                          "https://i.imgur.com/VVyrty3.jpg",
-                        ),
+                        image: NetworkImage(backgroundImage),
                       ),
                     ),
                     top: 0,
