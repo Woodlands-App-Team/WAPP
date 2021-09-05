@@ -51,6 +51,7 @@ class _CafMenuPageState extends State<CafMenuPage>
         height: MediaQuery.of(context).size.height * 0.9,
         padding: EdgeInsets.fromLTRB(2, 15, 2, 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
@@ -129,7 +130,6 @@ class _CafMenuPageState extends State<CafMenuPage>
             ),
             Flexible(
               child: Container(
-                  padding: EdgeInsets.fromLTRB(18, 0, 18, 0),
                   child: FutureBuilder<DocumentSnapshot>(
                       future: getFoodItems(),
                       builder: (BuildContext context,
@@ -153,77 +153,82 @@ class _CafMenuPageState extends State<CafMenuPage>
                               snackItem.add(allFoodItem['foodItems'][i]);
                             }
                           }
-                          return TabBarView(
-                              physics: NeverScrollableScrollPhysics(),
-                              controller: _foodController,
-                              children: [
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
-                                    itemCount: allFoodItem['foodItems'].length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return cafFlipCard(
-                                          imageAddress: allFoodItem['foodItems']
-                                              [index]['imgURL'],
-                                          title: allFoodItem['foodItems'][index]
-                                              ['title'],
-                                          price: allFoodItem['foodItems'][index]
-                                              ['price'],
-                                          flipText: allFoodItem['foodItems']
-                                              [index]['flipText']);
-                                    }),
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
-                                    itemCount: mealItem.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return cafFlipCard(
-                                          imageAddress: mealItem[index]
-                                              ['imgURL'],
-                                          title: mealItem[index]['title'],
-                                          price: mealItem[index]['price'],
-                                          flipText: mealItem[index]
-                                              ['flipText']);
-                                    }),
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
-                                    itemCount: drinkItem.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return cafFlipCard(
-                                          imageAddress: drinkItem[index]
-                                              ['imgURL'],
-                                          title: drinkItem[index]['title'],
-                                          price: drinkItem[index]['price'],
-                                          flipText: drinkItem[index]
-                                              ['flipText']);
-                                    }),
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
-                                    itemCount: snackItem.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return cafFlipCard(
-                                          imageAddress: snackItem[index]
-                                              ['imgURL'],
-                                          title: snackItem[index]['title'],
-                                          price: snackItem[index]['price'],
-                                          flipText: snackItem[index]
-                                              ['flipText']);
-                                    }),
-                              ]);
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: TabBarView(
+                                physics: NeverScrollableScrollPhysics(),
+                                controller: _foodController,
+                                children: [
+                                  GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemCount:
+                                          allFoodItem['foodItems'].length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return cafFlipCard(
+                                            imageAddress:
+                                                allFoodItem['foodItems'][index]
+                                                    ['imgURL'],
+                                            title: allFoodItem['foodItems']
+                                                [index]['title'],
+                                            price: allFoodItem['foodItems']
+                                                [index]['price'],
+                                            flipText: allFoodItem['foodItems']
+                                                [index]['flipText']);
+                                      }),
+                                  GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemCount: mealItem.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return cafFlipCard(
+                                            imageAddress: mealItem[index]
+                                                ['imgURL'],
+                                            title: mealItem[index]['title'],
+                                            price: mealItem[index]['price'],
+                                            flipText: mealItem[index]
+                                                ['flipText']);
+                                      }),
+                                  GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemCount: drinkItem.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return cafFlipCard(
+                                            imageAddress: drinkItem[index]
+                                                ['imgURL'],
+                                            title: drinkItem[index]['title'],
+                                            price: drinkItem[index]['price'],
+                                            flipText: drinkItem[index]
+                                                ['flipText']);
+                                      }),
+                                  GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemCount: snackItem.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return cafFlipCard(
+                                            imageAddress: snackItem[index]
+                                                ['imgURL'],
+                                            title: snackItem[index]['title'],
+                                            price: snackItem[index]['price'],
+                                            flipText: snackItem[index]
+                                                ['flipText']);
+                                      }),
+                                ]),
+                          );
                         } else {
                           return Center(child: CircularProgressIndicator());
                         }
@@ -237,7 +242,7 @@ class _CafMenuPageState extends State<CafMenuPage>
 
   Widget dayButton(String day) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.only(right: 8),
       child: Text(day,
           style: GoogleFonts.poppins(
             fontSize: 18,

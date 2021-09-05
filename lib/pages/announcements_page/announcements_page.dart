@@ -143,8 +143,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   }
 
   _getAnnouncements() async {
-    Query q =
-        _firestore.collection('announcements').orderBy('timestamp', descending: true).limit(5);
+    Query q = _firestore
+        .collection('announcements')
+        .orderBy('timestamp', descending: true)
+        .limit(5);
 
     setState(() {
       _loadingAnnouncements = true;
@@ -264,10 +266,11 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           color: Color(0x00EEEEEE),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+                          padding: EdgeInsets.fromLTRB(3, 0, 3, 0),
                           child: Flex(direction: Axis.horizontal, children: [
                             Expanded(
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
@@ -277,7 +280,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                     child: Text(
                                       'All',
                                       style: GoogleFonts.poppins(
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           color: allButtonTextColor),
                                     ),
                                     style: ButtonStyle(
@@ -290,7 +293,6 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                       backgroundColor: allButtonColor,
                                     ),
                                   ),
-                                  Spacer(),
                                   ElevatedButton(
                                     onPressed: () {
                                       filterNMode = 1;
@@ -299,7 +301,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                     child: Text(
                                       'Announcements',
                                       style: GoogleFonts.poppins(
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           color: announcementsButtonTextColor),
                                     ),
                                     style: ButtonStyle(
@@ -318,7 +320,6 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                                 color:
                                                     announcementsButtonTextColor))),
                                   ),
-                                  Spacer(),
                                   ElevatedButton(
                                     onPressed: () {
                                       filterNMode = 2;
@@ -327,7 +328,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                     child: Text(
                                       'Events',
                                       style: GoogleFonts.poppins(
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           color: eventsButtonTextColor),
                                     ),
                                     style: ButtonStyle(
@@ -343,7 +344,6 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                             TextStyle(
                                                 color: eventsButtonTextColor))),
                                   ),
-                                  Spacer(),
                                 ],
                               ),
                             ),
