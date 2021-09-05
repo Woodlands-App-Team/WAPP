@@ -46,6 +46,7 @@ class _CafMenuPageState extends State<CafMenuPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFF7F5F2),
       appBar: cafMenuPageAppBar(),
       body: Container(
         height: MediaQuery.of(context).size.height * 0.9,

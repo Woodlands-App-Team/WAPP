@@ -23,6 +23,7 @@ class _ClubPageState extends State<ClubPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFF7F5F2),
       appBar: clubPageAppBar(),
       body: FutureBuilder<DocumentSnapshot>(
         future: _getClubs(),
@@ -33,18 +34,21 @@ class _ClubPageState extends State<ClubPage> {
               snapshot.data!.exists) {
             final mpKeys = snapshot.data!.data()!.keys.toList();
             final clubData = snapshot.data!.data()!;
-            return ListView.builder(
-              itemCount: mpKeys.length,
-              itemBuilder: (context, index) {
-                return ClubPageTile(
-                  title: mpKeys[index],
-                  logo: clubData[mpKeys[index]]["logo"],
-                  meetingTime: clubData[mpKeys[index]]["meetingTime"],
-                  topic: mpKeys[index],
-                  description:
-                      clubData[mpKeys[index]]["description"].toString(),
-                );
-              },
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: ListView.builder(
+                itemCount: mpKeys.length,
+                itemBuilder: (context, index) {
+                  return ClubPageTile(
+                    title: mpKeys[index],
+                    logo: clubData[mpKeys[index]]["logo"],
+                    meetingTime: clubData[mpKeys[index]]["meetingTime"],
+                    topic: mpKeys[index],
+                    description:
+                        clubData[mpKeys[index]]["description"].toString(),
+                  );
+                },
+              ),
             );
           }
           return Center(child: CircularProgressIndicator());

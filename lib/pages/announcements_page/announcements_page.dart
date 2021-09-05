@@ -185,7 +185,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
     return Scaffold(
       appBar: announcementPageAppBar(),
-      backgroundColor: white,
+      backgroundColor: Color(0XFFF7F5F2),
       body: SafeArea(
         child: CustomScrollView(
           controller: _scrollController,
@@ -193,7 +193,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
             SliverAppBar(
               floating: true,
               snap: true,
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0XFFF7F5F2),
               elevation: 0,
               bottom: PreferredSize(
                 child: Container(),

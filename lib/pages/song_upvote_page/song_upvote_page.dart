@@ -39,6 +39,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFF7F5F2),
       floatingActionButton: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -84,7 +85,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: songUpvotePageAppBar(),
       body: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
           child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('song-requests')

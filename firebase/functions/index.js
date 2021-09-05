@@ -57,10 +57,18 @@ exports.sendToTopic = functions.firestore.document('announcements/{announcementI
 exports.upvoteSong = functions.https.onCall((data, context) => {
     if(!context.auth){
         throw new functions.https.HttpsError('unauthenticated', 'only authenticated users can add requests')
-    }
-
-    return admin.firestore().collection('song-requests').doc(data.song).update({
-        upvotedUsers: admin.firestore.FieldValue.arrayUnion(data.uid),
-        upvotes: admin.firestore.FieldValue.increment(1),
+    }  
+    
+    return admin.firestore().collection('song-requests').doc(data.song).get().then(doc => {
+        if (doc.data().upvotedUsers.includes(data.uid)){
+            throw new functions.https.HttpsError('failed-precondition', 'You can only upvote something once');
+        }
+    
+        return admin.firestore().collection('song-requests').doc(data.song).update({
+            upvotedUsers: admin.firestore.FieldValue.arrayUnion(data.uid),
+            upvotes: admin.firestore.FieldValue.increment(1),
+        })
     })
+
+    
 });

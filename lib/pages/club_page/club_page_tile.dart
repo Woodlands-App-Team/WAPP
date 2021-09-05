@@ -108,7 +108,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                 ),
                 child: Container(
                   height: 250,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery.of(context).size.width,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: FittedBox(
@@ -205,7 +205,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: 95,
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
