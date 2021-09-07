@@ -43,7 +43,7 @@ class _GeneralPageState extends State<GeneralPage> {
                 },
                 child: Container(
                   height: 190,
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width - 32,
                   decoration: BoxDecoration(
                       color: white,
                       borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -110,13 +110,16 @@ class _GeneralPageState extends State<GeneralPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Center(
-                                child: Container(
-                                  width: 120,
-                                  child: Icon(
-                                    CustomIcons.logout,
-                                    size: 110,
-                                    color: Color(0XFFd00000),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Center(
+                                  child: Container(
+                                    width: 120,
+                                    child: Icon(
+                                      CustomIcons.logout,
+                                      size: 110,
+                                      color: Color(0XFFd00000),
+                                    ),
                                   ),
                                 ),
                               ),

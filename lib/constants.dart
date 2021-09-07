@@ -12,4 +12,4 @@ const Color defaultShadowColor = Color(0xFFBABABA);
 
 //Size
 
-const double appBarHeight = 70;
+const double appBarHeight = 69;

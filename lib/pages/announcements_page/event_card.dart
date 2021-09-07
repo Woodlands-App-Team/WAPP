@@ -165,7 +165,7 @@ class _EventCardState extends State<EventCard>
                                     child: Text(
                                       widget.previewDescriptionText,
                                       overflow: TextOverflow.ellipsis,
-                                      maxLines: 4,
+                                      maxLines: 3,
                                       style: GoogleFonts.poppins(
                                         color: white,
                                         fontSize: 16, //16.5

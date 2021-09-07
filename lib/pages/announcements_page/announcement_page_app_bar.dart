@@ -22,11 +22,11 @@ PreferredSizeWidget announcementPageAppBar() {
       children: [
         Text(
           DateFormat('EEEE').format(date) + ",",
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: 20),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: 18),
         ),
         Text(
           DateFormat('MMMMd').format(date),
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: 20),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: 18),
         ),
       ],
     ),

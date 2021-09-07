@@ -214,7 +214,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 13, 0, 0),
+                          padding: EdgeInsets.fromLTRB(18, 13, 0, 0),
                           child: Center(
                             child: TextField(
                               onSubmitted: (text) {

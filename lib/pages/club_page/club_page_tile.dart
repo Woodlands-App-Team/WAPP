@@ -103,12 +103,14 @@ class _ClubPageTileState extends State<ClubPageTile> {
       child: Center(
         child: Container(
           height: 250,
+          width: MediaQuery.of(context).size.width - 5,
           margin: EdgeInsets.only(
             top: 10,
           ),
           child: Stack(
             children: [
               Card(
+                color: light_blue,
                 elevation: 4.5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
