@@ -159,6 +159,7 @@ class ClubPageInfo extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.86,
                           child: Text(
                             description.replaceAll(r'\n', '\n\n'),
+                            textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,

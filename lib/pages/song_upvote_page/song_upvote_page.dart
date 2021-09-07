@@ -85,7 +85,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: songUpvotePageAppBar(),
       body: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+          padding: const EdgeInsets.fromLTRB(14, 14, 14, 0),
           child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('song-requests')
@@ -103,6 +103,13 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var doc = snapshot.data!.docs[index];
+                      if (index == snapshot.data!.docs.length - 1) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 75),
+                          child: SongUpvoteTile(doc["name"], doc["artist"],
+                              doc["imgURL"], doc["upvotes"], true),
+                        );
+                      }
                       if (doc['upvotedUsers']
                           .contains(_user.currentUser!.uid)) {
                         return SongUpvoteTile(doc["name"], doc["artist"],

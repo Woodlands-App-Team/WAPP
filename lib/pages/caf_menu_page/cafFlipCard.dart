@@ -34,7 +34,7 @@ class cafFlipCardState extends State<cafFlipCard> {
           height: MediaQuery.of(context).size.width * 0.9 / 2,
           padding: EdgeInsets.fromLTRB(8, 0, 0, 8),
           child: Card(
-            elevation: 4,
+            elevation: 2,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

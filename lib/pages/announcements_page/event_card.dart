@@ -60,7 +60,7 @@ class _EventCardState extends State<EventCard>
   }
 
   void _handleTap() {
-    if(widget.expandedImageUrl != '' && widget.expandedDescriptionText != '') {
+    if (widget.expandedImageUrl != '' && widget.expandedDescriptionText != '') {
       setState(() {
         _isExpanded = !_isExpanded;
         if (_isExpanded) {
@@ -79,7 +79,7 @@ class _EventCardState extends State<EventCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 5),   //TODO Card padding here
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 5), //TODO Card padding here
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: dark_blue,
@@ -112,18 +112,20 @@ class _EventCardState extends State<EventCard>
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                   child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.15,
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.15,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.network(
                                       widget.imageUrl,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Image.network('https://upload.wikimedia.org/wikipedia/en/thumb/3/34/The_Woodlands_School_-_Mississauga_logo.png/220px-The_Woodlands_School_-_Mississauga_logo.png');
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.network(
+                                            'https://upload.wikimedia.org/wikipedia/en/thumb/3/34/The_Woodlands_School_-_Mississauga_logo.png/220px-The_Woodlands_School_-_Mississauga_logo.png');
                                       },
                                     ),
                                   ),
@@ -132,7 +134,8 @@ class _EventCardState extends State<EventCard>
                                   child: Align(
                                     alignment: Alignment(-1, 0),
                                     child: Padding(
-                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 0, 10, 0),
                                       child: AutoSizeText(
                                         widget.titleText,
                                         maxLines: 1,
@@ -258,14 +261,17 @@ class _EventCardState extends State<EventCard>
                             endIndent: 20)),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
-                      child: widget.expandedImageUrl!.length == 0 || widget.expandedImageUrl == null ? Container() : Image.network(widget.expandedImageUrl!),
+                      child: widget.expandedImageUrl!.length == 0 ||
+                              widget.expandedImageUrl == null
+                          ? Container()
+                          : Image.network(widget.expandedImageUrl!),
                     ),
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         child: Text(widget.expandedDescriptionText,
+                            textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
-                                color: white,
-                                fontSize: 16))),  //16.5
+                                color: white, fontSize: 16))), //16.5
                   ],
                 )
               ],

@@ -13,7 +13,7 @@ PreferredSizeWidget clubPageAppBar() {
     toolbarHeight: appBarHeight,
     centerTitle: false,
     title: Text(
-      "Clubs",
+      "Clubs & Teams",
       style: GoogleFonts.poppins(
         fontSize: 24,
         fontWeight: FontWeight.w600,

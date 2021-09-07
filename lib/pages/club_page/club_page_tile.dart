@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wapp/constants.dart';
 
 import 'package:wapp/custom_icons_icons.dart';
 import './club_page_tile_clicked.dart';
@@ -119,7 +120,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                     borderRadius: BorderRadius.circular(15.0),
                     child: FittedBox(
                       child: Opacity(
-                        opacity: 0.5,
+                        opacity: 0.4,
                         child: Image.network(backgroundImage),
                       ),
                       fit: BoxFit.fill,
@@ -213,9 +214,9 @@ class _ClubPageTileState extends State<ClubPageTile> {
                     height: 95,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: dark_blue,
                       border: Border.all(
-                        color: Colors.white,
+                        color: dark_blue,
                       ),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15.0),
@@ -224,7 +225,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                     ),
                     child: Card(
                       elevation: 0,
-                      color: Colors.white,
+                      color: dark_blue,
                       child: Row(
                         children: [
                           Container(
@@ -249,6 +250,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 child: Text(
                                   this.title,
                                   style: GoogleFonts.poppins(
+                                    color: white,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 20,
                                     height: 1.2,
@@ -262,6 +264,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                                 child: Text(
                                   this.meetingTime,
                                   style: GoogleFonts.poppins(
+                                    color: white,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
                                   ),
