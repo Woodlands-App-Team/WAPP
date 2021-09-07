@@ -156,10 +156,10 @@ class ClubPageInfo extends StatelessWidget {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
+                          padding: EdgeInsets.only(bottom: 15),
                           width: MediaQuery.of(context).size.width * 0.86,
                           child: Text(
-                            description.replaceAll(r'\n', '\n\n'),
-                            textAlign: TextAlign.justify,
+                            description.replaceAll(r'\n', '\n\n'), //textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
