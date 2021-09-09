@@ -48,18 +48,18 @@ class cafFlipCardState extends State<cafFlipCard> {
                     height: MediaQuery.of(context).size.width * 0.7 / 4,
                     fit: BoxFit.cover),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                  padding: EdgeInsets.fromLTRB(12, 5, 12, 0),
                   child: AutoSizeText(widget.title,
                       maxLines: 2,
                       textAlign: TextAlign.left,
                       style: GoogleFonts.poppins(
                         color: black,
                         fontSize: 20, //45
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       )),
                 ),
                 Padding(
-                    padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(12, 5, 12, 0),
                     child: Text(widget.price,
                         textAlign: TextAlign.left,
                         style: GoogleFonts.poppins(

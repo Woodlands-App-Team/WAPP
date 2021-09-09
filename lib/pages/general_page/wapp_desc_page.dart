@@ -6,6 +6,16 @@ import 'package:wapp/constants.dart';
 import 'package:wapp/models/member.dart';
 import 'package:wapp/pages/general_page/general_page_app_bar.dart';
 
+int _getColorFromHex(String hexColor) {
+  hexColor = hexColor.toUpperCase().replaceAll("#", "");
+
+  if (hexColor.length == 6) {
+    hexColor = "FF" + hexColor;
+  }
+
+  return int.parse(hexColor, radix: 16);
+}
+
 class WappDescPage extends StatelessWidget {
   const WappDescPage({Key? key}) : super(key: key);
 
@@ -14,7 +24,7 @@ class WappDescPage extends StatelessWidget {
         name: "Abhinav Balasubramanian",
         role: "President",
         altRole: "Supreme Overlord",
-        altColor: Color(0XFFFF8800),
+        altColor: Color(_getColorFromHex('#4b0082')),
         imgURL:
             "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
         desc: '"Add me on Clash Royale xD"'),
@@ -38,15 +48,15 @@ class WappDescPage extends StatelessWidget {
         name: "Aayush Panda",
         role: "Developer",
         altRole: "Something Random",
-        altColor: Colors.lime,
+        altColor: Color(_getColorFromHex('#87CEEB')),
         imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
+            "https://miro.medium.com/fit/c/262/262/1*juqzL_lv5ZEuhlHZr_RB2g.png",
         desc: '"I like planes"'),
     Member(
         name: "Jeffrey-Kai Li",
         role: "Developer",
         altRole: "Immortal 800",
-        altColor: Colors.lightGreen,
+        altColor: Color(_getColorFromHex('#b5b9ff')),
         imgURL:
             "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
         desc: '"I play Valorant."'),
@@ -70,7 +80,7 @@ class WappDescPage extends StatelessWidget {
         name: "Kelly Ng",
         role: "Designer",
         altRole: "Extremely Short",
-        altColor: Color(0XFF8799F5),
+        altColor: Color(_getColorFromHex('#88B9FF')),
         imgURL:
             "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
         desc: '"I am shorter than John"'),
@@ -78,7 +88,7 @@ class WappDescPage extends StatelessWidget {
         name: "Vishnu Satish",
         role: "Developer",
         altRole: "Poggers",
-        altColor: Color(0XFFFF8800),
+        altColor: Color(_getColorFromHex('#ffa941')),
         imgURL:
             "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
         desc: '"Sup guys! I am Vishnu."'),

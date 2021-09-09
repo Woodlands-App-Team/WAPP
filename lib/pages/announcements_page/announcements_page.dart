@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/pages/announcements_page/event_card.dart';
 import '../../constants.dart';
@@ -379,6 +380,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                                 //controller: _scrollController,
                                 itemCount: _announcements.length - 1,
                                 itemBuilder: (BuildContext context, int index) {
+                                  if (searchString.toUpperCase() == 'ABHINAV'){
+                                    SystemNavigator.pop();
+                                  }
                                   if (_announcements[index]['title']
                                           .toUpperCase()
                                           .contains(
