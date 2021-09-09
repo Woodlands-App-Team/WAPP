@@ -130,28 +130,13 @@ class ClubPageInfo extends StatelessWidget {
                             maxLines: 2,
                           ),
                         ),
-                        RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.black,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(text: 'every '),
-                              TextSpan(
-                                text: meetingTime.split(" ")[0],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              TextSpan(text: ' at '),
-                              TextSpan(
-                                text: meetingTime.split(" ")[1],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                        Text(
+                          meetingTime,
+                          textAlign: TextAlign.justify,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Colors.black,
                           ),
                         ),
                         Container(

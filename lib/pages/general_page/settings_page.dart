@@ -153,161 +153,167 @@ class _SettingsPageState extends State<SettingsPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: SingleChildScrollView(
-                    child: FutureBuilder<DocumentSnapshot>(
-                      future: _getDocument(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<DocumentSnapshot> snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done &&
-                            snapshot.hasData &&
-                            snapshot.data!.exists) {
-                          clubNotifications =
-                              snapshot.data!.data()!["push_notif_all_clubs"];
-                          eventNotifications =
-                              snapshot.data!.data()!["push_notif_event"];
-                          pushNotifications = (clubNotifications ||
-                              eventNotifications ||
-                              snapshot.data!.data()!["push_notif_enabled"]);
-                        }
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Switch(
-                                    value: pushNotifications,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        pushNotifications = value;
-                                      });
-                                      final clubs = snapshot.data!
-                                          .data()!["push_notif_announcement"];
-                                      changePushNotifications(clubs);
-                                    },
-                                    activeTrackColor: dark_blue,
-                                    activeColor: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  "Push Notifications",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 40),
-                                  child: Switch(
-                                    value: clubNotifications,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        clubNotifications = value;
-                                        if (value) pushNotifications = true;
-                                        changeAllClubNotifications();
-                                      });
-                                    },
-                                    activeTrackColor: dark_blue,
-                                    activeColor: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  "Club Notifications",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 40),
-                                  child: Switch(
-                                    value: eventNotifications,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        eventNotifications = value;
-                                        if (value) pushNotifications = true;
-                                        changeEventNotifications();
-                                      });
-                                    },
-                                    activeTrackColor: dark_blue,
-                                    activeColor: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  "Event Notifications",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Divider(),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Text(
-                                "Privacy Policy",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 25,
-                                  color: dark_blue,
+                  child: FutureBuilder<DocumentSnapshot>(
+                    future: _getDocument(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done &&
+                          snapshot.hasData &&
+                          snapshot.data!.exists) {
+                        clubNotifications =
+                            snapshot.data!.data()!["push_notif_all_clubs"];
+                        eventNotifications =
+                            snapshot.data!.data()!["push_notif_event"];
+                        pushNotifications = (clubNotifications ||
+                            eventNotifications ||
+                            snapshot.data!.data()!["push_notif_enabled"]);
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Switch(
+                                  value: pushNotifications,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pushNotifications = value;
+                                    });
+                                    final clubs = snapshot.data!
+                                        .data()!["push_notif_announcement"];
+                                    changePushNotifications(clubs);
+                                  },
+                                  activeTrackColor: dark_blue,
+                                  activeColor: Colors.white,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
-                              child: Text(
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                              Text(
+                                "Push Notifications",
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                   color: Colors.black,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
-                              child: Text(
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 40),
+                                child: Switch(
+                                  value: clubNotifications,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      clubNotifications = value;
+                                      if (value) pushNotifications = true;
+                                      changeAllClubNotifications();
+                                    });
+                                  },
+                                  activeTrackColor: dark_blue,
+                                  activeColor: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "Club Notifications",
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                   color: Colors.black,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
-                              child: Text(
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 40),
+                                child: Switch(
+                                  value: eventNotifications,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      eventNotifications = value;
+                                      if (value) pushNotifications = true;
+                                      changeEventNotifications();
+                                    });
+                                  },
+                                  activeTrackColor: dark_blue,
+                                  activeColor: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "Event Notifications",
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                   color: Colors.black,
                                 ),
                               ),
+                            ],
+                          ),
+                          Divider(),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                            child: Text(
+                              "Privacy Policy",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 25,
+                                color: dark_blue,
+                              ),
                             ),
-                          ],
-                        );
-                      },
-                    ),
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                                    child: Text(
+                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                                    child: Text(
+                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
+                                    child: Text(
+                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -30,6 +30,11 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
     print("After function");
   }
 
+  SongUpvoteTile tile(doc, isUpvoted) {
+    return SongUpvoteTile(
+        doc["name"], doc["artist"], doc["imgURL"], doc["upvotes"], isUpvoted);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -85,7 +90,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: songUpvotePageAppBar(),
       body: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 14, 14, 0),
+          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
           child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('song-requests')
@@ -103,25 +108,37 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var doc = snapshot.data!.docs[index];
-                      if (index == snapshot.data!.docs.length - 1) {
+                      if (index == snapshot.data!.docs.length - 1 ||
+                          index == 0) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 75),
-                          child: SongUpvoteTile(doc["name"], doc["artist"],
-                              doc["imgURL"], doc["upvotes"], true),
+                          padding: EdgeInsets.fromLTRB(
+                            0,
+                            index == 0 ? 10 : 0,
+                            0,
+                            index == snapshot.data!.docs.length - 1 ? 10 : 0,
+                          ),
+                          child: doc['upvotedUsers']
+                                  .contains(_user.currentUser!.uid)
+                              ? tile(doc, true)
+                              : InkWell(
+                                  onTap: () {
+                                    upvoteSong(doc.id);
+                                  },
+                                  child: tile(doc, false),
+                                ),
                         );
-                      }
-                      if (doc['upvotedUsers']
-                          .contains(_user.currentUser!.uid)) {
-                        return SongUpvoteTile(doc["name"], doc["artist"],
-                            doc["imgURL"], doc["upvotes"], true);
                       } else {
-                        return InkWell(
-                          onTap: () {
-                            upvoteSong(doc.id);
-                          },
-                          child: SongUpvoteTile(doc["name"], doc["artist"],
-                              doc["imgURL"], doc["upvotes"], false),
-                        );
+                        if (doc['upvotedUsers']
+                            .contains(_user.currentUser!.uid)) {
+                          return tile(doc, true);
+                        } else {
+                          return InkWell(
+                            onTap: () {
+                              upvoteSong(doc.id);
+                            },
+                            child: tile(doc, false),
+                          );
+                        }
                       }
                     },
                   );
