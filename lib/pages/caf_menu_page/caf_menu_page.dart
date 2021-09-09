@@ -86,7 +86,7 @@ class _CafMenuPageState extends State<CafMenuPage>
               ),
             ),
             Container(
-                height: 200,
+                height: 210,
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: db.snapshots(),

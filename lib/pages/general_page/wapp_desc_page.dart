@@ -193,24 +193,34 @@ class WappDescPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             child: Column(
               children: [
-                Text(name,
-                    style: GoogleFonts.poppins(
-                      color: white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
-                Text(altRole,
-                    style: GoogleFonts.poppins(
-                      color: white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    )),
-                Text(desc,
-                    style: GoogleFonts.poppins(
-                      color: grey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
+                Column(
+                  children: [
+                    Text(name,
+                        style: GoogleFonts.poppins(
+                          color: white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    Text(altRole,
+                        style: GoogleFonts.poppins(
+                          color: white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        )),
+                  ],
+                ),
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      child: Text(desc,
+                          style: GoogleFonts.poppins(
+                            color: white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

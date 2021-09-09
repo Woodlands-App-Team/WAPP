@@ -115,7 +115,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                             0,
                             index == 0 ? 10 : 0,
                             0,
-                            index == snapshot.data!.docs.length - 1 ? 10 : 0,
+                            index == snapshot.data!.docs.length - 1 ? 70 : 0,
                           ),
                           child: doc['upvotedUsers']
                                   .contains(_user.currentUser!.uid)

@@ -158,7 +158,6 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                                   child: Text(
                                     widget.previewDescriptionText,
                                     overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.justify,
                                     maxLines: 4,
                                     style: GoogleFonts.poppins(
                                       color: white,
@@ -222,7 +221,6 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         child: Text(widget.expandedDescriptionText,
-                            textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
                                 color: white, fontSize: 16))), //16.5
                   ],

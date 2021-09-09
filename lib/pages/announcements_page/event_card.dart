@@ -269,7 +269,6 @@ class _EventCardState extends State<EventCard>
                     Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         child: Text(widget.expandedDescriptionText,
-                            textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
                                 color: white, fontSize: 16))), //16.5
                   ],
