@@ -56,7 +56,7 @@ class _GeneralPageState extends State<GeneralPage> {
                           width: 140,
                           child: Icon(
                             CustomIcons.map,
-                            size: 110,
+                            size: 80,
                             color: dark_blue,
                           ),
                         ),
@@ -89,7 +89,7 @@ class _GeneralPageState extends State<GeneralPage> {
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 2 - 18,
-                    height: MediaQuery.of(context).size.height / 4.2,
+                    height: MediaQuery.of(context).size.height / 4.5,
                     child: Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(
@@ -103,9 +103,9 @@ class _GeneralPageState extends State<GeneralPage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              color: white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
+                            color: white,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,19 +117,22 @@ class _GeneralPageState extends State<GeneralPage> {
                                     width: 120,
                                     child: Icon(
                                       CustomIcons.logout,
-                                      size: 110,
+                                      size: 80,
                                       color: Color(0XFFd00000),
                                     ),
                                   ),
                                 ),
                               ),
                               SizedBox(height: 8),
-                              Text("Logout",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.poppins(
-                                      color: Color(0XFFd00000),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600)),
+                              Text(
+                                "Logout",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                  color: Color(0XFFd00000),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -150,7 +153,7 @@ class _GeneralPageState extends State<GeneralPage> {
       padding: const EdgeInsets.all(5),
       child: Container(
         width: MediaQuery.of(context).size.width / 2 - 18,
-        height: MediaQuery.of(context).size.height / 4.2,
+        height: MediaQuery.of(context).size.height / 4.5,
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
@@ -164,8 +167,11 @@ class _GeneralPageState extends State<GeneralPage> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+                color: white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,18 +181,20 @@ class _GeneralPageState extends State<GeneralPage> {
                       width: 120,
                       child: Icon(
                         icon,
-                        size: 110,
+                        size: 80,
                         color: dark_blue,
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(name,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                          color: grey,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600)),
+                  Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      color: grey,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
             ),

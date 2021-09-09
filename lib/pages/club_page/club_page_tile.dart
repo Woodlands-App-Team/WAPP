@@ -214,7 +214,7 @@ class _ClubPageTileState extends State<ClubPageTile> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: 95,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width - 32,
                     decoration: BoxDecoration(
                       color: dark_blue,
                       border: Border.all(

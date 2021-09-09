@@ -214,7 +214,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(18, 13, 0, 0),
+                          padding: EdgeInsets.fromLTRB(18, 6.5, 6.5, 0),
                           child: Center(
                             child: TextField(
                               onSubmitted: (text) {
@@ -224,7 +224,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                               controller: textController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                hintText: ' Search posts...',
+                                hintText: 'Search posts...',
                                 hintStyle: TextStyle(fontFamily: 'Poppins'),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(

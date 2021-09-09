@@ -63,11 +63,26 @@ class Tile extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Text(
-                          song.artist,
-                          style: GoogleFonts.nunitoSans(
-                            fontSize: 12,
-                          ),
+                        child: Row(
+                          children: [
+                            song.explicit
+                                ? Padding(
+                                    padding: EdgeInsets.only(right: 2),
+                                    child: Icon(
+                                      IconData(0xf722,
+                                          fontFamily: 'MaterialIcons'),
+                                      color: Colors.black,
+                                      size: 18,
+                                    ),
+                                  )
+                                : Container(),
+                            Text(
+                              song.artist,
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )

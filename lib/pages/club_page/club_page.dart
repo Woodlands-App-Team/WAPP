@@ -35,19 +35,28 @@ class _ClubPageState extends State<ClubPage> {
             final mpKeys = snapshot.data!.data()!.keys.toList();
             final clubData = snapshot.data!.data()!;
             return Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
               child: ListView.builder(
-                itemCount: mpKeys.length,
+                itemCount: mpKeys.length + 2,
                 itemBuilder: (context, index) {
-                  return ClubPageTile(
-                    backgroundImage: clubData[mpKeys[index]]["backgroundImage"],
-                    title: mpKeys[index],
-                    logo: clubData[mpKeys[index]]["logo"],
-                    meetingTime: clubData[mpKeys[index]]["meetingTime"],
-                    topic: mpKeys[index],
-                    description:
-                        clubData[mpKeys[index]]["description"].toString(),
-                  );
+                  if (index == 0) {
+                    return SizedBox(height: 4);
+                  } else if (index == mpKeys.length + 1) {
+                    return SizedBox(
+                      height: 15,
+                    );
+                  } else {
+                    return ClubPageTile(
+                      backgroundImage: clubData[mpKeys[index - 1]]
+                          ["backgroundImage"],
+                      title: mpKeys[index - 1],
+                      logo: clubData[mpKeys[index - 1]]["logo"],
+                      meetingTime: clubData[mpKeys[index - 1]]["meetingTime"],
+                      topic: mpKeys[index - 1],
+                      description:
+                          clubData[mpKeys[index - 1]]["description"].toString(),
+                    );
+                  }
                 },
               ),
             );
