@@ -5,6 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
 import 'package:wapp/models/member.dart';
 import 'package:wapp/pages/general_page/general_page_app_bar.dart';
+import 'dart:math';
+
+Random random = new Random();
 
 int _getColorFromHex(String hexColor) {
   hexColor = hexColor.toUpperCase().replaceAll("#", "");
@@ -229,10 +232,13 @@ class WappDescPage extends StatelessWidget {
                       decoration: new BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: new DecorationImage(
-                        image: new NetworkImage(
-                            'https://c.tenor.com/yo1fCgCiyQ4AAAAC/f14-grumman.gif'),
-                        fit: BoxFit.cover,
-                      )),
+                            image: random.nextInt(7) != 1
+                                ? new NetworkImage(
+                                    'https://c.tenor.com/yo1fCgCiyQ4AAAAC/f14-grumman.gif')
+                                : new NetworkImage(
+                                    'https://c.tenor.com/Z6gmDPeM6dgAAAAC/dance-moves.gif'),
+                            fit: BoxFit.cover,
+                          )),
                     ),
             )));
   }
