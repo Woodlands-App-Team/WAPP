@@ -51,7 +51,7 @@ class _ClubPageState extends State<ClubPage> {
                           ["backgroundImage"],
                       title: mpKeys[index - 1],
                       logo: clubData[mpKeys[index - 1]]["logo"],
-                      meetingTime: clubData[mpKeys[index - 1]]["meetingTime"],
+                      meetingTime: clubData[mpKeys[index - 1]]["meetingTime"] + " | " + clubData[mpKeys[index - 1]]["grades"],
                       topic: mpKeys[index - 1],
                       description:
                           clubData[mpKeys[index - 1]]["description"].toString(),

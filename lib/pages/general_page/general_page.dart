@@ -76,7 +76,7 @@ class _GeneralPageState extends State<GeneralPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconCard(CustomIcons.wapp_team, WappDescPage(), 100,
-                    "Woodlands\nApp Team"),
+                    "The Woodlands\nApp Team"),
                 IconCard(
                     CustomIcons.description, InfoPage(), 100, "School Info"),
               ],
