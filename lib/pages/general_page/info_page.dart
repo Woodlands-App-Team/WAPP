@@ -14,8 +14,10 @@ class InfoPage extends StatelessWidget {
         info: "3325 Erindale Station Road,\nMississauga, L5C1Y5"),
     InfoField(name: "Phone Number", info: "(905) 279-0575"),
     InfoField(name: "Email", info: "woodlands.ss@peelsb.com"),
-    InfoField(name: "Principals", info: "Lowkey don't know"),
-    InfoField(name: "Vice-Principals", info: "Art Tinson\nRyan Farell"),
+    InfoField(name: "Principals", info: "Omar Zia\nAntonietta Peluso"),
+    InfoField(
+        name: "Vice-Principals",
+        info: "Art Tinson\nZorica Zikey\nKaren Quinton"),
     InfoField(name: "Office Manager", info: "Sophia Ling"),
     InfoField(name: "Superintendent", info: "Patricia Noble\n(905) 366-8800"),
   ];

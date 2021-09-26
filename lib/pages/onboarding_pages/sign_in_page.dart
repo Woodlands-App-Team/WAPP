@@ -42,7 +42,10 @@ class _SignInPageState extends State<SignInPage> {
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               final snackBar = SnackBar(
-                  content: Text('Please sign in with a PDSB account.'));
+                  content: Text(
+                'Please sign in with a PDSB account.',
+                textAlign: TextAlign.center,
+              ));
               provider.delete();
               provider.logout();
               WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -88,7 +91,7 @@ class SignIn extends StatelessWidget {
             Hero(
                 tag: 'Privacy Policy Button',
                 child: Container(
-                  width: MediaQuery.of(context).size.width - 120,
+                  width: MediaQuery.of(context).size.width - 90,
                   decoration: BoxDecoration(
                       color: dark_blue,
                       borderRadius: BorderRadius.circular(18)),
@@ -103,6 +106,7 @@ class SignIn extends StatelessWidget {
                       },
                       child: Text(
                         'Sign in with Google',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.w300,

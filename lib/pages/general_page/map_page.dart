@@ -34,7 +34,7 @@ class MapPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Container(
           child: PhotoView(
-        imageProvider: AssetImage("assets/logo.png"),
+        imageProvider: AssetImage("assets/school_map.png"),
       )),
     );
   }
