@@ -5,6 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
 import 'package:wapp/models/member.dart';
 import 'package:wapp/pages/general_page/general_page_app_bar.dart';
+import 'dart:math';
+
+Random random = new Random();
 
 int _getColorFromHex(String hexColor) {
   hexColor = hexColor.toUpperCase().replaceAll("#", "");
@@ -47,8 +50,8 @@ class WappDescPage extends StatelessWidget {
     Member(
         name: "Aayush Panda",
         role: "Developer",
-        altRole: "Something Random",
-        altColor: Color(_getColorFromHex('#87CEEB')),
+        altRole: "I like planes",
+        altColor: Color(_getColorFromHex('#86CEEB')),
         imgURL:
             "https://miro.medium.com/fit/c/262/262/1*juqzL_lv5ZEuhlHZr_RB2g.png",
         desc: '"I like planes"'),
@@ -141,91 +144,102 @@ class WappDescPage extends StatelessWidget {
   Widget infoCard(BuildContext context, String name, String role,
       String altRole, Color altColor, String imgURL, String desc) {
     return Container(
-      padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
-      width: MediaQuery.of(context).size.width,
-      height: 230,
-      child: FlipCard(
-        speed: 400,
-        direction: FlipDirection.VERTICAL,
-        front: Card(
-          color: dark_blue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15),
-            child: Column(
-              children: [
-                Container(
-                  height: 120,
-                  width: 190,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: light_blue,
-                      image: DecorationImage(
-                          image: NetworkImage(imgURL), fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(name,
-                    style: GoogleFonts.poppins(
-                      color: white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
-                Text(role,
-                    style: GoogleFonts.poppins(
-                      color: light_blue,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    )),
-              ],
-            ),
-          ),
-        ),
-        back: Card(
-          color: altColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15),
-            child: Column(
-              children: [
-                Column(
+        padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
+        width: MediaQuery.of(context).size.width,
+        height: 230,
+        child: FlipCard(
+            speed: 400,
+            direction: FlipDirection.VERTICAL,
+            front: Card(
+              color: dark_blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                child: Column(
                   children: [
+                    Container(
+                      height: 120,
+                      width: 190,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: light_blue,
+                          image: DecorationImage(
+                              image: NetworkImage(imgURL), fit: BoxFit.cover)),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
                     Text(name,
                         style: GoogleFonts.poppins(
                           color: white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         )),
-                    Text(altRole,
+                    Text(role,
                         style: GoogleFonts.poppins(
-                          color: white,
+                          color: light_blue,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         )),
                   ],
                 ),
-                Expanded(
-                  child: Center(
-                    child: Container(
-                      child: Text(desc,
-                          style: GoogleFonts.poppins(
-                            color: white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+              ),
+            ),
+            back: Card(
+              color: altColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: name != 'Aayush Panda'
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Column(
+                        children: [
+                          Column(
+                            children: [
+                              Text(name,
+                                  style: GoogleFonts.poppins(
+                                    color: white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                              Text(altRole,
+                                  style: GoogleFonts.poppins(
+                                    color: white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ],
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: Container(
+                                child: Text(desc,
+                                    style: GoogleFonts.poppins(
+                                      color: white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(
+                      decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: new DecorationImage(
+                            image: random.nextInt(7) != 1
+                                ? new NetworkImage(
+                                    'https://c.tenor.com/yo1fCgCiyQ4AAAAC/f14-grumman.gif')
+                                : new NetworkImage(
+                                    'https://c.tenor.com/Z6gmDPeM6dgAAAAC/dance-moves.gif'),
+                            fit: BoxFit.cover,
                           )),
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+            )));
   }
 }
