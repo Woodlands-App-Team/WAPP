@@ -52,7 +52,7 @@ class _LandingPageState extends State<LandingPage> {
                 DelayedWidget(
                   delayDuration: Duration(milliseconds: 1000),
                   child: Text(
-                    'to Woodlands',
+                    'to The Woodlands',
                     style: TextStyle(
                         fontSize: 30, color: grey, fontWeight: FontWeight.w300),
                   ),
