@@ -79,6 +79,10 @@ flutter:
     - family:  CustomIcons
       fonts:
        - asset: assets/CustomIcons.ttf
+
+    - family: Upvote
+      fonts:
+       - asset: assets/Upvote.ttf
        
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

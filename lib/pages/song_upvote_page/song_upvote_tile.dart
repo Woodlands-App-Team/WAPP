@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/image.dart' as img;
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
-import 'package:wapp/custom_icons_icons.dart';
+import 'package:wapp/upvote_icons.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 class SongUpvoteTile extends StatefulWidget {
@@ -114,21 +114,27 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
                           ],
                         ),
                         Padding(
-                            padding: EdgeInsets.only(right: 25),
+                            padding: EdgeInsets.only(right: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 widget.isUpvoted == true
-                                    ? Icon(
-                                        Icons.check_circle_outline_outlined,
-                                        size: 30,
-                                        color: white,
-                                      )
-                                    : Icon(
-                                        Icons.circle_outlined,
-                                        size: 30,
-                                        color: white,
-                                      ),
+                                    ? Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 8, 7),
+                                      child: Icon(
+                                          Upvote.upvoted,
+                                          size: 30,
+                                          color: white,
+                                        ),
+                                    )
+                                    : Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 8, 7),
+                                      child: Icon(
+                                          Upvote.unupvoted,
+                                          size: 30,
+                                          color: white,
+                                        ),
+                                    ),
                                 Text(
                                   widget.upvotes.toStringAsFixed(0),
                                   style: GoogleFonts.nunitoSans(
