@@ -74,6 +74,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         allButtonTextColor = white;
         announcementsButtonTextColor = black;
         eventsButtonTextColor = black;
+
+        _getMoreAnnouncements();
+
         setState(() {});
         break;
       case 1:
@@ -90,6 +93,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         allButtonTextColor = black;
         announcementsButtonTextColor = white;
         eventsButtonTextColor = black;
+
+        _getMoreAnnouncements();
+
         setState(() {});
         break;
       case 2:
@@ -105,6 +111,9 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         allButtonTextColor = black;
         announcementsButtonTextColor = black;
         eventsButtonTextColor = white;
+
+        _getMoreAnnouncements();
+
         setState(() {});
         break;
     }
@@ -114,7 +123,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
     print("Getting more announcements");
 
     if (!_moreAnnouncementsAvailable) {
-      print("no more announcements!");
+      print("No more announcements!");
       return;
     }
 
@@ -124,10 +133,32 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
 
     _gettingMoreAnnouncements = true;
 
-    Query q = _firestore
-        .collection('announcements')
-        .orderBy('timestamp', descending: true)
-        .startAfter([_lastDocument.data()['timestamp']]).limit(_perPage);
+    Query q;
+
+    switch(cardFilter) {
+      case 'announcements':
+        q = _firestore
+            .collection('announcements')
+            .where("type", isEqualTo: 'Announcement')
+            .orderBy('timestamp', descending: true)
+            .startAfter([_lastDocument.data()['timestamp']]).limit(_perPage);
+        break;
+      case 'events':
+        q = _firestore
+            .collection('announcements')
+            .where("type", isEqualTo: 'Event')
+            .orderBy('timestamp', descending: true)
+            .startAfter([_lastDocument.data()['timestamp']]).limit(_perPage);
+        break;
+      default:
+        q = _firestore
+            .collection('announcements')
+            .orderBy('timestamp', descending: true)
+            .startAfter([_lastDocument.data()['timestamp']]).limit(_perPage);
+        break;
+    }
+
+
 
     QuerySnapshot querySnapshot = await q.get();
 
@@ -144,10 +175,31 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   }
 
   _getAnnouncements() async {
-    Query q = _firestore
-        .collection('announcements')
-        .orderBy('timestamp', descending: true)
-        .limit(5);
+
+    Query q;
+
+    switch(cardFilter) {
+      case 'announcements':
+        q = _firestore
+            .collection('announcements')
+            .where("type", isEqualTo: 'Announcement')
+            .orderBy('timestamp', descending: true)
+            .limit(5);
+        break;
+      case 'events':
+        q = _firestore
+            .collection('announcements')
+            .where("type", isEqualTo: 'Event')
+            .orderBy('timestamp', descending: true)
+            .limit(5);
+        break;
+      default:
+        q = _firestore
+            .collection('announcements')
+            .orderBy('timestamp', descending: true)
+            .limit(5);
+        break;
+    }
 
     setState(() {
       _loadingAnnouncements = true;

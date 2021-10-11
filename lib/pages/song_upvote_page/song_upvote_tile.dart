@@ -120,18 +120,18 @@ class _SongUpvoteTileState extends State<SongUpvoteTile> {
                               children: [
                                 widget.isUpvoted == true
                                     ? Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 8, 7),
+                                      padding: EdgeInsets.fromLTRB(0, 0, 6, 7),
                                       child: Icon(
                                           Upvote.upvoted,
-                                          size: 30,
+                                          size: 22,
                                           color: white,
                                         ),
                                     )
                                     : Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 8, 7),
+                                      padding: EdgeInsets.fromLTRB(0, 0, 6, 7),
                                       child: Icon(
                                           Upvote.unupvoted,
-                                          size: 30,
+                                          size: 22,
                                           color: white,
                                         ),
                                     ),
