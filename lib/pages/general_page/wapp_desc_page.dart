@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wapp/constants.dart';
 import 'package:wapp/models/member.dart';
 import 'package:wapp/pages/general_page/general_page_app_bar.dart';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:math';
 
 Random random = new Random();
@@ -27,74 +29,65 @@ class WappDescPage extends StatelessWidget {
         name: "Abhinav Balasubramanian",
         role: "President",
         altRole: "Supreme Overlord",
-        altColor: Color(_getColorFromHex('#4b0082')),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"Add me on Clash Royale xD"'),
+        altColor: dark_blue,
+        imgURL: "https://i.imgur.com/AJWRskZ.jpg",
+        desc: '"Add me on Clash Royale"'),
     Member(
         name: "Lillian Liu",
-        role: "Executive",
-        altRole: "Abhinav's #1 Simp",
+        role: "Visual Media Manager",
+        altRole: "Sleeps a lot",
         altColor: Color(0XFFFFB5E9),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I am short."'),
+        imgURL: "https://i.imgur.com/v9HeuxA.jpg",
+        desc: '"I really like cheese"'),
     Member(
         name: "John Ibrahim",
-        role: "Executive",
-        altRole: "Abhinav's #2 Simp",
+        role: "Operations Manager",
+        altRole: "Spreadsheet God",
         altColor: Color(0XFFFF4B4B),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I love Abhinav"'),
+        imgURL: "https://i.imgur.com/fC3GBkB.jpg",
+        desc: '"I am Joob."'),
     Member(
         name: "Aayush Panda",
         role: "Developer",
         altRole: "I like planes",
         altColor: Color(_getColorFromHex('#86CEEB')),
-        imgURL:
-            "https://miro.medium.com/fit/c/262/262/1*juqzL_lv5ZEuhlHZr_RB2g.png",
+        imgURL: "https://i.imgur.com/Axm76yZ.jpg",
         desc: '"I like planes"'),
     Member(
         name: "Jeffrey-Kai Li",
         role: "Developer",
         altRole: "Immortal 800",
         altColor: Color(_getColorFromHex('#b5b9ff')),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I play Valorant."'),
+        imgURL: "https://i.imgur.com/Ilc65RB.jpg",
+        desc: '"I play Valorant"'),
     Member(
         name: "Catherine Zhang",
         role: "Designer",
-        altRole: "Your Mother's Significant Other",
+        altRole: "@aspcaton",
         altColor: Color(0XFFFFB819),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I draw."'),
+        imgURL: "https://i.imgur.com/5Q5sUcB.jpg",
+        desc: '"I draw a lot"'),
     Member(
         name: "Gianni Tse",
         role: "Designer",
-        altRole: "Fat Cow",
+        altRole: "MOOOOOO",
         altColor: Color(0XFF1A2551),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I sleep."'),
+        imgURL: "https://i.imgur.com/X2mNLth.jpg",
+        desc: '"I sleep a lot"'),
     Member(
         name: "Kelly Ng",
         role: "Designer",
-        altRole: "Extremely Short",
+        altRole: "Cereal Bowl",
         altColor: Color(_getColorFromHex('#88B9FF')),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"I am shorter than John"'),
+        imgURL: "https://i.imgur.com/FO3TNuU.jpg",
+        desc: '"I do not sleep a lot"'),
     Member(
         name: "Vishnu Satish",
         role: "Developer",
-        altRole: "Poggers",
+        altRole: "RCB",
         altColor: Color(_getColorFromHex('#ffa941')),
-        imgURL:
-            "https://img.cinemablend.com/filter:scale/quill/6/8/5/b/5/e/685b5edda326d2bd77ca9709647e913d7875af4f.jpg?mw=600",
-        desc: '"Sup guys! I am Vishnu."'),
+        imgURL: "https://i.imgur.com/MRIibBL.jpg",
+        desc: '"I love cricket"'),
   ];
 
   @override
@@ -123,32 +116,46 @@ class WappDescPage extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 45),
-        child: ListView.builder(
-            itemCount: members.length,
-            itemBuilder: (context, index) {
-              return infoCard(
-                  context,
-                  members[index].name,
-                  members[index].role,
-                  members[index].altRole,
-                  members[index].altColor,
-                  members[index].imgURL,
-                  members[index].desc);
-            }),
-      ),
+      body: ListView.builder(
+          itemCount: members.length,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  infoCard(
+                      context,
+                      members[index].name,
+                      members[index].role,
+                      members[index].altRole,
+                      members[index].altColor,
+                      members[index].imgURL,
+                      members[index].desc)
+                ],
+              );
+            }
+            return infoCard(
+                context,
+                members[index].name,
+                members[index].role,
+                members[index].altRole,
+                members[index].altColor,
+                members[index].imgURL,
+                members[index].desc);
+          }),
     );
   }
 
   Widget infoCard(BuildContext context, String name, String role,
       String altRole, Color altColor, String imgURL, String desc) {
     return Container(
-        padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
+        padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
         width: MediaQuery.of(context).size.width,
-        height: 230,
+        height: 250,
         child: FlipCard(
-            speed: 400,
+            speed: 370,
             direction: FlipDirection.VERTICAL,
             front: Card(
               color: dark_blue,
@@ -160,8 +167,8 @@ class WappDescPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      height: 120,
-                      width: 190,
+                      height: 140,
+                      width: 220,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: light_blue,
@@ -188,58 +195,147 @@ class WappDescPage extends StatelessWidget {
               ),
             ),
             back: Card(
-              color: altColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: name != 'Aayush Panda'
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: Column(
-                        children: [
-                          Column(
-                            children: [
-                              Text(name,
-                                  style: GoogleFonts.poppins(
-                                    color: white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                              Text(altRole,
-                                  style: GoogleFonts.poppins(
-                                    color: white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ],
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: Container(
-                                child: Text(desc,
-                                    style: GoogleFonts.poppins(
-                                      color: white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    )),
+                color: altColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: name == 'Aayush Panda'
+                    ? Container(
+                        decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: new DecorationImage(
+                              image: random.nextInt(7) != 1
+                                  ? new NetworkImage(
+                                      'https://c.tenor.com/yo1fCgCiyQ4AAAAC/f14-grumman.gif')
+                                  : new NetworkImage(
+                                      'https://c.tenor.com/Z6gmDPeM6dgAAAAC/dance-moves.gif'),
+                              fit: BoxFit.cover,
+                            )),
+                      )
+                    : name == 'Abhinav Balasubramanian'
+                        ? Container(
+                            child: CarouselSlider(
+                              items: [
+                                //1st Image of Slider
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://i.imgur.com/TqRFe9F.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                //2nd Image of Slider
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://i.imgur.com/Q1lBoIi.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                //3rd Image of Slider
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://i.imgur.com/KEN73P2.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                //4th Image of Slider
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://i.imgur.com/7oxsCzB.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                //5th Image of Slider
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://i.imgur.com/OVdbJLm.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ],
+
+                              //Slider Container properties
+                              options: CarouselOptions(
+                                height: 180.0,
+                                enlargeCenterPage: true,
+                                autoPlay: true,
+                                aspectRatio: 16 / 9,
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enableInfiniteScroll: true,
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 800),
+                                viewportFraction: 0.8,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(
-                      decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: new DecorationImage(
-                            image: random.nextInt(7) != 1
-                                ? new NetworkImage(
-                                    'https://c.tenor.com/yo1fCgCiyQ4AAAAC/f14-grumman.gif')
-                                : new NetworkImage(
-                                    'https://c.tenor.com/Z6gmDPeM6dgAAAAC/dance-moves.gif'),
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-            )));
+                          )
+                        : name == 'John Ibrahim'
+                            ? Container(
+                                decoration: new BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: new DecorationImage(
+                                      image: new NetworkImage(
+                                          'https://i.imgur.com/KVo5AUo.jpg'),
+                                      fit: BoxFit.cover,
+                                    )),
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 15, bottom: 15),
+                                child: Column(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(name,
+                                            style: GoogleFonts.poppins(
+                                              color: white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                        Text(altRole,
+                                            style: GoogleFonts.poppins(
+                                              color: white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Center(
+                                        child: Container(
+                                          child: Text(desc,
+                                              style: GoogleFonts.poppins(
+                                                color: white,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ))));
   }
 }

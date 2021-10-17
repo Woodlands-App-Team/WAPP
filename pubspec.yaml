@@ -53,7 +53,7 @@ dependencies:
   flip_card: ^0.5.0
   cached_network_image: ^3.1.0
   profanity_filter: ^2.0.0
-
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:

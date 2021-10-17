@@ -27,15 +27,24 @@ class MapPage extends StatelessWidget {
           child: Icon(
             CupertinoIcons.chevron_back,
             size: 40,
-            color: white,
+            color: black,
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Container(
-          child: PhotoView(
-        imageProvider: AssetImage("assets/school_map.png"),
-      )),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+              height: MediaQuery.of(context).size.height - 50,
+              child: PhotoView(
+                backgroundDecoration: BoxDecoration(color: white),
+                imageProvider: AssetImage("assets/school_map.png"),
+              )),
+        ],
+      ),
     );
   }
 }
