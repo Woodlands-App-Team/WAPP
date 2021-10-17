@@ -57,8 +57,7 @@ class _AnnouncementCardState extends State<AnnouncementCard>
   }
 
   void _handleTap() {
-    if (!(widget.expandedImageUrl == '' &&
-        widget.expandedDescriptionText == '')) {
+    if (!(widget.expandedImageUrl == '' && widget.expandedDescriptionText == '')) {
       setState(() {
         _isExpanded = !_isExpanded;
         if (_isExpanded) {
