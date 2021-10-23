@@ -35,7 +35,9 @@ class _SignInPageState extends State<SignInPage> {
           } else if (snapshot.hasData) {
             final user = FirebaseAuth.instance.currentUser!;
             if ((user.email!.endsWith("@pdsb.net") &&
-                    user.displayName!.endsWith("The Woodlands SS")) ||
+                    (user.displayName!.endsWith("The Woodlands SS") ||
+                        user.displayName!
+                            .endsWith("The Woodlands SS (2372)"))) ||
                 user.email!.endsWith("@peelsb.com")) {
               return Home();
             } else {
