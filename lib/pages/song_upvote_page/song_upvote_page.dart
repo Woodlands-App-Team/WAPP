@@ -45,48 +45,168 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFF7F5F2),
-      floatingActionButton: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-        ),
-        elevation: 10,
-        child: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SongReqPage()),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(25)),
-              color: white,
-            ),
-            width: 230,
-            height: 45,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.add_rounded,
-                  size: 30,
-                  color: dark_blue,
+      floatingActionButton: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .snapshots(),
+          builder: (BuildContext context, snapshot) {
+            if (!snapshot.hasData) {
+              return Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
-                SizedBox(
-                  width: 10,
+                elevation: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    color: white,
+                  ),
+                  width: 230,
+                  height: 45,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Loading...",
+                          style: GoogleFonts.poppins(
+                              color: grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500)),
+                    ],
+                  ),
                 ),
-                Text("Request Song",
-                    style: GoogleFonts.poppins(
-                        color: grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500)),
-              ],
-            ),
-          ),
-        ),
-      ),
+              );
+            } else {
+              if (snapshot.data!['last_song_req'] == null ||
+                  snapshot.data!['last_song_req'] == "") {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  elevation: 10,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SongReqPage()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        color: white,
+                      ),
+                      width: 230,
+                      height: 45,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_rounded,
+                            size: 30,
+                            color: dark_blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Request Song",
+                              style: GoogleFonts.poppins(
+                                  color: grey,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+              if (DateTime.parse((snapshot.data!['last_song_req'].toString()))
+                  .isBefore(DateTime.now().subtract(Duration(days: 30)))) {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  elevation: 10,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SongReqPage()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        color: white,
+                      ),
+                      width: 230,
+                      height: 45,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_rounded,
+                            size: 30,
+                            color: dark_blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Request Song",
+                              style: GoogleFonts.poppins(
+                                  color: grey,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  elevation: 10,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        color: white,
+                      ),
+                      width: 230,
+                      height: 45,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.check_circle_outline_rounded,
+                            size: 30,
+                            color: dark_blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Song Requested",
+                              style: GoogleFonts.poppins(
+                                  color: grey,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: songUpvotePageAppBar(),
       body: Padding(

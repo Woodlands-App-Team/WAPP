@@ -135,7 +135,7 @@ class SongReqScreen extends StatelessWidget {
 class _SongReqPageState extends State<SongReqPage> {
   FirebaseFunctions functions = FirebaseFunctions.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  Future<String> requestSong(Track song) async {
+  Future requestSong(Track song) async {
     String date = DateTime.now().toString();
 
     HttpsCallable requestSong = functions.httpsCallable('requestSong');
@@ -148,7 +148,6 @@ class _SongReqPageState extends State<SongReqPage> {
       "songName": song.songURL,
     });
     print(song.songURL);
-    return songName;
   }
 
   @override
@@ -167,6 +166,7 @@ class _SongReqPageState extends State<SongReqPage> {
                     } else {
                       requestSong(song);
                       output = "Selected song: ${song.name}";
+                      Navigator.of(context).pop();
                     }
                     ScaffoldMessenger.of(context)
                       ..removeCurrentSnackBar()
