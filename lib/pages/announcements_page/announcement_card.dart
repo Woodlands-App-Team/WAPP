@@ -167,8 +167,16 @@ class _AnnouncementCardState extends State<AnnouncementCard>
                               ),
                             ],
                           ),
-                        )
-                      ],
+                        ),
+                        InkWell(
+                          child: Container(
+                            child: (!(widget.expandedImageUrl == '' && widget.expandedDescriptionText == '')  && !_isExpanded) ? const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.white,
+                              size: 35.0,
+                            ) : Container(),
+                          )
+                        )],
                     ),
                   ),
                 ),
