@@ -41,7 +41,7 @@ class MapPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height - 50,
               child: PhotoView(
                 backgroundDecoration: BoxDecoration(color: white),
-                imageProvider: AssetImage("assets/school_map.png"),
+                imageProvider: AssetImage("assets/map.png"),
               )),
         ],
       ),

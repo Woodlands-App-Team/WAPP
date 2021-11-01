@@ -150,11 +150,8 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                         children: [
                           Icon(
                             Icons.add_rounded,
-                            size: 30,
+                            size: 27,
                             color: dark_blue,
-                          ),
-                          SizedBox(
-                            width: 10,
                           ),
                           Text("Request Song",
                               style: GoogleFonts.poppins(
