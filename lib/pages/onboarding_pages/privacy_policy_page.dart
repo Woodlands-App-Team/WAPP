@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:wapp/pages/onboarding_pages/sign_in_page.dart';
 import 'dart:io' show Platform;
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:http/http.dart' as http;
 
 class PrivacyPolicyPage extends StatefulWidget {
   @override
@@ -24,6 +26,13 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
   Future changeAgreeState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('seen privacy policy', true);
+  }
+
+  Future<String> getTextData() async {
+    String url =
+        'https://raw.githubusercontent.com/Woodlands-App-Team/Privacy-Policy/master/Privacy-Policy.md';
+    var response = await http.get(Uri.parse(url));
+    return response.body;
   }
 
   @override
@@ -54,64 +63,25 @@ class _PrivacyPolicyPage extends State<PrivacyPolicyPage> {
                   height: isIOS ? 40 : 20,
                 ),
                 Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: grey),
-                      color: Colors.white,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: grey),
+                    color: Colors.white,
+                  ),
+                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  height: isIOS ? 400 : 300,
+                  child: CupertinoScrollbar(
+                    child: FutureBuilder(
+                      future: getTextData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Markdown(data: snapshot.data as String);
+                        }
+                        return Container();
+                      },
                     ),
-                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    height: isIOS ? 400 : 300,
-                    child: CupertinoScrollbar(
-                      child: ListView(
-                          physics: BouncingScrollPhysics(),
-                          dragStartBehavior: DragStartBehavior.start,
-                          padding: EdgeInsets.all(20),
-                          children: <Widget>[
-                            RichText(
-                              text: TextSpan(
-                                text: '',
-                                style: GoogleFonts.nunitoSans(
-                                    color: black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300),
-                                children: const <TextSpan>[
-                                  TextSpan(
-                                      text: 'Land Acknowledgement',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        fontFamily: "Poppins",
-                                      )),
-                                  TextSpan(
-                                    text:
-                                        '\n\nThe land on which The Woodlands Secondary School operates is the territory of the Mississaugas of the Credit First Nation and the traditional homeland of the Anishinaabe, Wendat, and Haudenosaunee nations. This territory is covered by the Upper Canada Treaties and is within the lands protected by the "Dish with One Spoon" wampum agreement.\n\nToday, this place is still home to many First Nations, Métis, and Inuit peoples and we are grateful to have the opportunity to live and work on this land.\n\n',
-                                  ),
-                                  TextSpan(
-                                      text: 'Privacy Policy',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        fontFamily: "Poppins",
-                                      )),
-                                  TextSpan(
-                                      text: '\n\nLast updated July 14, 2021'),
-                                  TextSpan(
-                                      text:
-                                          '\n\nIF YOU DO NOT AGREE WITH THE TERMS OF THIS PRIVACY POLICY, PLEASE DO NOT ACCESS THE APPLICATION.'),
-                                  TextSpan(
-                                      text:
-                                          '\n\nThe Woodlands Secondary School (“we” or “us” or “our”) respects the privacy of our users (“user” or “you”). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the “Application”). Please read this Privacy Policy carefully.'),
-                                  TextSpan(
-                                      text:
-                                          '\n\nWe reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the “Last updated” date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Application after the date such revised Privacy Policy is posted.'),
-                                  TextSpan(
-                                      text:
-                                          '\n\nThis Privacy Policy does not apply to the third-party online/mobile store from which you install the Application or make payments. We are not responsible for any of the data collected by any such third party.'),
-                                ],
-                              ),
-                            )
-                          ]),
-                    )),
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),

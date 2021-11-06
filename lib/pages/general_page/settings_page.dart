@@ -116,7 +116,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<String> getTextData() async {
     String url =
-        'https://raw.githubusercontent.com/mxstbr/markdown-test-file/master/TEST.md';
+        'https://raw.githubusercontent.com/Woodlands-App-Team/Privacy-Policy/master/Privacy-Policy.md';
     var response = await http.get(Uri.parse(url));
     return response.body;
   }
@@ -264,17 +264,6 @@ class _SettingsPageState extends State<SettingsPage> {
                             ],
                           ),
                           Divider(),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                            child: Text(
-                              "Privacy Policy",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 25,
-                                color: dark_blue,
-                              ),
-                            ),
-                          ),
                           Expanded(
                             child: Center(
                               child: FutureBuilder(
@@ -282,7 +271,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return Markdown(
-                                        data: snapshot.data as String);
+                                        data: snapshot.data as String,
+                                        styleSheet: MarkdownStyleSheet(
+                                          p: GoogleFonts.poppins(),
+                                        ));
                                   }
                                   return Container();
                                 },
