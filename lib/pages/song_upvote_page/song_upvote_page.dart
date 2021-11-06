@@ -11,6 +11,8 @@ import 'package:wapp/pages/song_upvote_page/song_upvote_page_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wapp/pages/song_upvote_page/song_upvote_tile.dart';
 
+var cooldownDays = 30;
+
 class SongUpvotePage extends StatefulWidget {
   const SongUpvotePage({Key? key}) : super(key: key);
 
@@ -21,6 +23,14 @@ class SongUpvotePage extends StatefulWidget {
 class _SongUpvotePageState extends State<SongUpvotePage> {
   final FirebaseAuth _user = FirebaseAuth.instance;
   final FirebaseFunctions functions = FirebaseFunctions.instance;
+
+  getCooldownDays() async {
+    var document = await FirebaseFirestore.instance
+        .collection('app-settings')
+        .doc('app-settings')
+        .get();
+    cooldownDays = int.parse(document.data()!['cooldownDays'].toString());
+  }
 
   upvoteSong(song) async {
     print("Before function");
@@ -38,6 +48,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
   @override
   void initState() {
     // TODO: implement initState
+    getCooldownDays();
     super.initState();
   }
 
@@ -123,7 +134,7 @@ class _SongUpvotePageState extends State<SongUpvotePage> {
                 );
               }
               if (DateTime.parse((snapshot.data!['last_song_req'].toString()))
-                  .isBefore(DateTime.now().subtract(Duration(days: 30)))) {
+                  .isBefore(DateTime.now().subtract(Duration(days: cooldownDays)))) {
                 return Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(25)),

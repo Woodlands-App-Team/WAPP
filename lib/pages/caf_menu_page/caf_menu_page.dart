@@ -1,15 +1,20 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:wapp/pages/caf_menu_page/cafFlipCard.dart';
 import '../../constants.dart';
 import 'package:wapp/pages/caf_menu_page/caf_menu_page_app_bar.dart';
 import 'package:wapp/pages/caf_menu_page/special_card.dart';
 import 'cafFlipCard.dart';
+import 'package:blur/blur.dart';
 
 class CafMenuPage extends StatefulWidget {
   const CafMenuPage({Key? key}) : super(key: key);
@@ -19,6 +24,8 @@ class CafMenuPage extends StatefulWidget {
 }
 
 final db = FirebaseFirestore.instance.collection("caf-menu");
+
+bool cafOpen = true;
 
 class _CafMenuPageState extends State<CafMenuPage>
     with TickerProviderStateMixin {
@@ -32,7 +39,18 @@ class _CafMenuPageState extends State<CafMenuPage>
   void initState() {
     _tabController = TabController(length: 5, initialIndex: 0, vsync: this);
     _foodController = TabController(length: 4, initialIndex: 0, vsync: this);
+    getCafStatus();
     super.initState();
+  }
+
+  getCafStatus() async {
+    var document = await FirebaseFirestore.instance
+        .collection('app-settings')
+        .doc('app-settings')
+        .get();
+    setState(() {
+      cafOpen = document.data()!['cafOpen'].toString() == 'true';
+    });
   }
 
   Future<DocumentSnapshot> getFoodItems() async {
@@ -237,7 +255,28 @@ class _CafMenuPageState extends State<CafMenuPage>
             ),
           ],
         ),
-      ),
+      ).blurred(
+          colorOpacity: !cafOpen ? 0.5 : 0,
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(20)),
+          blur: !cafOpen ? 7 : 0,
+          overlay: Container(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: !cafOpen
+                  ? Row(
+                      children: <Widget>[
+                        Flexible(
+                            child: Center(
+                          child: AutoSizeText('Cafeteria is currently closed',
+                              maxLines: 1,
+                              style: GoogleFonts.poppins(
+                                color: black,
+                                fontSize: 35, //45
+                                fontWeight: FontWeight.normal,
+                              )),
+                        ))
+                      ],
+                    )
+                  : Container())),
     );
   }
 
