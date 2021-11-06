@@ -55,6 +55,8 @@ dependencies:
   profanity_filter: ^2.0.0
   carousel_slider: ^4.0.0
   blur: ^3.0.0
+  flutter_markdown: ^0.6.8
+
 
 dev_dependencies:
   flutter_test:

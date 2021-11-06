@@ -9,6 +9,8 @@ import 'package:wapp/pages/general_page/general_page_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:http/http.dart' as http;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -110,6 +112,13 @@ class _SettingsPageState extends State<SettingsPage> {
         _fcm.unsubscribeFromTopic(topic.replaceAll(' ', ''));
       });
     }
+  }
+
+  Future<String> getTextData() async {
+    String url =
+        'https://raw.githubusercontent.com/mxstbr/markdown-test-file/master/TEST.md';
+    var response = await http.get(Uri.parse(url));
+    return response.body;
   }
 
   @override
@@ -267,43 +276,16 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ),
                           Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                            child: Center(
+                              child: FutureBuilder(
+                                future: getTextData(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Markdown(
+                                        data: snapshot.data as String);
+                                  }
+                                  return Container();
+                                },
                               ),
                             ),
                           ),
