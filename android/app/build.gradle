@@ -45,7 +45,7 @@ android {
         versionName "1.4" // TODO Change to a higher number every release
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
+        versionCode 4
         versionName "1.4.0"
     }
 
