@@ -22,7 +22,7 @@ exports.requestSong = functions.https.onCall((data, context) => {
     if(!context.auth){
         throw new functions.https.HttpsError('unauthenticated', 'only authenticated users can add requests')
     }
-    admin.firestore().collection('song-requests').add({
+    admin.firestore().collection('song-requests').doc(Date.now().toString()).set({
         name: data.name,
         artist: data.artist,
         imgURL: data.imgURL,
