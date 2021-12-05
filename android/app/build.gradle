@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '1.4'
+    flutterVersionCode = '1.5'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.4'
+    flutterVersionName = '1.5'
 }
 
 apply plugin: 'com.android.application'
@@ -42,11 +42,11 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.woodlands.wapp"
-        versionName "1.4" // TODO Change to a higher number every release
+        versionName "1.5" // TODO Change to a higher number every release
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 4
-        versionName "1.4.0"
+        versionName "1.5.0"
     }
 
     signingConfigs {
